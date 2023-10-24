@@ -278,14 +278,14 @@
                     }
                 },
                 {
-                    "source": "D:\\pemrograman mobile\\android-flutter\\mboistat\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "D:\\pemrograman mobile\\android-flutter\\mboistats\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,18",
                         "startColumns": "4,4",
-                        "startOffsets": "173,1095",
+                        "startOffsets": "176,1107",
                         "endLines": "11,20",
                         "endColumns": "12,12",
-                        "endOffsets": "748,1259"
+                        "endOffsets": "758,1273"
                     },
                     "to": {
                         "startLines": "93,101",
@@ -996,14 +996,14 @@
             "outputFile": "com.example.mboisat.app-merged_res-11:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
-                    "source": "D:\\pemrograman mobile\\android-flutter\\mboistat\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "D:\\pemrograman mobile\\android-flutter\\mboistats\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,18",
                         "startColumns": "4,4",
-                        "startOffsets": "172,1094",
+                        "startOffsets": "175,1106",
                         "endLines": "11,20",
                         "endColumns": "12,12",
-                        "endOffsets": "747,1258"
+                        "endOffsets": "757,1272"
                     },
                     "to": {
                         "startLines": "2,10",
@@ -1170,14 +1170,14 @@
             "outputFile": "com.example.mboisat.app-merged_res-11:/values-v31_values-v31.arsc.flat",
             "map": [
                 {
-                    "source": "D:\\pemrograman mobile\\android-flutter\\mboistat\\android\\app\\src\\main\\res\\values-v31\\styles.xml",
+                    "source": "D:\\pemrograman mobile\\android-flutter\\mboistats\\android\\app\\src\\main\\res\\values-v31\\styles.xml",
                     "from": {
                         "startLines": "3,15",
                         "startColumns": "4,4",
-                        "startOffsets": "173,881",
+                        "startOffsets": "176,896",
                         "endLines": "8,17",
                         "endColumns": "12,12",
-                        "endOffsets": "530,1045"
+                        "endOffsets": "538,1062"
                     },
                     "to": {
                         "startLines": "2,8",
@@ -1284,14 +1284,14 @@
             "outputFile": "com.example.mboisat.app-merged_res-11:/values-night-v31_values-night-v31.arsc.flat",
             "map": [
                 {
-                    "source": "D:\\pemrograman mobile\\android-flutter\\mboistat\\android\\app\\src\\main\\res\\values-night-v31\\styles.xml",
+                    "source": "D:\\pemrograman mobile\\android-flutter\\mboistats\\android\\app\\src\\main\\res\\values-night-v31\\styles.xml",
                     "from": {
                         "startLines": "3,15",
                         "startColumns": "4,4",
-                        "startOffsets": "173,881",
+                        "startOffsets": "176,896",
                         "endLines": "8,17",
                         "endColumns": "12,12",
-                        "endOffsets": "530,1045"
+                        "endOffsets": "538,1062"
                     },
                     "to": {
                         "startLines": "2,8",

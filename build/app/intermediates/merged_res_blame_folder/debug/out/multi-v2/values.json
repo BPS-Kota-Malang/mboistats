@@ -23,14 +23,14 @@
                     }
                 },
                 {
-                    "source": "D:\\pemrograman mobile\\android-flutter\\mboistat\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "D:\\pemrograman mobile\\android-flutter\\mboistats\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,18",
                         "startColumns": "4,4",
-                        "startOffsets": "173,1095",
+                        "startOffsets": "176,1107",
                         "endLines": "11,20",
                         "endColumns": "12,12",
-                        "endOffsets": "748,1259"
+                        "endOffsets": "758,1273"
                     },
                     "to": {
                         "startLines": "93,101",

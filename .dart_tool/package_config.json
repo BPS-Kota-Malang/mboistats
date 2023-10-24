@@ -75,9 +75,9 @@
     },
     {
       "name": "cupertino_icons",
-      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/cupertino_icons-1.0.5",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/cupertino_icons-1.0.6",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.19"
     },
     {
       "name": "fake_async",
@@ -89,7 +89,7 @@
       "name": "flutter",
       "rootUri": "file:///D:/Downloads/SDK/flutter/packages/flutter",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "flutter_launcher_icons",
@@ -99,15 +99,27 @@
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-2.0.2",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-2.0.3",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.19"
     },
     {
       "name": "flutter_test",
       "rootUri": "file:///D:/Downloads/SDK/flutter/packages/flutter_test",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "http",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/http-0.13.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "http_parser",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "image",
@@ -129,9 +141,9 @@
     },
     {
       "name": "lints",
-      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/lints-2.0.1",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/lints-2.1.1",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.0"
     },
     {
       "name": "matcher",
@@ -147,7 +159,7 @@
     },
     {
       "name": "meta",
-      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.9.1",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.10.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -173,7 +185,7 @@
       "name": "sky_engine",
       "rootUri": "file:///D:/Downloads/SDK/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "source_span",
@@ -225,9 +237,9 @@
     },
     {
       "name": "web",
-      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/web-0.1.4-beta",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/web-0.2.1-beta",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.2"
     },
     {
       "name": "xml",
@@ -248,7 +260,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-10-20T03:00:14.439471Z",
+  "generated": "2023-10-24T16:08:41.478499Z",
   "generator": "pub",
-  "generatorVersion": "3.2.0-134.1.beta"
+  "generatorVersion": "3.2.0-210.3.beta"
 }
