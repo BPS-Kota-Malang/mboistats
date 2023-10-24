@@ -1,0 +1,110 @@
+{
+   "checksum": "81fbb24953f51c961ded87d4c1e31b58",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13290004364633493",
+            "date_last_used": "0",
+            "guid": "aacf4899-12ad-4ed0-a074-ede2ef1e4288",
+            "id": "7",
+            "name": "Metode-Metode Pengembangan Sistem Informasi (SI) Dan Penjelasannya Lengkap",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://www.konsepkoding.com/2021/01/metode-metode-pengembangan-sistem.html"
+         }, {
+            "date_added": "13292909967330642",
+            "date_last_used": "0",
+            "guid": "97a14034-a8ed-4c1a-b2f4-8ceda0353620",
+            "id": "8",
+            "name": "Mengganti Value- contoh 2",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "file:///D:/Data%20Kuliah/HTML/New%20folder/Minggu6/gantiValueContoh2.html"
+         }, {
+            "children": [ {
+               "date_added": "13287369287379757",
+               "date_last_used": "0",
+               "guid": "b4223256-f807-46bd-a0dd-c6c176d36b29",
+               "id": "10",
+               "name": "Lenovo Support",
+               "show_icon": false,
+               "source": "sync",
+               "type": "url",
+               "url": "http://support.lenovo.com/"
+            }, {
+               "date_added": "13287369287379757",
+               "date_last_used": "0",
+               "guid": "06b89dcb-ab04-4427-aaad-d32e6ec3e90e",
+               "id": "11",
+               "name": "Lenovo",
+               "show_icon": false,
+               "source": "sync",
+               "type": "url",
+               "url": "http://www.lenovo.com/"
+            } ],
+            "date_added": "13293092813248798",
+            "date_last_used": "0",
+            "date_modified": "13293092813248798",
+            "guid": "55edf839-e301-4114-8b63-2bc92d440837",
+            "id": "9",
+            "name": "Lenovo",
+            "source": "unknown",
+            "type": "folder"
+         }, {
+            "date_added": "13295094504488840",
+            "date_last_used": "0",
+            "guid": "d9566c44-9266-48f1-b500-0189f02fe1f0",
+            "id": "12",
+            "name": "New tab",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "edge://newtab/"
+         }, {
+            "date_added": "13299496062267817",
+            "date_last_used": "0",
+            "guid": "2a769a48-f91c-4edd-9779-c0997efe9707",
+            "id": "13",
+            "name": "",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://drive.google.com/file/d/0By-6twShYeLzTG9kMzlNX1BHYVU/edit"
+         } ],
+         "date_added": "13342083727359398",
+         "date_last_used": "0",
+         "date_modified": "13299496062267817",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Favorites bar",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13342083727359400",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Other favorites",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13342083727359402",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Mobile favorites",
+         "source": "unknown",
+         "type": "folder"
+      }
+   },
+   "sync_metadata": "CjEKDgiIgQISCBt8d0GLAQAAEgAgASoYc1k1ZkpJT3B0TUJIUmo1Q0JMcjZvUT09oAYMEokBCAMShAEKHG5qZ0R1ODhlQ3J2WHA4NnBEN2ZIR2NxRnA4OD0SJGEyOWE0MDYyLTdhOTQtNTk4MS1hMDJjLTYwYmFiZmE3ZDYzYhgAIAAoADCYpOXrsTA48+z93OgvQPPs/dzoL0oceXpOQjAxY241NEE3Y1JVMHVUKy9QZ21UdFVvPVoAZQAAAAASqAEICRKjAQoccnVQdTllTXpyUnlrVFo0d2d5OVZRVnhjN2JBPRIkNTVlZGY4MzktZTMwMS00MTE0LThiNjMtMmJjOTJkNDQwODM3GAAgACgAMI/l88r9LzjL5fPK/S9Ay+Xzyv0vShxaR2N1ei80cXVqMjFreG9WS1pKaEszWVBrcVU9Wh8iHb1KVzBZYnRHZzh1WTJxeURZMHlrcnE1eVRCN0k9ZQAAAAASiQEIAhKEAQocWWNTVG9udkVTUHdxQ3M0TDJjclZodjY4TDk4PRIkNGUyNmI3YTItYzY4MC01YjI2LWE4ZTEtNjgxYmU0NjAxNzI5GAAgACgAMJik5euxMDiD7f3c6C9Ag+393OgvShxvUFZraHdCUmJWNjVLQ1dSMitJT05IV29PdTg9WgBlAAAAABKJAQgBEoQBChx5eEovNmZ2a2VjcjdrcDVFUXpCNHRXTHBkYkU9EiRiNDg0NmQ4OS1mODY5LTVlZmEtODkxNi03ZDU3NWQyYWY2MjQYACAAKAAwmKTl67EwOOTs/dzoL0Dk7P3c6C9KHGFSQ1dMZ2hGOWI1SW5xS0lEdnVKL2p2UWtGYz1aAGUAAAAAEqcBCAoSogEKHFNCTjZUeFRyTk4xbUt3eDhaM1BQQTNDWjBiZz0SJGI0MjIzMjU2LWY4MDctNDZiZC1hMGRkLWM2YzE3NmQzNmIyORgAIAAoADCP5fPK/S842+Xzyv0vQNvl88r9L0ocNTFGMUNMWEJqOGxNbE8yV2Z3Y0lETFlqcUJNPVoeIhxCbmJseTkwNldCTEhXb2NHK3czSmZ2QUp6c3M9ZQAAAAASpwEICBKiAQocY0c0Sk1HYUlZa2RyQS9IV2tBaWJyeUtpQkRFPRIkOTdhMTQwMzQtYThlZC00YzFhLWIyZjQtOGNlZGEwMzUzNjIwGAAgACgAMIe12/P8LziNtdvz/C9AjbXb8/wvShxEQ1NmNGM4UHBScjEraGM0Tm0yYyt1eDA2Zmc9Wh4iHHpLbHp5MXhIR3VIUDZtbkFYQk1FazlMd09zTT1lAAAAABKnAQgHEqIBChxBbkhyRG9BM3JEUXdxRTAzQnpGbkk1NFF4TDg9EiRhYWNmNDg5OS0xMmFkLTRlZDAtYTA3NC1lZGUyZWYxZTQyODgYACACKAIwgrLMi7QxOMS7m4ryL0D38MuLtDFKHFRXTWRUY1kyK1ZxajM5NUZDRE5nNzVpblJLWT1aHiIcUGEyMzFGME9QdDVla2p3SkFmYjJYa2ZaNG5BPWVCX+gBEqcBCAsSogEKHGpZYjlteXMvNTdaVmZodm9uR1UwTE5UZ2tBST0SJDA2Yjg5ZGNiLWFiMDQtNDQyNy1hYWFkLWQzMmU2ZWMzZTkwZRgAIAAoADCP5fPK/S846uXzyv0vQOrl88r9L0ocUGhKcFhyVVlHemF5RndwOWx4ZDZhOTlrZDk4PVoeIhxTRS92WWFDNTU1TXBqSWRwU1RkSzVYTDE0MU09ZQAAAAASqAEIDBKjAQocYmJYMEpUYjc5cnVjc3Bxb09FZ3o1eURhNlFzPRIkZDk1NjZjNDQtOTI2Ni00OGYxLWI1MDAtMDE4OWYwMmZlMWYwGAAgACgAMOWTsYWFMDiSlLGFhTBAkpSxhYUwShxhM2tFNkx3RHIwTXROMmhJckt4d3lwZThYbjA9Wh8iHd4wSUV6d2ZFS0lTVGQ2c3NUeDdXY0JHeXhQVkU9ZdivsAISqAEIDRKjAQocREZJQTlvZ2RrUXpZOG5KbEQxZndhR3AzK0M0PRIkMmE3NjlhNDgtZjkxYy00ZWRkLTk3NzktYzA5OTdlZmU5NzA3GAAgACgAMOWKpoutMTii3pq4lTBAot6auJUwShxQcllHNmc4UU15OVREZ0Q0TUFHTVlMRHJTUXc9Wh8iHe9xbzdrenR2emJDUlRGTlYzM1NaUUtqOTRaY009ZboKLFEwADgA",
+   "version": 1
+}
