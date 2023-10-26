@@ -10,7 +10,7 @@ class Menus extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 15, top: 32),
       child: SizedBox(
-        height: 167,
+        height: 200,
         child: GridView.count(
           crossAxisCount: 4,
           mainAxisSpacing: 8,
@@ -23,8 +23,8 @@ class Menus extends StatelessWidget {
                 child: Column(
                   children: [
                     Container(
-                      width: 50,
-                      height: 50,
+                      width: 40,
+                      height: 40,
                       decoration: BoxDecoration(
                         color: icon.icon == 'ipm'
                             ? Color.fromARGB(255, 254, 255, 255)

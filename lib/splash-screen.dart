@@ -5,7 +5,8 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   double opacity = 1.0; // Nilai opasitas awal
   late AnimationController controller;
 
@@ -16,7 +17,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     // Menggunakan Future.delayed untuk mengatur animasi
     Future.delayed(Duration(seconds: 2), () {
       setState(() {
-        opacity = 0.0; // Mengubah opasitas menjadi 0 untuk menghilangkan tulisan
+        opacity =
+            0.0; // Mengubah opasitas menjadi 0 untuk menghilangkan tulisan
       });
 
       // Navigasi ke halaman beranda setelah animasi selesai
@@ -50,28 +52,27 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
               opacity: opacity,
               duration: Duration(seconds: 1),
               child: Image.asset(
-                'assets/icons/MboistatLogo.png',
+                'assets/images/Mbois-stat Logo_Fix Putih.png',
                 width: 200,
                 height: 200,
               ),
             ),
-           AnimatedPositioned(
-  top: 130, // Ganti nilai top sesuai keinginan
-  duration: Duration(seconds: 1),
-  child: AnimatedOpacity(
-    opacity: opacity,
-    duration: Duration(seconds: 1),
-    child: const Text(
-      "MBOIStats+",
-      style: TextStyle(
-        fontSize: 32,
-        fontWeight: FontWeight.bold,
-        color: Color.fromARGB(221, 219, 95, 12),
-      ),
-    ),
-  ),
-),
-
+            AnimatedPositioned(
+              top: 130, // Ganti nilai top sesuai keinginan
+              duration: Duration(seconds: 1),
+              child: AnimatedOpacity(
+                opacity: opacity,
+                duration: Duration(seconds: 1),
+                // child: const Text(
+                //   "MBOIStats+",
+                //   style: TextStyle(
+                //     fontSize: 32,
+                //     fontWeight: FontWeight.bold,
+                //     color: Color.fromARGB(221, 219, 95, 12),
+                //   ),
+                // ),
+              ),
+            ),
           ],
         ),
       ),
