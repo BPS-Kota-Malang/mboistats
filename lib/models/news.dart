@@ -1,7 +1,7 @@
-class News{
-  final String image;
+class Ketenagakerjaan {
+  final String icons;
   final String title;
   final String description;
 
-  News(this.image, this.title, this.description);
+  Ketenagakerjaan(this.icons, this.title, this.description);
 }
