@@ -1,4 +1,10 @@
-2023/10/27-21:52:24.345 337c Reusing MANIFEST C:\Users\SONY\AppData\Local\Temp\flutter_tools.dcf95862\flutter_tools_chrome_device.18d03a3d\Default\Site Characteristics Database/MANIFEST-000001
-2023/10/27-21:52:24.348 337c Recovering log #6
-2023/10/27-21:52:24.349 337c Reusing old log C:\Users\SONY\AppData\Local\Temp\flutter_tools.dcf95862\flutter_tools_chrome_device.18d03a3d\Default\Site Characteristics Database/000006.log 
-2023/10/27-21:52:24.350 337c Delete type=0 #3
+2023/10/29-14:37:32.255 12ec Log #3: 6 ops saved to Table #7 OK
+2023/10/29-14:37:32.256 12ec Archiving C:\Users\Lenovo\AppData\Local\Temp\flutter_tools.12163bcf\flutter_tools_chrome_device.58ac147\Default\Site Characteristics Database/000003.log: OK
+2023/10/29-14:37:32.259 12ec Log #6: 32 ops saved to Table #8 OK
+2023/10/29-14:37:32.260 12ec Archiving C:\Users\Lenovo\AppData\Local\Temp\flutter_tools.12163bcf\flutter_tools_chrome_device.58ac147\Default\Site Characteristics Database/000006.log: OK
+2023/10/29-14:37:32.300 12ec Table #4: 6 entries OK
+2023/10/29-14:37:32.301 12ec Table #6: 6 entries OK
+2023/10/29-14:37:32.301 12ec Table #7: 6 entries OK
+2023/10/29-14:37:32.301 12ec Table #8: 32 entries OK
+2023/10/29-14:37:32.330 12ec Archiving C:\Users\Lenovo\AppData\Local\Temp\flutter_tools.12163bcf\flutter_tools_chrome_device.58ac147\Default\Site Characteristics Database/MANIFEST-000001: OK
+2023/10/29-14:37:32.481 12ec **** Repaired leveldb C:\Users\Lenovo\AppData\Local\Temp\flutter_tools.12163bcf\flutter_tools_chrome_device.58ac147\Default\Site Characteristics Database; recovered 4 files; 1654 bytes. Some data may have been lost. ****
