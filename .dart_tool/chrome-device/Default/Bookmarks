@@ -1,13 +1,55 @@
 {
-   "checksum": "b79b33d74883d2e76824ccac9e3eb5a5",
+   "checksum": "6ee1b472f6596111a889baf001cc6674",
    "roots": {
       "bookmark_bar": {
          "children": [ {
+            "date_added": "13343146496344071",
+            "date_last_used": "0",
+            "guid": "58c80edb-5ce2-4082-800d-a1d7404f7d32",
+            "id": "19",
+            "name": "Agoda",
+            "show_icon": false,
+            "source": "oem_preload",
+            "type": "url",
+            "url": "https://js.redirect.hp.com/jumpstation?bd=agoda&c=231&locale=*&pf=*&tp=edge&TYPE=3"
+         }, {
+            "date_added": "13343146496343953",
+            "date_last_used": "0",
+            "guid": "2706a234-d8b9-4ef8-a495-b5725fdf17c7",
+            "id": "18",
+            "name": "Express VPN",
+            "show_icon": false,
+            "source": "oem_preload",
+            "type": "url",
+            "url": "https://js.redirect.hp.com/jumpstation?bd=expressvpn&c=*&locale=en_us&pf=*&s=*&tp=edge"
+         }, {
+            "date_added": "13343146496343699",
+            "date_last_used": "0",
+            "guid": "5d7be4d9-1272-473b-ba63-f2b585048a70",
+            "id": "17",
+            "name": "McAfee Security",
+            "show_icon": false,
+            "source": "oem_preload",
+            "type": "url",
+            "url": "https://www.mcafee.com/consumer/v/browserfav/hp.html"
+         }, {
+            "date_added": "13343146496341890",
+            "date_last_used": "0",
+            "guid": "ab07527a-67d9-4d87-ac40-3ab6fee16576",
+            "id": "16",
+            "name": "LastPass password manager",
+            "show_icon": false,
+            "source": "oem_preload",
+            "type": "url",
+            "url": "https://js.redirect.hp.com/jumpstation?bd=lastpass&c=231&locale=*&pf=*&tp=edge&TYPE=3"
+         }, {
             "date_added": "13290004364633493",
             "date_last_used": "0",
             "guid": "aacf4899-12ad-4ed0-a074-ede2ef1e4288",
             "id": "7",
             "name": "Metode-Metode Pengembangan Sistem Informasi (SI) Dan Penjelasannya Lengkap",
+            "show_icon": false,
+            "source": "unknown",
             "type": "url",
             "url": "https://www.konsepkoding.com/2021/01/metode-metode-pengembangan-sistem.html"
          }, {
@@ -16,6 +58,8 @@
             "guid": "97a14034-a8ed-4c1a-b2f4-8ceda0353620",
             "id": "8",
             "name": "Mengganti Value- contoh 2",
+            "show_icon": false,
+            "source": "unknown",
             "type": "url",
             "url": "file:///D:/Data%20Kuliah/HTML/New%20folder/Minggu6/gantiValueContoh2.html"
          }, {
@@ -25,6 +69,8 @@
                "guid": "b4223256-f807-46bd-a0dd-c6c176d36b29",
                "id": "10",
                "name": "Lenovo Support",
+               "show_icon": false,
+               "source": "unknown",
                "type": "url",
                "url": "http://support.lenovo.com/"
             }, {
@@ -33,6 +79,8 @@
                "guid": "06b89dcb-ab04-4427-aaad-d32e6ec3e90e",
                "id": "11",
                "name": "Lenovo",
+               "show_icon": false,
+               "source": "unknown",
                "type": "url",
                "url": "http://www.lenovo.com/"
             } ],
@@ -42,6 +90,7 @@
             "guid": "55edf839-e301-4114-8b63-2bc92d440837",
             "id": "9",
             "name": "Lenovo",
+            "source": "unknown",
             "type": "folder"
          }, {
             "date_added": "13295094504488840",
@@ -49,6 +98,8 @@
             "guid": "d9566c44-9266-48f1-b500-0189f02fe1f0",
             "id": "12",
             "name": "New tab",
+            "show_icon": false,
+            "source": "unknown",
             "type": "url",
             "url": "edge://newtab/"
          }, {
@@ -57,15 +108,18 @@
             "guid": "2a769a48-f91c-4edd-9779-c0997efe9707",
             "id": "13",
             "name": "",
+            "show_icon": false,
+            "source": "unknown",
             "type": "url",
             "url": "https://drive.google.com/file/d/0By-6twShYeLzTG9kMzlNX1BHYVU/edit"
          } ],
          "date_added": "13342083727359398",
          "date_last_used": "0",
-         "date_modified": "13299496062267817",
+         "date_modified": "13343153743128926",
          "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
          "id": "1",
-         "name": "Bookmarks bar",
+         "name": "Favorites bar",
+         "source": "unknown",
          "type": "folder"
       },
       "other": {
@@ -75,7 +129,8 @@
          "date_modified": "0",
          "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
          "id": "2",
-         "name": "Other bookmarks",
+         "name": "Other favorites",
+         "source": "unknown",
          "type": "folder"
       },
       "synced": {
@@ -85,7 +140,8 @@
          "date_modified": "0",
          "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
          "id": "3",
-         "name": "Mobile bookmarks",
+         "name": "Mobile favorites",
+         "source": "unknown",
          "type": "folder"
       }
    },
