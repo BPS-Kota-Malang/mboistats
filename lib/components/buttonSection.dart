@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mboistat/datas/button.dart';
 
 class ButtonSection extends StatelessWidget {
   @override
@@ -9,39 +10,37 @@ class ButtonSection extends StatelessWidget {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          children: [
-            _buildButton(context, "Berita Resmi Statistik", Colors.blue,
-                '/berita_resmi'),
-            SizedBox(width: 16.0),
-            _buildButton(context, "Infografis", Colors.blue, '/infografis'),
-            SizedBox(width: 16.0),
-            _buildButton(context, "Tentang Kami", Colors.blue, '/tentang_kami'),
-            SizedBox(width: 16.0),
-            _buildButton(context, "Lainnya", Colors.blue, '/lainnya'),
-          ],
+          children: mboistatButton.map((icon) {
+            return Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, icon.route);
+                  },
+                  child: _buildButton(
+                      context, icon.title, Colors.blue, icon.route),
+                ),
+                SizedBox(width: 16.0),
+              ],
+            );
+          }).toList(),
         ),
       ),
     );
   }
 
   Widget _buildButton(
-      BuildContext context, String text, Color color, String routeName) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushNamed(
-            context, '/berita'); // Pindah ke halaman dengan rute yang sesuai
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-        decoration: BoxDecoration(
-          border: Border.all(color: color),
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        child: Text(
-          text,
-          style: TextStyle(
-            color: color,
-          ),
+      BuildContext context, String text, Color color, String route) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: color),
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: color,
         ),
       ),
     );

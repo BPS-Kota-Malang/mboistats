@@ -1,4 +1,4 @@
-#Sun Oct 29 14:41:33 ICT 2023
-base.0=E\:\\mboistats\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-renamed.0=classes.dex
+#Mon Oct 30 13:20:02 WIB 2023
+base.0=E\:\\Android\\mboistats\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
+renamed.0=classes.dex

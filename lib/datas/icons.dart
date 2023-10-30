@@ -16,6 +16,5 @@ List<MboistatIcon> mboistatMenuIcon = [
 
   MboistatIcon(icon: 'pertanian', title: 'Pertanian', route: '/pertanian'),
   MboistatIcon(icon: 'more', title: 'Lainnya', route: '/more'),
-
   //  MboistatIcon(icon : 'MboistatLogo', title: 'mboistat', color: red),
 ];
