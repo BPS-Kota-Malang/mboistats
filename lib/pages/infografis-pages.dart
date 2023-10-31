@@ -5,8 +5,7 @@ import 'package:mboistat/theme.dart';
 class InfografisPages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text('Infografis'),
           leading: IconButton(
@@ -42,11 +41,13 @@ class InfografisPages extends StatelessWidget {
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2, // Menampilkan 2 kolom
+                    mainAxisSpacing: 0.0, // Jarak vertikal antara elemen-elemen dalam grid
+                    crossAxisSpacing: 0.0, // Jarak horizontal antara elemen-elemen dalam grid
                   ),
                   itemCount: images.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.all(3.0),
+                      padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16), 
                       child: Image.asset(
                         images[index].imagePath,
                         width: 600,
@@ -59,7 +60,6 @@ class InfografisPages extends StatelessWidget {
             ),
           ],
         ),
-      ),
     );
   }
 }
