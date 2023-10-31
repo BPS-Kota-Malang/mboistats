@@ -1,11 +1,11 @@
 import 'package:mboistat/models/pertanian.dart';
 
 List<Pertanian> pertanian = [
-  Pertanian('pertanian_1.png', 'Produksi Padi', 'Penduduk bekerja sementara'),
+  Pertanian('pertanian_1.png', 'Produksi Padi', 'Hasil perkalian luas dan produktivitas'),
   Pertanian('pertanian_2.png', 'Luas Lahan Padi',
-      'Presentase angkatan kerja terhadap usia kerja'),
+      'Dihitung dengan metodologi KSA'),
   Pertanian('pertanian_3.png', 'Produktivitas Padi',
-      'Presentase pengangguran angkatan kerja'),
+      'Hasil bagi antara produksi dan luas'),
   Pertanian('pertanian_4.png', 'Produksi Beras',
-      'Penduduk yang tidak punya pekerjaan'),
+      'Dihitung dengan angka konversi GKG'),
 ];

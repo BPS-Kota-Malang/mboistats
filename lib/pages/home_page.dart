@@ -31,10 +31,11 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+
       body: SingleChildScrollView(
           child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
           Padding(
             padding: EdgeInsets.all(16.0), // Tambahkan jarak 16 di semua sisi
             child: Column(

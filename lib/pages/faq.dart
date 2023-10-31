@@ -1,33 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:mboistat/components/footer.dart';
-import 'package:mboistat/datas/ekonomi.dart';
+import 'package:mboistat/datas/contact.dart';
 import 'package:mboistat/theme.dart';
 
 class FAQ extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
-        title: Text('FAQ'),
-        leading: IconButton(
-          icon: Image.asset(
-            'assets/icons/left-arrow.png',
-            height: 18,
-          ),
-          onPressed: () {
-            Navigator.of(context)
-                .pop(); // Menavigasi kembali ke halaman sebelumnya
-          },
+        backgroundColor: Colors.white,
+        elevation: 0,
+        toolbarHeight: 50,
+        title: const Text(
+          'MBOIStatS+',
+          style: TextStyle(color: Colors.black),
+        ),
+        leading: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Image.asset(
+              'assets/images/Mbois-stat Logo_Fix Putih.png',
+              width: 40,
+              height: 40,
+            ),
+          ],
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 24,
-          ),
-          //News
-          ...ekonomi.map((item) => Padding(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0), // Padding di dalam ScrollView
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // const SizedBox(height: 10),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0), // Jarak di bawah judul
+                  child: Column(
+                    children: [
+                      Text(
+                        'Frequently Asked Question', // Ganti dengan judul yang sesuai
+                        style: bold16.copyWith(color: dark1, height: 1.5), // Sesuaikan gaya teks
+                      ),
+                      Text(
+                        'Pertanyaan Yang Sering Diajukan', // Teks tambahan di bawah judul
+                        style: regular14.copyWith(color: dark2, height: 1.5),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              ...contact.map((item) => Padding(
                 padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
                 child: Container(
                   clipBehavior: Clip.hardEdge,
@@ -72,7 +96,9 @@ class FAQ extends StatelessWidget {
                   ),
                 ),
               )),
-        ],
+            ],
+          ),
+        ),
       ),
       bottomNavigationBar: Footer(),
     );

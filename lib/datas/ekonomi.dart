@@ -2,11 +2,11 @@ import 'package:mboistat/models/ekonomi.dart';
 
 List<Ekonomi> ekonomi = [
   Ekonomi('laju_pertumbuhan.png', 'Laju Pertumbuhan Ekonomi',
-      'Penduduk bekerja sementara'),
+      'Perubahan produksi barang dan jasa'),
   Ekonomi('pdrb.png', 'PDRB Menurut Lapangan Usaha',
-      'Presentase angkatan kerja terhadap usia kerja'),
+      'PDRB atas dasar harga'),
   Ekonomi('inflasi.png', 'Inflasi Tahun Kalender',
-      'Presentase pengangguran angkatan kerja'),
+      'Presentase kenaikan harga produk'),
   Ekonomi('inflasi_bulanan.png', 'Inflasi Bulanan',
-      'Penduduk yang tidak punya pekerjaan'),
+      'Presentase kenaikan harga produk bulan tertentu'),
 ];

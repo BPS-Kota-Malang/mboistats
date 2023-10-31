@@ -1,12 +1,12 @@
 import 'package:mboistat/models/ipm.dart';
 
 List<IPM> ipm = [
-  IPM('ipm_1.png', 'Indeks Pembangunan Manusia', 'Penduduk bekerja sementara'),
+  IPM('ipm_1.png', 'Indeks Pembangunan Manusia', 'Indikator kualitas hidup manusia'),
   IPM('ipm_2.png', 'Usia Harapan Hidup',
-      'Presentase angkatan kerja terhadap usia kerja'),
+      'Rata-rata lamanya seseorang hidup'),
   IPM('ipm_3.png', 'Harapan Lama Sekolah',
-      'Presentase pengangguran angkatan kerja'),
+      'Lamanya sekolah yang diharapkan'),
   IPM('ipm_4.png', 'Rata-rata Lama Sekolah',
-      'Penduduk yang tidak punya pekerjaan'),
-  IPM('ipm_5.png', 'Daya Beli', 'Penduduk yang tidak punya pekerjaan'),
+      'Lamanya menjalani pendidikan formal'),
+  IPM('ipm_5.png', 'Daya Beli', 'Rata-rata pengeluaran riil yang sesuai'),
 ];

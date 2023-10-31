@@ -50,8 +50,9 @@ class InfografisPages extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16), 
                       child: Image.asset(
                         images[index].imagePath,
-                        width: 600,
-                        height: 600,
+                        // width: 600,
+                        // height: 600,
+                         fit: BoxFit.cover, // Sesuaikan dengan tata letak gambar
                       ),
                     );
                   },
