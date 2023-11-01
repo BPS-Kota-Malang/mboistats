@@ -1,0 +1,70 @@
+{
+   "checksum": "0508cc4c78c5bc59851c63026e894c90",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13308501270523100",
+            "date_last_used": "0",
+            "guid": "970e1e26-6962-4e3c-a134-f15103aca0b3",
+            "id": "7",
+            "name": "Developer Roadmaps",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://roadmap.sh/"
+         }, {
+            "date_added": "13308501288432974",
+            "date_last_used": "0",
+            "guid": "7a54ec58-1e15-4bdd-84fd-e014bbc4d830",
+            "id": "8",
+            "name": "Kumpulan 618+ Grup Telegram untuk Programmer",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://www.petanikode.com/kumpulan-group-channel-bot-telegram/"
+         }, {
+            "date_added": "13308501294651762",
+            "date_last_used": "0",
+            "guid": "747a42a2-9df7-42f7-8d81-da940c5ec77f",
+            "id": "9",
+            "name": "HackerRank",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://www.hackerrank.com/"
+         } ],
+         "date_added": "13343324102292833",
+         "date_last_used": "0",
+         "date_modified": "13308501294651762",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Favorites bar",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13343324102292838",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Other favorites",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13343324102292840",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Mobile favorites",
+         "source": "unknown",
+         "type": "folder"
+      }
+   },
+   "sync_metadata": "CkEKHgiIgQISCM1oX4uLAQAAKg4QABgBIAYoBDAAOABAABIAIAEqGFBwR1YzR0pSMjhmc3RObEdBRTgrdWc9PaAGDBKoAQgJEqMBChw3SXAyQVVkNkU5b3JnRlZsbW1xYnRuc0lzNFk9EiQ3NDdhNDJhMi05ZGY3LTQyZjctOGQ4MS1kYTk0MGM1ZWM3N2YYACACKAIwu5OQ27gxOMbYoP62MEDfmIfbuDFKHDVpVFhqTU1VdWFBSFJ2MWdFUlArV0NlUjZBZz1aHyId1E5uTGhCak0rQWlHcUw3Mnd3UGJuTmU5T21OMD1lUGjx2xKnAQgHEqIBChw4ZU85L2x5eWdjcXo5TytWeEoxMjFkcjB5Tjg9EiQ5NzBlMWUyNi02OTYyLTRlM2MtYTEzNC1mMTUxMDNhY2EwYjMYACACKAIwupOQ27gxOOOdn/62MEDXmIfbuDFKHDlTMmNPQ1NsOUVqaERpWjhNZmE1K0hXZUZqQT1aHiIcUTJBc0g3OG9EWUN5LzhCOEhpRS9IMkJpRm1vPWX45JVTEokBCAIShAEKHFljU1RvbnZFU1B3cUNzNEwyY3JWaHY2OEw5OD0SJDNhODk0ZmUyLTYwNmYtNWExMC1iNWNlLTMyZDlhMDM0OWEyNRgAIAAoADDCw8mUsDA40/LVofMvQNPy1aHzL0ocb1BWa2h3QlJiVjY1S0NXUjIrSU9OSFdvT3U4PVoAZQAAAAASqAEICBKjAQocZWRCVDZXWUN0d0c3YVFoczdobnozbVd0RFNrPRIkN2E1NGVjNTgtMWUxNS00YmRkLTg0ZmQtZTAxNGJiYzRkODMwGAAgAigCMLmTkNu4MTiZqKD+tjBA2ZiH27gxShxseXJONm1EZmZrYmxCUXJTcG9PeUU1Y2R5ZUE9Wh8iHahIbnlVMDNFd1ZZWlYxdFlFbVhheVNneWJEdkk9ZTDJChUSiQEIARKEAQoceXhKLzZmdmtlY3I3a3A1RVF6QjR0V0xwZGJFPRIkZmJmMmYwNzktYTM2ZS01OTFjLTgwZjgtN2E3NThhMjc3ODJmGAAgACgAMMLDyZSwMDii89Wh8y9AovPVofMvShxhUkNXTGdoRjliNUlucUtJRHZ1Si9qdlFrRmM9WgBlAAAAABKJAQgDEoQBChxuamdEdTg4ZUNydlhwODZwRDdmSEdjcUZwODg9EiRhMjQwYTM2OC0yNmU4LTU0NTgtODZhOS1hYTQ2YmU4MmExNmEYACAAKAAwwsPJlLAwOILz1aHzL0CC89Wh8y9KHHl6TkIwMWNuNTRBN2NSVTB1VCsvUGdtVHRVbz1aAGUAAAAAMAA4AA==",
+   "version": 1
+}
