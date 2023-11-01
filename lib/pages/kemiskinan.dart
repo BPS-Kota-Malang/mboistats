@@ -45,8 +45,15 @@ class KemiskinanPages extends StatelessWidget {
                     ],
                   ),
                   child: ListTile(
-                    leading: Image.asset(
-                        'assets/icons/${item.icons}'), // Ikon di sini
+                        leading: GestureDetector(
+                        onTap: () {
+                          if (item.route != null) {
+                            Navigator.of(context).pushNamed(item.route!);
+                          }
+                        },
+                        child: Image.asset('assets/icons/${item.icons}'),
+                      ),
+                       // Ikon di sini
                     title: Text(
                       item.title,
                       style: bold16.copyWith(color: dark1),

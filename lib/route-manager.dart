@@ -6,6 +6,7 @@ import 'package:mboistat/pages/faq.dart';
 import 'package:mboistat/pages/home_page.dart';
 import 'package:mboistat/pages/infografis-pages.dart';
 import 'package:mboistat/pages/kemiskinan-pages.dart';
+import 'package:mboistat/pages/kemiskinan.dart';
 import 'package:mboistat/pages/kependudukan-pages.dart';
 import 'package:mboistat/pages/kesejahteraan-pages.dart';
 import 'package:mboistat/pages/ketenagakerjaan-pages.dart';
@@ -32,7 +33,7 @@ class RouteManager {
     '/contact': (context) => Contact(),
     '/faq': (context) => FAQ(),
     '/kependudukan': (context) => KependudukanPages(),
-    '/kemiskinan': (context) => KemiskinanSubPages(),
+    '/kemiskinan': (context) => KemiskinanPages(),
     '/ekonomi': (context) => EkonomiPages(),
     '/ipm': (context) => IPMPages(),
     '/kesejahteraan': (context) => KesejahteraanPages(),
@@ -44,6 +45,7 @@ class RouteManager {
     '/HarapanLamaSekolah': (context) => HarapanLamaSekolahPage(),
     '/RataRataLamaSekolah': (context) => RataRataLamaSekolahPage(),
     '/DayaBeli': (context) => DayaBeliPage(),
+    
   };
 }
 
