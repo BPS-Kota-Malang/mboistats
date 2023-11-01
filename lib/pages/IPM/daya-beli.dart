@@ -7,7 +7,7 @@ class DayaBeliPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Data Kemiskinan'),
+        title: Text('Daya Beli'),
       ),
       body: WebView(
         initialUrl: 'about:blank', // URL awal sementara

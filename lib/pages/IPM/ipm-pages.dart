@@ -54,7 +54,7 @@ class IPMPages extends StatelessWidget {
                             Navigator.of(context).pushNamed(item.route!);
                           }
                         },
-                        child: Image.asset('assets/icon/${item.icons}'),
+                        child: Image.asset('assets/icons/${item.icons}'),
                       ),
                       title: Text(
                         item.title,

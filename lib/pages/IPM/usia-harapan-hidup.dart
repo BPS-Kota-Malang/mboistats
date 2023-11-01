@@ -7,7 +7,7 @@ class UsiaHarapanHidupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Data Kemiskinan'),
+        title: Text('Usia Harapan Hidup'),
       ),
       body: WebView(
         initialUrl: 'about:blank', // URL awal sementara

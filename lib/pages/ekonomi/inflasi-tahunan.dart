@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:convert';
 
-class RataRataLamaSekolahPage extends StatelessWidget {
+class DayaBeliPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Rata - Rata Lama Sekolah'),
+        title: Text('Inflasi Tahunan'),
       ),
       body: WebView(
         initialUrl: 'about:blank', // URL awal sementara
@@ -20,7 +20,7 @@ class RataRataLamaSekolahPage extends StatelessWidget {
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Rata-Rata Lama Sekolah</title>
+        <title>Inflasi Tahunan</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
 			.container {
@@ -30,10 +30,10 @@ class RataRataLamaSekolahPage extends StatelessWidget {
 			.kotak{
 				width: 350px;
 				height: auto;
-				border: 2px solid #A94C0E;
+				border: 2px solid #7F6000;
 				border-radius: 10px 10px 10px 10px;
 				margin: 1px 1px 1px 1px;
-				background-color: #D7C3B7;
+				background-color: #DBCFAF;
 			}
     </style>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -43,7 +43,7 @@ class RataRataLamaSekolahPage extends StatelessWidget {
     </head>
     <script>
 			var data;
-			url='https://webapi.bps.go.id/v1/api/list/model/data/domain/3573/var/285/key/9db89e91c3c142df678e65a78c4e547f';
+			url='https://webapi.bps.go.id/v1/api/list/model/data/domain/3573/var/437/key/9db89e91c3c142df678e65a78c4e547f';
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', url, false);
 			xhr.onreadystatechange = function() {
@@ -75,14 +75,14 @@ class RataRataLamaSekolahPage extends StatelessWidget {
 			//alert('Count: ' + val3573.length + " data: " + val3573);
 	</script>
 
-    <body style="background-image: url(file:///android_res/drawable/back_ipm.png); background-size: 100% 100%;">
+    <body style="background-image: url(file:///android_res/drawable/back_perekonomian.png); background-size: 100% 100%;">
         <div class="container" >
             <script> 
 			if(satuanB == ""){
-				document.write('<p align= "center" style="color:#843C0C; font-weight: bold;">RATA-RATA LAMA SEKOLAH (RLS)<br>'+ kolomB[0].toUpperCase() + ', ' + kolomB[1].toUpperCase() +', DAN ' + kolomB[2].toUpperCase() +'</p>'); 
+				document.write('<p align= "center" style="color:#7F6000; font-weight: bold;">INFLASI TAHUN KALENDER<br>'+ kolomB[0].toUpperCase() + ', ' + kolomB[1].toUpperCase() +', DAN ' + kolomB[2].toUpperCase()+'</p>'); 
 			}
 			else{
-				document.write('<p align= "center" style="color:#843C0C; font-weight: bold;">RATA-RATA LAMA SEKOLAH (RLS)<br>'+ kolomB[0].toUpperCase() + ', ' + kolomB[1].toUpperCase() +', DAN ' + kolomB[2].toUpperCase() +'<br>(' + satuanB + ')</p>'); 
+				document.write('<p align= "center" style="color:#7F6000; font-weight: bold;">INFLASI TAHUN KALENDER<br>'+ kolomB[0].toUpperCase() + ', ' + kolomB[1].toUpperCase() +', DAN ' + kolomB[2].toUpperCase()+'<br>('+ satuanB +')</p>'); 
 			}
 			</script>
             <table border = "0" align ="center" style="background-color:transparent;" cellpadding="10">
@@ -178,7 +178,7 @@ class RataRataLamaSekolahPage extends StatelessWidget {
 								  style: {
 										fontSize: '9px',
 										fontWeight: 600,
-										colors: ['#7030A0','#7030A0','#7030A0','#7030A0','#7030A0','#7030A0','#7030A0','#7030A0','#7030A0','#7030A0']
+										colors: ['#7F6000','#7F6000','#7F6000','#7F6000','#7F6000','#7F6000','#7F6000','#7F6000','#7F6000','#7F6000']
 									}
 							  },
 							  title: {
@@ -186,10 +186,11 @@ class RataRataLamaSekolahPage extends StatelessWidget {
 							  }
 							},
 							tooltip: {
+							theme: 'dark',
 							  enabled: true,
 							  y: {
 								  formatter: function(value){
-									return new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(value) + ' ' + satuanB
+									return new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(value) + '%'
 								  }
 							  }
 							},
@@ -215,14 +216,13 @@ class RataRataLamaSekolahPage extends StatelessWidget {
             <!-- <canvas id="canvas" height="300" width="500"></canvas> -->
 			<table border = "0" align ="center" style="width:auto; background-color:transparent;" cellpadding="10">
 				<td>
-					<div class="kotak"><p style="margin: 2px 2px 2px 2px;font-size:12px;color:#843C0C; text-align:center;" align="center"><b>RATA-RATA LAMA SEKOLAH</b><br>
-						<text style="color:#7F6000; font-size:12px; text-align:center;" align="center">didefinisikan sebagai jumlah tahun yang digunakan oleh 
-penduduk berumur 25 tahun ke atas dalam menjalani pendidikan formal</text></p>
+					<div class="kotak"><p style="margin: 2px 2px 2px 2px;font-size:12px;color:#7F6000; text-align:center;" align="center"><b>INFLASI TAHUN KALENDER</b><br>
+						<text style="color:#7F6000; font-size:12px; text-align:center;" align="center">merupakan kumulatif selama setahun, persentase tingkat kenaikan harga sejumlah barang dan jasa yang secara umum dikonsumsi rumah tangga</text></p>
 					</div>
 				</td>
 			</table>
-            <table border = "0" align ="center" style="background-color:transparent; font-size:12px; color:#843C0C;"cellpadding="10">
-                <tr align ="center" style="background-color:#843C0C; font-weight:bold; color: white; font-family: sans-serif;">
+            <table border = "0" align ="center" style="background-color:transparent; font-size:12px; color:#7F6000;"cellpadding="10">
+                <tr align ="center" style="background-color:#7F6000; font-weight:bold; color: white; font-family: sans-serif;">
                     <td>TAHUN</td>
                     <script>
 						document.write('<td>' + kolomB[0].toUpperCase() + '</td>');
@@ -230,7 +230,7 @@ penduduk berumur 25 tahun ke atas dalam menjalani pendidikan formal</text></p>
 						document.write('<td>' + kolomB[2].toUpperCase() + '</td>');
 					</script>
                 </tr>
-                <tr align ="center" style="background-color:#D5AD93; font-weight:bold; ">
+                <tr align ="center" style="background-color:#DBB958; font-weight:bold; ">
                     <script>
 						document.write('<td>' + thB[pjData-10] + '</td>');
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-10]) + '</td>');
@@ -238,7 +238,7 @@ penduduk berumur 25 tahun ke atas dalam menjalani pendidikan formal</text></p>
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-10]) + '</td>');
 					</script>
                 </tr>
-                <tr align ="center" style="background-color:#D7C3B7; font-weight:bold;">
+                <tr align ="center" style="background-color:#DBCFAF; font-weight:bold;">
                     <script>
 						document.write('<td>' + thB[pjData-9] + '</td>');
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-9]) + '</td>');
@@ -246,7 +246,7 @@ penduduk berumur 25 tahun ke atas dalam menjalani pendidikan formal</text></p>
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-9]) + '</td>');
 					</script>
                 </tr>
-                <tr align ="center" style="background-color:#D5AD93; font-weight:bold; ">
+                <tr align ="center" style="background-color:#DBB958; font-weight:bold; ">
                     <script>
 						document.write('<td>' + thB[pjData-8] + '</td>');
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-8]) + '</td>');
@@ -254,7 +254,7 @@ penduduk berumur 25 tahun ke atas dalam menjalani pendidikan formal</text></p>
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-8]) + '</td>');
 					</script>
                 </tr>
-                <tr align ="center" style="background-color:#D7C3B7; font-weight:bold;">
+                <tr align ="center" style="background-color:#DBCFAF; font-weight:bold;">
                     <script>
 						document.write('<td>' + thB[pjData-7] + '</td>');
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-7]) + '</td>');
@@ -262,7 +262,7 @@ penduduk berumur 25 tahun ke atas dalam menjalani pendidikan formal</text></p>
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-7]) + '</td>');
 					</script>
                 </tr>
-                <tr align ="center" style="background-color:#D5AD93; font-weight:bold; ">
+                <tr align ="center" style="background-color:#DBB958; font-weight:bold; ">
                     <script>
 						document.write('<td>' + thB[pjData-6] + '</td>');
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-6]) + '</td>');
@@ -270,7 +270,7 @@ penduduk berumur 25 tahun ke atas dalam menjalani pendidikan formal</text></p>
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-6]) + '</td>');
 					</script>
                 </tr>
-                <tr align ="center" style="background-color:#D7C3B7; font-weight:bold;">
+                <tr align ="center" style="background-color:#DBCFAF; font-weight:bold;">
                     <script>
 						document.write('<td>' + thB[pjData-5] + '</td>');
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-5]) + '</td>');
@@ -278,7 +278,7 @@ penduduk berumur 25 tahun ke atas dalam menjalani pendidikan formal</text></p>
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-5]) + '</td>');
 					</script>
                 </tr>
-                <tr align ="center" style="background-color:#D5AD93; font-weight:bold; ">
+                <tr align ="center" style="background-color:#DBB958; font-weight:bold; ">
                     <script>
 						document.write('<td>' + thB[pjData-4] + '</td>');
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-4]) + '</td>');
@@ -286,7 +286,7 @@ penduduk berumur 25 tahun ke atas dalam menjalani pendidikan formal</text></p>
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-4]) + '</td>');
 					</script>
                 </tr>
-                <tr align ="center" style="background-color:#D7C3B7; font-weight:bold;">
+                <tr align ="center" style="background-color:#DBCFAF; font-weight:bold;">
                     <script>
 						document.write('<td>' + thB[pjData-3] + '</td>');
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-3]) + '</td>');
@@ -294,7 +294,7 @@ penduduk berumur 25 tahun ke atas dalam menjalani pendidikan formal</text></p>
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-3]) + '</td>');
 					</script>
                 </tr>
-                <tr align ="center" style="background-color:#D5AD93; font-weight:bold; ">
+                <tr align ="center" style="background-color:#DBB958; font-weight:bold; ">
                     <script>
 						document.write('<td>' + thB[pjData-2] + '</td>');
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-2]) + '</td>');
@@ -302,7 +302,7 @@ penduduk berumur 25 tahun ke atas dalam menjalani pendidikan formal</text></p>
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-2]) + '</td>');
 					</script>
                 </tr>
-                <tr align ="center" style="background-color:#D7C3B7; font-weight:bold;">
+                <tr align ="center" style="background-color:#DBCFAF; font-weight:bold;">
                     <script>
 						document.write('<td>' + thB[pjData-1] + '</td>');
 						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-1]) + '</td>');
