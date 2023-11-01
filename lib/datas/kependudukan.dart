@@ -6,7 +6,7 @@ List<Kependudukan> kependudukan = [
   Kependudukan('kependudukan_2.png', 'Penduduk Menurut Kecamatan',
       'Jumlah penduduk menurut kecamatan', route: '/PendudukKec'),
   Kependudukan('kependudukan_3.png', 'Penduduk Kedungkandang',
-      'Jumlah penduduk Kedungkandang', route: '/PKedungkang'),
+      'Jumlah penduduk Kedungkandang', route: '/PKedungkandang'),
   Kependudukan('kependudukan_3.png', 'Penduduk Sukun',
       'Jumlah penduduk Sukun', route: '/PSukun'),
   Kependudukan('kependudukan_3.png', 'Penduduk Klojen',

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:convert';
 
-class DayaBeliPage extends StatelessWidget {
+class PendudukLowokmaruPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
