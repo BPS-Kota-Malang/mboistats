@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mboistat/pages/berita-pages.dart';
 import 'package:mboistat/pages/contact.dart';
-import 'package:mboistat/pages/ekonomi-pages.dart';
+import 'package:mboistat/pages/ekonomi/ekonomi-pages.dart';
 import 'package:mboistat/pages/faq.dart';
 import 'package:mboistat/pages/home_page.dart';
 import 'package:mboistat/pages/infografis-pages.dart';
