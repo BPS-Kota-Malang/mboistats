@@ -1,4 +1,4 @@
-import 'dart:js';
+//import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:mboistat/pages/berita-pages.dart';
 import 'package:mboistat/pages/contact.dart';
