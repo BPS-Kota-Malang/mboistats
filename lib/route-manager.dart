@@ -8,10 +8,10 @@ import 'package:mboistat/pages/home_page.dart';
 import 'package:mboistat/pages/infografis-pages.dart';
 import 'package:mboistat/pages/kemiskinan/kemiskinan.dart';
 import 'package:mboistat/pages/kependudukan/kependudukan-pages.dart';
-import 'package:mboistat/pages/kesejahteraan-pages.dart';
+import 'package:mboistat/pages/kesejahteraan/kesejahteraan-pages.dart';
 import 'package:mboistat/pages/ketenagakerjaan/ketenagakerjaan-pages.dart';
 import 'package:mboistat/pages/more-pages.dart';
-import 'package:mboistat/pages/pertanian-pages.dart';
+import 'package:mboistat/pages/pertanian/pertanian-pages.dart';
 import 'package:mboistat/pages/publikasi.dart';
 import 'package:mboistat/pages/tentang-pages.dart';
 import 'package:mboistat/splash-screen.dart';
@@ -40,7 +40,12 @@ import 'package:mboistat/pages/ketenagakerjaan/AK-Menurut-Pendidikan.dart';
 import 'package:mboistat/pages/ketenagakerjaan/pengangguran-pendidikan.dart';
 import 'package:mboistat/pages/ketenagakerjaan/persentase-pengangguran-AK.dart';
 import 'package:mboistat/pages/ketenagakerjaan/tingkat-partisipasi-AK.dart';
-
+import 'package:mboistat/pages/kesejahteraan/gini-rasio.dart';
+import 'package:mboistat/pages/kesejahteraan/pengeluaran-ekonomi.dart';
+import 'package:mboistat/pages/pertanian/luas-lahan.dart';
+import 'package:mboistat/pages/pertanian/produksi-beras.dart';
+import 'package:mboistat/pages/pertanian/produksi-padi.dart';
+import 'package:mboistat/pages/pertanian/produktivitas-padi.dart';
 
 class RouteManager {
   static Map<String, Widget Function(BuildContext)> routes = {
@@ -98,7 +103,15 @@ class RouteManager {
     '/TingkatPengangguran': (context)=> PersentasePengangguranMenurutPendidikanPage(),
     '/PengangguranMenurutPendidikan': (context)=> PengangguranMenurutPendidikanPage(),
 
-    
+    //Kesejahteraan
+    '/GiniRasio': (context)=>GiniRasioPage(),
+    '/PengeluaranEkonomi':(context)=>PengeluaranEkonomiPage(),
+
+    //Pertanian
+    '/LuasLahanPadi': (context)=>LuasLahanPadiPage(),
+    '/ProduksiPadi':(context)=>ProduksiPadiPage(),
+    '/ProduktivitasPadi':(context)=>ProduktivitasPadiPage(),
+    '/ProduksiBeras':(context)=>ProduksiBerasPage(),
 
 
 
