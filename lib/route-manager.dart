@@ -29,6 +29,11 @@ import 'package:mboistat/pages/kependudukan/penduduk-klojen.dart';
 import 'package:mboistat/pages/kependudukan/penduduk-sukun.dart';
 import 'package:mboistat/pages/kependudukan/penduduk-blimbing.dart';
 import 'package:mboistat/pages/kependudukan/penduduk-lowokmaru.dart';
+import 'package:mboistat/pages/ekonomi/ekonomi-pages.dart';
+import 'package:mboistat/pages/ekonomi/inflasi-bulanan.dart';
+import 'package:mboistat/pages/ekonomi/inflasi-tahunan.dart';
+import 'package:mboistat/pages/ekonomi/laju-pertumbuhan.dart';
+import 'package:mboistat/pages/ekonomi/pdrb-ekonomi.dart';
 
 class RouteManager {
   static Map<String, Widget Function(BuildContext)> routes = {
@@ -64,7 +69,19 @@ class RouteManager {
     '/PKlojen': (context) => PendudukKlojenPage(),
     '/PBlimbing': (context) => PendudukBlimbingPage(),
     '/PLowokmaru': (context) => PendudukLowokmaruPage(),
+
+
+    //Ekonomi
+    '/LajuPertumbuhan': (context) => LajuPertumbuhan(),
+    '/PDRB': (context) => PDRB(),
+    '/InflasiTahunKalender': (context) => InflasiTahunanPage(),
+    '/InflasiBulanan': (context) => InflasiBulananPage(),
     
+
+  
+
+
+
   };
 }
 
