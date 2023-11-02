@@ -1,2 +1,69 @@
-windows/flutter/generated_plugin_registrant.h
-build/
+# macOS-specific files
+.DS_Store
+
+# Android build/
+android/app/build/
+
+# iOS build/
+ios/Pods/
+ios/Podfile.lock
+ios/Podfile
+ios/Pods/Manifest.lock
+ios/DerivedData/
+ios/.symlinks/
+ios/Flutter/ephemeral/
+
+# Web build/
+web/build/
+
+# Log files
+*.log
+*.log.*
+
+# Flutter settings
+*.iml
+.flutter-plugins
+.flutter-plugins-dependencies
+/flutter_assets/
+
+# Android
+local.properties
+.android/
+
+# iOS
+ios/Runner/GeneratedPluginRegistrant.*
+
+# IntelliJ IDEA
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Android Studio
+.android/
+
+# Flutter package dependencies
+pubspec.lock
+.pub-cache/
+.pub/
+
+# Flutter upgrade files
+dart_style.lock
+.flutter_tool
+
+# iOS - Generated Reference Files
+ios/Generated.xcconfig
+ios/Generated.xcconfig
+
+# Release build
+ios/Runner/Release.xcconfig
+
+# Web
+web/.dart_tool/
+web/packages/
+web/pubspec.lock
+
+# Ignore Android, iOS, and Web build artifacts
+ios/Runner/Flutter
+android/app/build/
+web/build/
