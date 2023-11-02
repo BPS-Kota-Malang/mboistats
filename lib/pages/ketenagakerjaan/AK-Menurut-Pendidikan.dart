@@ -1,0 +1,434 @@
+import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'dart:convert';
+
+class AngkatanKerjaMenurutPendidikanPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Angkatan Kerja Menurut Pendidikan'),
+      ),
+      body: WebView(
+        initialUrl: 'about:blank', // URL awal sementara
+        javascriptMode: JavascriptMode.unrestricted, // Aktifkan JavaScript
+        onWebViewCreated: (WebViewController webViewController) {
+          // Muat konten HTML dan JavaScript
+          webViewController.loadUrl(Uri.dataFromString(
+            '''
+            <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Angkatan Kerja Menurut Pendidikan</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+			.container {
+				width: 100%;
+				min-height: 200px;
+			}
+			.kotak{
+				width: 350px;
+				height: auto;
+				border: 2px solid #2F5597;
+				border-radius: 10px 10px 10px 10px;
+				margin: 1px 1px 1px 1px;
+				background-color: #B1B5C9;
+			}
+    </style>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <!-- <link href="path/to/css/style.css" rel='stylesheet' type='text/css' /> -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script> -->
+        <!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+    </head>
+    <script>
+			var data,i;
+			url='https://webapi.bps.go.id/v1/api/list/model/data/domain/3573/var/442/key/9db89e91c3c142df678e65a78c4e547f';
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', url, false);
+			xhr.onreadystatechange = function() {
+			  // request completed?
+			  if (xhr.readyState !== 4) return;
+			  if (xhr.status === 200) {
+				// request successful - show response
+				data = JSON.parse(xhr.responseText);
+			  }
+			  else {
+				// request error
+				console.log('HTTP error', xhr.status, xhr.statusText);
+			  }
+			};
+			xhr.send();
+
+			const satuanA = data.var;
+			const satuanB = satuanA.map(a => a.unit);
+			const sumberA = data.var;
+			const sumberB = sumberA.map(b => b.note);
+			const kolomA = data.turvar;
+			const kolomB = kolomA.map(c => c.label);
+			var pjKolom = kolomB.length;
+			const thA = data.tahun;
+			const thB = thA.map(d => d.label);
+			var pjThData = thB.length;
+			//alert('Your query 3: ' + sumberB +" count= " + thB.length);
+
+			const valData = Object.values(data.datacontent);
+			var pjData = valData.length;
+			//alert('Count: ' + val3573.length + " data: " + val3573);
+			
+			for(i=0;i<valData.length;i++){
+				if(valData[i] == 0){
+					valData[i] = null;
+				}
+			}
+	/*		alert(valData[Number(0*(pjThData)*pjKolom+8)] +" "+Number(0*(pjThData)*pjKolom+8));
+			alert(valData[Number(1*(pjThData)*pjKolom+8)] +" "+Number(1*(pjThData)*pjKolom+8));
+			alert(pjThData); */
+			
+	</script>
+
+    <body style="background-image: url(file:///android_res/drawable/back_ketenagakerjaan.png); background-size: 100% 100%;">
+        <div class="container" align ="center" >
+            <script> 
+				document.write('<p align= "center" style="color:#2F5597; font-weight:bold;">ANGKATAN KERJA MENURUT<br>PENDIDIKAN TAHUN '+ thB[pjThData-1] +'<br>'+ kolomB[0].toUpperCase() + ', ' + kolomB[1].toUpperCase() +', DAN ' + kolomB[2].toUpperCase()+'</p>');
+			</script>
+            <table border = "0" align ="center" style="background-color:transparent;" cellpadding="10">
+					<div id="chart" align ="center" style="width:370px; text-align:center; height:15px;" >
+						 <script>
+							var options = {
+							  series: [{
+							  name: '<=SMP',
+							  data: [valData[0*pjThData*pjKolom+(1*pjThData-1)]+valData[1*pjThData*pjKolom+(1*pjThData-1)], valData[0*pjThData*pjKolom+(2*pjThData-1)]+valData[1*pjThData*pjKolom+(2*pjThData-1)], valData[0*pjThData*pjKolom+(3*pjThData-1)]+valData[1*pjThData*pjKolom+(3*pjThData-1)]]
+							}, {
+							  name: 'SMA',
+							  data: [valData[2*pjThData*pjKolom+(1*pjThData-1)], valData[2*pjThData*pjKolom+(2*pjThData-1)], valData[2*pjThData*pjKolom+(3*pjThData-1)]]
+							}, {
+							  name: 'SMK',
+							  data: [valData[3*pjThData*pjKolom+(1*pjThData-1)], valData[3*pjThData*pjKolom+(2*pjThData-1)], valData[3*pjThData*pjKolom+(3*pjThData-1)]]
+							}, {
+							  name: 'Perguruan Tinggi',
+							  data: [valData[4*pjThData*pjKolom+(1*pjThData-1)]+valData[5*pjThData*pjKolom+(1*pjThData-1)], valData[4*pjThData*pjKolom+(2*pjThData-1)]+valData[5*pjThData*pjKolom+(2*pjThData-1)], valData[4*pjThData*pjKolom+(3*pjThData-1)]+valData[5*pjThData*pjKolom+(3*pjThData-1)]]
+							}],
+							  chart: {
+							  type: 'bar',
+							  height: 350,
+							  width: '100%',
+							  stacked: true,
+							  stackType: '100%',
+							  toolbar: {
+								show: true,
+								tools: {
+									download: true,
+									selection: false,
+									zoom: false,
+									zoomout: false,
+									zoomin: false,
+									pan: false,
+									reset: false,
+								},
+							  }
+							},
+							responsive: [{
+							  breakpoint: 480,
+							  options: {
+								legend: {
+								  position: 'bottom',
+								  offsetX: -10,
+								  offsetY: 0
+								}
+							  }
+							}],
+							dataLabels: {
+								enabled: true,
+								background: {
+									enabled: true,
+									foreColor: '#fff',
+								},
+								style:{
+									fontSize: '10px',
+									colors: ['#000']
+								},
+								border:false,
+								formatter: function (val, opts){
+									return new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(val).toFixed(2)) + '%'
+								},
+							},
+							xaxis: {
+							  categories: [kolomB[0].toUpperCase(), kolomB[1].toUpperCase(), kolomB[2].toUpperCase()],
+							  labels: {
+								show: true,
+								 style: {
+									  fontSize: '12px',
+									  fontWeight: 600,
+								  },								
+							  },
+							},
+							yaxis: {
+							  title: {
+                                text: 'Persentase (%)',
+                              },
+							  labels: {
+								show: true,
+								 style: {
+									  fontSize: '12px',
+									  fontWeight: 600,
+								  },								
+							  },
+							},
+							fill: {
+							  opacity: 1
+							},
+							tooltip: {
+							  theme: 'dark',
+							  enabled: true,
+							  style: {
+								fontSize: '12px',
+							  },
+							  x: {
+								show: true,
+							  },
+							  y: {
+								  formatter: function(value){
+									return new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(value) + ' ' + satuanB
+								  }
+							  },
+							  z: {
+								show: false,
+							  },
+							},
+							legend: {
+							  position: 'top',
+							  fontSize: '12px',
+							  fontWeight: 600,
+							},
+							};
+
+							var chart = new ApexCharts(document.querySelector("#chart"), options);
+							chart.render();
+						</script>
+                    </div>
+			</table>
+            <!-- <div id="curve_chart" style="width: 100%; height: 300px"></div><br> -->
+            <!-- <div id="canvas" style="height: 300px; width: 100%;"></div> -->
+            <!-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script><br><br> -->
+            <!-- <canvas id="canvas" height="300" width="500"></canvas> -->
+			<table border = "0" align ="center" style="width:auto; background-color:transparent;" cellpadding="10">
+				<td>
+					<div class="kotak"><p style="margin: 2px 2px 2px 2px;font-size:12px;color:#2F5597; text-align:center;" align="center"><b>ANGKATAN KERJA</b><br>
+						<text style="color:#2F5597; font-size:12px; text-align:center;" align="center">merupakan penduduk 15 tahun ke atas yang bekerja, atau punya pekerjaan namun sementara tidak bekerja dan pengangguran</text></p>
+					</div>
+				</td>
+			</table>
+			<table border = "0" align ="center" style="width:auto; background-color:transparent;" cellpadding="10">
+				<td>
+					<script> 
+						document.write('<p align= "center" style="color:#2F5597; font-weight:bold;">PERSENTASE ANGKATAN KERJA<br>'+ kolomB[0].toUpperCase() + ' MENURUT PENDIDIKAN</p>'); 
+					</script>
+				</td>
+			</table>
+            <table border = "0" align ="center" style="background-color:transparent; font-size:12px; color:#2F5597;"cellpadding="10">
+                <tr align ="center" style="background-color:#3A62A7; font-weight:bold; color: white; font-family: sans-serif;">
+                    <td style="#fab;width:50pxheight:auto;word-wrap:break-word;">TAHUN</td>
+                    <script>
+						document.write('<td style="#fab;width:50px;height:auto;;word-wrap:break-word;"><=SMP</td>');
+						document.write('<td style="#fab;width:50px;height:auto;word-wrap:break-word;">SMA</td>');
+						document.write('<td style="#fab;width:50px;height:auto;word-wrap:break-word;">SMK</td>');
+						document.write('<td style="#fab;width:50px;height:auto;word-wrap:break-word;">PERGURUAN TINGGI</td>');
+					</script>
+                </tr>
+                <tr align ="center" style="background-color:#B1B5C9; font-weight:bold; ">
+                    <script>
+						document.write('<td>' + thB[pjThData-10] + '</td>');
+						if(valData[6*pjThData*pjKolom+(pjThData-10)] == null){
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+						}
+						else{
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[0*pjThData*pjKolom+(pjThData-10)]+valData[1*pjThData*pjKolom+(pjThData-10)])/valData[6*pjThData*pjKolom+(pjThData-10)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[2*pjThData*pjKolom+(pjThData-10)]/valData[6*pjThData*pjKolom+(pjThData-10)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[3*pjThData*pjKolom+(pjThData-10)]/valData[6*pjThData*pjKolom+(pjThData-10)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[4*pjThData*pjKolom+(pjThData-10)]+valData[5*pjThData*pjKolom+(pjThData-10)])/valData[6*pjThData*pjKolom+(pjThData-10)]*100).toFixed(2))) + '</td>');
+						}
+					</script>
+                </tr>
+                <tr align ="center" style="background-color:#C7C9D1; font-weight:bold;">
+                    <script>
+						document.write('<td>' + thB[pjThData-9] + '</td>');
+						if(valData[6*pjThData*pjKolom+(pjThData-9)] == null){
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+						}
+						else{
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[0*pjThData*pjKolom+(pjThData-9)]+valData[1*pjThData*pjKolom+(pjThData-9)])/valData[6*pjThData*pjKolom+(pjThData-9)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[2*pjThData*pjKolom+(pjThData-9)]/valData[6*pjThData*pjKolom+(pjThData-9)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[3*pjThData*pjKolom+(pjThData-9)]/valData[6*pjThData*pjKolom+(pjThData-9)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[4*pjThData*pjKolom+(pjThData-9)]+valData[5*pjThData*pjKolom+(pjThData-9)])/valData[6*pjThData*pjKolom+(pjThData-9)]*100).toFixed(2))) + '</td>');
+						}
+					</script>
+                </tr>
+                <tr align ="center" style="background-color:#B1B5C9; font-weight:bold; ">
+                    <script>
+						document.write('<td>' + thB[pjThData-8] + '</td>');
+						if(valData[6*pjThData*pjKolom+(pjThData-8)] == null){
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+						}
+						else{
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[0*pjThData*pjKolom+(pjThData-8)]+valData[1*pjThData*pjKolom+(pjThData-8)])/valData[6*pjThData*pjKolom+(pjThData-8)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[2*pjThData*pjKolom+(pjThData-8)]/valData[6*pjThData*pjKolom+(pjThData-8)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[3*pjThData*pjKolom+(pjThData-8)]/valData[6*pjThData*pjKolom+(pjThData-8)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[4*pjThData*pjKolom+(pjThData-8)]+valData[5*pjThData*pjKolom+(pjThData-8)])/valData[6*pjThData*pjKolom+(pjThData-8)]*100).toFixed(2))) + '</td>');
+						}
+					</script>
+                </tr>
+                <tr align ="center" style="background-color:#C7C9D1; font-weight:bold;">
+                    <script>
+						document.write('<td>' + thB[pjThData-7] + '</td>');
+						if(valData[6*pjThData*pjKolom+(pjThData-7)] == null){
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+						}
+						else{
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[0*pjThData*pjKolom+(pjThData-7)]+valData[1*pjThData*pjKolom+(pjThData-7)])/valData[6*pjThData*pjKolom+(pjThData-7)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[2*pjThData*pjKolom+(pjThData-7)]/valData[6*pjThData*pjKolom+(pjThData-7)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[3*pjThData*pjKolom+(pjThData-7)]/valData[6*pjThData*pjKolom+(pjThData-7)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[4*pjThData*pjKolom+(pjThData-7)]+valData[5*pjThData*pjKolom+(pjThData-7)])/valData[6*pjThData*pjKolom+(pjThData-7)]*100).toFixed(2))) + '</td>');
+						}
+					</script>
+                </tr>
+                <tr align ="center" style="background-color:#B1B5C9; font-weight:bold; ">
+                    <script>
+						document.write('<td>' + thB[pjThData-6] + '</td>');
+						if(valData[6*pjThData*pjKolom+(pjThData-6)] == null){
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+						}
+						else{
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[0*pjThData*pjKolom+(pjThData-6)]+valData[1*pjThData*pjKolom+(pjThData-6)])/valData[6*pjThData*pjKolom+(pjThData-6)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[2*pjThData*pjKolom+(pjThData-6)]/valData[6*pjThData*pjKolom+(pjThData-6)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[3*pjThData*pjKolom+(pjThData-6)]/valData[6*pjThData*pjKolom+(pjThData-6)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[4*pjThData*pjKolom+(pjThData-6)]+valData[5*pjThData*pjKolom+(pjThData-6)])/valData[6*pjThData*pjKolom+(pjThData-6)]*100).toFixed(2))) + '</td>');
+						}
+					</script>
+                </tr>
+                <tr align ="center" style="background-color:#C7C9D1; font-weight:bold;">
+                    <script>
+						document.write('<td>' + thB[pjThData-5] + '</td>');
+						if(valData[6*pjThData*pjKolom+(pjThData-5)] == null){
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+						}
+						else{
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[0*pjThData*pjKolom+(pjThData-5)]+valData[1*pjThData*pjKolom+(pjThData-5)])/valData[6*pjThData*pjKolom+(pjThData-5)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[2*pjThData*pjKolom+(pjThData-5)]/valData[6*pjThData*pjKolom+(pjThData-5)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[3*pjThData*pjKolom+(pjThData-5)]/valData[6*pjThData*pjKolom+(pjThData-5)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[4*pjThData*pjKolom+(pjThData-5)]+valData[5*pjThData*pjKolom+(pjThData-5)])/valData[6*pjThData*pjKolom+(pjThData-5)]*100).toFixed(2))) + '</td>');
+						}
+					</script>
+                </tr>
+                <tr align ="center" style="background-color:#B1B5C9; font-weight:bold; ">
+                    <script>
+						document.write('<td>' + thB[pjThData-4] + '</td>');
+						if(valData[6*pjThData*pjKolom+(pjThData-4)] == null){
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+						}
+						else{
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[0*pjThData*pjKolom+(pjThData-4)]+valData[1*pjThData*pjKolom+(pjThData-4)])/valData[6*pjThData*pjKolom+(pjThData-4)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[2*pjThData*pjKolom+(pjThData-4)]/valData[6*pjThData*pjKolom+(pjThData-4)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[3*pjThData*pjKolom+(pjThData-4)]/valData[6*pjThData*pjKolom+(pjThData-4)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[4*pjThData*pjKolom+(pjThData-4)]+valData[5*pjThData*pjKolom+(pjThData-4)])/valData[6*pjThData*pjKolom+(pjThData-4)]*100).toFixed(2))) + '</td>');
+						}
+					</script>
+                </tr>
+                <tr align ="center" style="background-color:#C7C9D1; font-weight:bold;">
+                    <script>
+						document.write('<td>' + thB[pjThData-3] + '</td>');
+						if(valData[6*pjThData*pjKolom+(pjThData-3)] == null){
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+						}
+						else{
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[0*pjThData*pjKolom+(pjThData-3)]+valData[1*pjThData*pjKolom+(pjThData-3)])/valData[6*pjThData*pjKolom+(pjThData-3)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[2*pjThData*pjKolom+(pjThData-3)]/valData[6*pjThData*pjKolom+(pjThData-3)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[3*pjThData*pjKolom+(pjThData-3)]/valData[6*pjThData*pjKolom+(pjThData-3)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[4*pjThData*pjKolom+(pjThData-3)]+valData[5*pjThData*pjKolom+(pjThData-3)])/valData[6*pjThData*pjKolom+(pjThData-3)]*100).toFixed(2))) + '</td>');
+						}
+					</script>
+                </tr>
+                <tr align ="center" style="background-color:#B1B5C9; font-weight:bold; ">
+                    <script>
+						document.write('<td>' + thB[pjThData-2] + '</td>');
+						if(valData[6*pjThData*pjKolom+(pjThData-2)] == null){
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+						}
+						else{
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[0*pjThData*pjKolom+(pjThData-2)]+valData[1*pjThData*pjKolom+(pjThData-2)])/valData[6*pjThData*pjKolom+(pjThData-2)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[2*pjThData*pjKolom+(pjThData-2)]/valData[6*pjThData*pjKolom+(pjThData-2)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[3*pjThData*pjKolom+(pjThData-2)]/valData[6*pjThData*pjKolom+(pjThData-2)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[4*pjThData*pjKolom+(pjThData-2)]+valData[5*pjThData*pjKolom+(pjThData-2)])/valData[6*pjThData*pjKolom+(pjThData-2)]*100).toFixed(2))) + '</td>');
+						}
+					</script>
+                </tr>
+                <tr align ="center" style="background-color:#C7C9D1; font-weight:bold;">
+                    <script>
+						document.write('<td>' + thB[pjThData-1] + '</td>');
+						if(valData[6*pjThData*pjKolom+(pjThData-1)] == null){
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+							document.write('<td>N.A.</td>');
+						}
+						else{
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[0*pjThData*pjKolom+(pjThData-1)]+valData[1*pjThData*pjKolom+(pjThData-1)])/valData[6*pjThData*pjKolom+(pjThData-1)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[2*pjThData*pjKolom+(pjThData-1)]/valData[6*pjThData*pjKolom+(pjThData-1)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number((valData[3*pjThData*pjKolom+(pjThData-1)]/valData[6*pjThData*pjKolom+(pjThData-1)]*100).toFixed(2))) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(Number(((valData[4*pjThData*pjKolom+(pjThData-1)]+valData[5*pjThData*pjKolom+(pjThData-1)])/valData[6*pjThData*pjKolom+(pjThData-1)]*100).toFixed(2))) + '</td>');
+						}
+					</script>
+                </tr>
+                <tr align ="left" style="background-color:transparent; line-height:auto;">
+                    <script>
+						document.write('<td colspan="5" style="#fab;height:auto;width:100px;word-wrap:break-word;"><strong style="font-size: 9px;">' + sumberB + '</strong></td>');
+					</script>
+                </tr>
+				<tr align ="left" style="background-color:transparent; line-height:1px;">
+                    <script>
+						document.write('<td colspan="5" align = "right" style="font-weight:bold; color:#336B87; font-size:13px;">MBOIStatS</td>');
+					</script>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
+
+          
+
+            ''',
+            mimeType: 'text/html',
+            encoding: Encoding.getByName('utf-8'),
+          ).toString());
+        },
+      ),
+    );
+  }
+}

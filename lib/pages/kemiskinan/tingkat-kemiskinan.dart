@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:convert';
 
-class KemiskinanSubPages extends StatelessWidget {
+class TingkatKemiskinanPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Data Kemiskinan'),
+        title: Text('Tingkat Kemiskinan'),
       ),
       body: WebView(
         initialUrl: 'about:blank', // URL awal sementara
@@ -16,11 +16,11 @@ class KemiskinanSubPages extends StatelessWidget {
           // Muat konten HTML dan JavaScript
           webViewController.loadUrl(Uri.dataFromString(
             '''
-           <!DOCTYPE html>
+          <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Indeks Kedalaman Kemiskinan</title>
+        <title>Tingkat Kemiskinan</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
 			.container {
@@ -43,7 +43,7 @@ class KemiskinanSubPages extends StatelessWidget {
     </head>
     <script>
 			var data;
-			url='https://webapi.bps.go.id/v1/api/list/model/data/domain/3573/var/432/key/9db89e91c3c142df678e65a78c4e547f';
+			url='https://webapi.bps.go.id/v1/api/list/model/data/domain/3573/var/428/key/9db89e91c3c142df678e65a78c4e547f';
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', url, false);
 			xhr.onreadystatechange = function() {
@@ -78,12 +78,12 @@ class KemiskinanSubPages extends StatelessWidget {
     <body style="background-image: url(file:///android_res/drawable/back_kemiskinan.png); background-size: 100% 100%;">
         <div class="container" >
             <script> 
-				if(satuanB == ""){
-					document.write('<p align= "center" style="color:#2F5597; font-weight: bold;">INDEKS KEDALAMAN KEMISKINAN (P1)<br>'+ kolomB[0].toUpperCase() + ', ' + kolomB[1].toUpperCase() +', DAN ' + kolomB[2].toUpperCase() + '</p>'); 
-				}
-				else{
-					document.write('<p align= "center" style="color:#2F5597; font-weight: bold;">INDEKS KEDALAMAN KEMISKINAN (P1)<br>'+ kolomB[0].toUpperCase() + ', ' + kolomB[1].toUpperCase() +', DAN ' + kolomB[2].toUpperCase() +'<br>('+ satuanB +')</p>'); 
-				}
+			if(satuanB == ""){
+				document.write('<p align= "center" style="color:#2F5597; font-weight: bold;">TINGKAT KEMISKINAN (P0)<br>'+ kolomB[0].toUpperCase() + ', ' + kolomB[1].toUpperCase() +', DAN ' + kolomB[2].toUpperCase() + '</p>'); 
+			}
+			else{
+				document.write('<p align= "center" style="color:#2F5597; font-weight: bold;">TINGKAT KEMISKINAN (P0)<br>'+ kolomB[0].toUpperCase() + ', ' + kolomB[1].toUpperCase() +', DAN ' + kolomB[2].toUpperCase() + '<br>(' + satuanB + ')'); 
+			}
 			</script>
             <table border = "0" align ="center" style="background-color:transparent;" cellpadding="10">
 					<tr id="chart" align ="center" style="width:50%; text-align:center; height:15px;" >
@@ -189,7 +189,7 @@ class KemiskinanSubPages extends StatelessWidget {
 							  enabled: true,
 							  y: {
 								  formatter: function(value){
-									return new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(value)
+									return new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(value) + '%'
 								  }
 							  }
 							},
@@ -198,7 +198,7 @@ class KemiskinanSubPages extends StatelessWidget {
 							  fontSize: '9px',
 							  fontWeight: 600,
 							  horizontalAlign: 'center',
-							  floating: false,
+							  floating: true,
 							  labels:{
 							  }
 							}
@@ -215,8 +215,8 @@ class KemiskinanSubPages extends StatelessWidget {
             <!-- <canvas id="canvas" height="300" width="500"></canvas> -->
 			<table border = "0" align ="center" style="width:auto; background-color:transparent;" cellpadding="10">
 				<td>
-					<div class="kotak"><p style="margin: 2px 2px 2px 2px;font-size:12px;color:#2F5597; text-align:center;" align="center"><b>INDEKS KEDALAMAN KEMISKINAN (P1)</b><br>
-						<text style="color:#2F5597; font-size:12px; text-align:center;" align="center">menggambarkan kesenjangan pengeluaran penduduk miskin terhadap garis kemiskinan</text></p>
+					<div class="kotak"><p style="margin: 2px 2px 2px 2px;font-size:12px;color:#2F5597; text-align:center;" align="center"><b>TINGKAT KEMISKINAN (P0)</b><br>
+						<text style="color:#2F5597; font-size:12px; text-align:center;" align="center"> merupakan persentase penduduk miskin terhadap total penduduk</text></p>
 					</div>
 				</td>
 			</table>
@@ -323,6 +323,7 @@ class KemiskinanSubPages extends StatelessWidget {
         </div>
     </body>
 </html>
+
 
             ''',
             mimeType: 'text/html',

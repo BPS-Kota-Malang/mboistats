@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/datas/ketenagakerjaan.dart';
+import 'package:mboistat/datas/kemiskinan.dart';
 import 'package:mboistat/theme.dart';
 
-class KetenagakerjaanPages extends StatelessWidget {
+class KemiskinanPages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ketenagakerjaan'),
+        title: Text('Kemiskinan'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -26,8 +26,14 @@ class KetenagakerjaanPages extends StatelessWidget {
             height: 24,
           ),
           //News
-          ...ketenagakerjaan.map((item) => Padding(
+          ...kemiskinan.map((item) => Padding(
                 padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
+                child: GestureDetector(
+                  onTap: () {
+                    if (item.route != null) {
+                      Navigator.of(context).pushNamed(item.route!);
+                    }
+                  },
                 child: Container(
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
@@ -45,8 +51,15 @@ class KetenagakerjaanPages extends StatelessWidget {
                     ],
                   ),
                   child: ListTile(
-                    leading: Image.asset(
-                        'assets/icons/${item.icons}'), // Ikon di sini
+                        leading: GestureDetector(
+                        onTap: () {
+                          if (item.route != null) {
+                            Navigator.of(context).pushNamed(item.route!);
+                          }
+                        },
+                        child: Image.asset('assets/icons/${item.icons}'),
+                      ),
+                       // Ikon di sini
                     title: Text(
                       item.title,
                       style: bold16.copyWith(color: dark1),
@@ -69,6 +82,7 @@ class KetenagakerjaanPages extends StatelessWidget {
                       ],
                     ),
                   ),
+                ),
                 ),
               )),
         ],

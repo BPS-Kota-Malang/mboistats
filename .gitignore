@@ -67,3 +67,8 @@ web/pubspec.lock
 ios/Runner/Flutter
 android/app/build/
 web/build/
+
+# Ignore build artifacts
+build/
+
+.dart_tool

@@ -1,3 +1,4 @@
+import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:mboistat/pages/berita-pages.dart';
 import 'package:mboistat/pages/contact.dart';
@@ -5,11 +6,10 @@ import 'package:mboistat/pages/ekonomi/ekonomi-pages.dart';
 import 'package:mboistat/pages/faq.dart';
 import 'package:mboistat/pages/home_page.dart';
 import 'package:mboistat/pages/infografis-pages.dart';
-import 'package:mboistat/pages/kemiskinan-pages.dart';
-import 'package:mboistat/pages/kemiskinan.dart';
-import 'package:mboistat/pages/kependudukan-pages.dart';
+import 'package:mboistat/pages/kemiskinan/kemiskinan.dart';
+import 'package:mboistat/pages/kependudukan/kependudukan-pages.dart';
 import 'package:mboistat/pages/kesejahteraan-pages.dart';
-import 'package:mboistat/pages/ketenagakerjaan-pages.dart';
+import 'package:mboistat/pages/ketenagakerjaan/ketenagakerjaan-pages.dart';
 import 'package:mboistat/pages/more-pages.dart';
 import 'package:mboistat/pages/pertanian-pages.dart';
 import 'package:mboistat/pages/publikasi.dart';
@@ -27,13 +27,20 @@ import 'package:mboistat/pages/kependudukan/penduduk-blimbing.dart';
 import 'package:mboistat/pages/kependudukan/penduduk-kedungkandang.dart';
 import 'package:mboistat/pages/kependudukan/penduduk-klojen.dart';
 import 'package:mboistat/pages/kependudukan/penduduk-sukun.dart';
-import 'package:mboistat/pages/kependudukan/penduduk-blimbing.dart';
 import 'package:mboistat/pages/kependudukan/penduduk-lowokmaru.dart';
-import 'package:mboistat/pages/ekonomi/ekonomi-pages.dart';
 import 'package:mboistat/pages/ekonomi/inflasi-bulanan.dart';
 import 'package:mboistat/pages/ekonomi/inflasi-tahunan.dart';
 import 'package:mboistat/pages/ekonomi/laju-pertumbuhan.dart';
 import 'package:mboistat/pages/ekonomi/pdrb-ekonomi.dart';
+import 'package:mboistat/pages/kemiskinan/garis-kemiskinan.dart';
+import 'package:mboistat/pages/kemiskinan/indeks-kedalaman-kemiskinan.dart';
+import 'package:mboistat/pages/kemiskinan/indeks-keparahan-kemiskinan.dart';
+import 'package:mboistat/pages/kemiskinan/tingkat-kemiskinan.dart';
+import 'package:mboistat/pages/ketenagakerjaan/AK-Menurut-Pendidikan.dart';
+import 'package:mboistat/pages/ketenagakerjaan/pengangguran-pendidikan.dart';
+import 'package:mboistat/pages/ketenagakerjaan/persentase-pengangguran-AK.dart';
+import 'package:mboistat/pages/ketenagakerjaan/tingkat-partisipasi-AK.dart';
+
 
 class RouteManager {
   static Map<String, Widget Function(BuildContext)> routes = {
@@ -46,7 +53,7 @@ class RouteManager {
     '/contact': (context) => Contact(),
     '/faq': (context) => FAQ(),
     '/kependudukan': (context) => KependudukanPages(),
-    '/kemiskinan': (context) => KemiskinanPages(),
+
     '/ekonomi': (context) => EkonomiPages(),
     '/ipm': (context) => IPMPages(),
     '/kesejahteraan': (context) => KesejahteraanPages(),
@@ -73,12 +80,25 @@ class RouteManager {
 
     //Ekonomi
     '/LajuPertumbuhan': (context) => LajuPertumbuhan(),
+    '/Ekonomi': (context) => EkonomiPages(),
     '/PDRB': (context) => PDRB(),
     '/InflasiTahunKalender': (context) => InflasiTahunanPage(),
     '/InflasiBulanan': (context) => InflasiBulananPage(),
     
+    //Kemiskinan
+    '/kemiskinan': (context) => KemiskinanPages(),
+    '/TingkatKemiskinan': (context) => TingkatKemiskinanPage(),
+    '/IndeksKedalamanKemiskinan': (context)=> IndeksKedalamanKemiskinanPage(),
+    '/IndeksKeparahanKemiskinan': (context)=> IndeksKeparahanKemiskinan(),
+    '/GarisKemiskinan': (context)=> GarisKemiskinanPage(),
+    
+    //Ketenagakerjaan
+    '/AKMenurutPendidikan': (context)=> AngkatanKerjaMenurutPendidikanPage(),
+    '/PartisipasiAngkatanKerja': (context)=> TingkatPartisipasiAngkatanKerjaPage(),
+    '/TingkatPengangguran': (context)=> PersentasePengangguranMenurutPendidikanPage(),
+    '/PengangguranMenurutPendidikan': (context)=> PengangguranMenurutPendidikanPage(),
 
-  
+    
 
 
 

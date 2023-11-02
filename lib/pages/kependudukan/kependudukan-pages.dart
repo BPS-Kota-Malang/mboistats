@@ -30,6 +30,12 @@ class KependudukanPages extends StatelessWidget {
             ...kependudukan.map((item) => Padding(
                   padding:
                       const EdgeInsets.only(bottom: 24, left: 16, right: 16),
+                  child: GestureDetector(
+                  onTap: () {
+                    if (item.route != null) {
+                      Navigator.of(context).pushNamed(item.route!);
+                    }
+                  },
                   child: Container(
                     clipBehavior: Clip.hardEdge,
                     decoration: BoxDecoration(
@@ -73,6 +79,7 @@ class KependudukanPages extends StatelessWidget {
                         ],
                       ),
                     ),
+                  ),
                   ),
                 )),
           ],

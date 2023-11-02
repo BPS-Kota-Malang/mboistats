@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/datas/kemiskinan.dart';
+import 'package:mboistat/datas/ketenagakerjaan.dart';
 import 'package:mboistat/theme.dart';
 
-class KemiskinanPages extends StatelessWidget {
+class KetenagakerjaanPages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kemiskinan'),
+        title: Text('Ketenagakerjaan'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -26,8 +26,14 @@ class KemiskinanPages extends StatelessWidget {
             height: 24,
           ),
           //News
-          ...kemiskinan.map((item) => Padding(
+          ...ketenagakerjaan.map((item) => Padding(
                 padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
+                child: GestureDetector(
+                  onTap: () {
+                    if (item.route != null) {
+                      Navigator.of(context).pushNamed(item.route!);
+                    }
+                  },
                 child: Container(
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
@@ -45,15 +51,14 @@ class KemiskinanPages extends StatelessWidget {
                     ],
                   ),
                   child: ListTile(
-                        leading: GestureDetector(
+                    leading: GestureDetector(
                         onTap: () {
                           if (item.route != null) {
                             Navigator.of(context).pushNamed(item.route!);
                           }
                         },
                         child: Image.asset('assets/icons/${item.icons}'),
-                      ),
-                       // Ikon di sini
+                      ), // Ikon di sini
                     title: Text(
                       item.title,
                       style: bold16.copyWith(color: dark1),
@@ -76,6 +81,7 @@ class KemiskinanPages extends StatelessWidget {
                       ],
                     ),
                   ),
+                ),
                 ),
               )),
         ],
