@@ -8,6 +8,16 @@ class IndeksKeparahanKemiskinan extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Indeks Keparahan Kemiskinan'),
+        leading: IconButton(
+          icon: Image.asset(
+            'assets/icons/left-arrow.png',
+            height: 18,
+          ),
+          onPressed: () {
+            Navigator.of(context)
+                .pop(); // Menavigasi kembali ke halaman sebelumnya
+          },
+        ),
       ),
       body: WebView(
         initialUrl: 'about:blank', // URL awal sementara

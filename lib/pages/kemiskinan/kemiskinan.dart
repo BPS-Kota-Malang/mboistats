@@ -7,7 +7,7 @@ class KemiskinanPages extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kemiskinan'),
+        title: Text('Data Kemiskinan'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',

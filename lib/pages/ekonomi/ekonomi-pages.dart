@@ -7,7 +7,7 @@ class EkonomiPages extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Perekonomian'),
+        title: Text('Data Perekonomian'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',

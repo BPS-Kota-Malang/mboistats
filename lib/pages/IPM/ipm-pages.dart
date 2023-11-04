@@ -7,7 +7,7 @@ class IPMPages extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('IPM'),
+        title: Text('Data IPM'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',

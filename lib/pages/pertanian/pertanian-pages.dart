@@ -7,7 +7,7 @@ class PertanianPages extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pertanian'),
+        title: Text('Data Pertanian'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',

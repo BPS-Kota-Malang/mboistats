@@ -7,7 +7,17 @@ class PendudukKedungkandangPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Penduduk Kecamatan Kedungkang '),
+        title: Text('Penduduk Kedungkandang'),
+        leading: IconButton(
+          icon: Image.asset(
+            'assets/icons/left-arrow.png',
+            height: 18,
+          ),
+          onPressed: () {
+            Navigator.of(context)
+                .pop(); // Menavigasi kembali ke halaman sebelumnya
+          },
+        ),
       ),
       body: WebView(
         initialUrl: 'about:blank', // URL awal sementara
