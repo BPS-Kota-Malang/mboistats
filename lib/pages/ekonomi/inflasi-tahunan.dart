@@ -7,7 +7,7 @@ class InflasiTahunanPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inflasi Tahunan'),
+        title: Text('Inflasi Tahun Kalender'),
       ),
       body: WebView(
         initialUrl: 'about:blank', // URL awal sementara

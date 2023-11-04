@@ -7,7 +7,7 @@ class IndeksKedalamanKemiskinanPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Data Kemiskinan'),
+        title: Text('Indeks Kedalaman Kemiskinan'),
       ),
       body: WebView(
         initialUrl: 'about:blank', // URL awal sementara

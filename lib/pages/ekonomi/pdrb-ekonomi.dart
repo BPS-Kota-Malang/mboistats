@@ -7,7 +7,7 @@ class PDRB extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PDRB'),
+        title: Text('PDRB Menurut Lapangan Usaha'),
       ),
       body: WebView(
         initialUrl: 'about:blank', // URL awal sementara

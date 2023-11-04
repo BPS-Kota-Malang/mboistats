@@ -2,13 +2,17 @@ import 'package:mboistat/models/ketenagakerjaan.dart';
 
 List<Ketenagakerjaan> ketenagakerjaan = [
   Ketenagakerjaan('angkatan_kerja.png', 'Angkatan Kerja Menurut Pendidikan',
-      'Penduduk bekerja sementara', route:'/AKMenurutPendidikan'),
+      'Penduduk bekerja sementara',
+      route: '/AKMenurutPendidikan'),
   Ketenagakerjaan(
       'tingkat_partisipasi.png',
       'Tingkat Partisipasi Angkatan Kerja',
-      'Presentase angkatan kerja terhadap usia kerja', route: '/PartisipasiAngkatanKerja'),
+      'Presentase angkatan kerja terhadap usia kerja',
+      route: '/PartisipasiAngkatanKerja'),
   Ketenagakerjaan('tingkat_pengangguran.png', 'Tingkat Pengangguran Terbuka',
-      'Presentase pengangguran angkatan kerja', route: '/TingkatPengangguran'),
+      'Presentase pengangguran angkatan kerja',
+      route: '/TingkatPengangguran'),
   Ketenagakerjaan('pengangguran.png', 'Pengangguran Menurut Pendidikan',
-      'Penduduk yang tidak punya pekerjaan',route: '/PengangguranMenurutPendidikan'),
+      'Penduduk tidak punya pekerjaan',
+      route: '/PengangguranMenurutPendidikan'),
 ];

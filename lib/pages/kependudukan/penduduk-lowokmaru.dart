@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:convert';
 
-class PendudukLowokmaruPage extends StatelessWidget {
+class PendudukLowokwaruPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Penduduk Kecamatan Lowokmaru'),
+        title: Text('Penduduk Kecamatan Lowokwaru'),
       ),
       body: WebView(
         initialUrl: 'about:blank', // URL awal sementara

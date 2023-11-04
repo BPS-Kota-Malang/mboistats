@@ -7,7 +7,7 @@ class LajuPertumbuhan extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Laju Pertumbuhan'),
+        title: Text('Laju Pertumbuhan Ekonomi'),
       ),
       body: WebView(
         initialUrl: 'about:blank', // URL awal sementara

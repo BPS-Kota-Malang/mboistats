@@ -80,8 +80,7 @@ class RouteManager {
     '/PSukun': (context) => PendudukSukunPage(),
     '/PKlojen': (context) => PendudukKlojenPage(),
     '/PBlimbing': (context) => PendudukBlimbingPage(),
-    '/PLowokmaru': (context) => PendudukLowokmaruPage(),
-
+    '/PLowokwaru': (context) => PendudukLowokwaruPage(),
 
     //Ekonomi
     '/LajuPertumbuhan': (context) => LajuPertumbuhan(),
@@ -89,33 +88,31 @@ class RouteManager {
     '/PDRB': (context) => PDRB(),
     '/InflasiTahunKalender': (context) => InflasiTahunanPage(),
     '/InflasiBulanan': (context) => InflasiBulananPage(),
-    
+
     //Kemiskinan
     '/kemiskinan': (context) => KemiskinanPages(),
     '/TingkatKemiskinan': (context) => TingkatKemiskinanPage(),
-    '/IndeksKedalamanKemiskinan': (context)=> IndeksKedalamanKemiskinanPage(),
-    '/IndeksKeparahanKemiskinan': (context)=> IndeksKeparahanKemiskinan(),
-    '/GarisKemiskinan': (context)=> GarisKemiskinanPage(),
-    
+    '/IndeksKedalamanKemiskinan': (context) => IndeksKedalamanKemiskinanPage(),
+    '/IndeksKeparahanKemiskinan': (context) => IndeksKeparahanKemiskinan(),
+    '/GarisKemiskinan': (context) => GarisKemiskinanPage(),
+
     //Ketenagakerjaan
-    '/AKMenurutPendidikan': (context)=> AngkatanKerjaMenurutPendidikanPage(),
-    '/PartisipasiAngkatanKerja': (context)=> TingkatPartisipasiAngkatanKerjaPage(),
-    '/TingkatPengangguran': (context)=> PersentasePengangguranMenurutPendidikanPage(),
-    '/PengangguranMenurutPendidikan': (context)=> PengangguranMenurutPendidikanPage(),
+    '/AKMenurutPendidikan': (context) => AngkatanKerjaMenurutPendidikanPage(),
+    '/PartisipasiAngkatanKerja': (context) =>
+        TingkatPartisipasiAngkatanKerjaPage(),
+    '/TingkatPengangguran': (context) =>
+        PersentasePengangguranMenurutPendidikanPage(),
+    '/PengangguranMenurutPendidikan': (context) =>
+        PengangguranMenurutPendidikanPage(),
 
     //Kesejahteraan
-    '/GiniRasio': (context)=>GiniRasioPage(),
-    '/PengeluaranEkonomi':(context)=>PengeluaranEkonomiPage(),
+    '/GiniRasio': (context) => GiniRasioPage(),
+    '/PengeluaranEkonomi': (context) => PengeluaranEkonomiPage(),
 
     //Pertanian
-    '/LuasLahanPadi': (context)=>LuasLahanPadiPage(),
-    '/ProduksiPadi':(context)=>ProduksiPadiPage(),
-    '/ProduktivitasPadi':(context)=>ProduktivitasPadiPage(),
-    '/ProduksiBeras':(context)=>ProduksiBerasPage(),
-
-
-
+    '/LuasLahanPadi': (context) => LuasLahanPadiPage(),
+    '/ProduksiPadi': (context) => ProduksiPadiPage(),
+    '/ProduktivitasPadi': (context) => ProduktivitasPadiPage(),
+    '/ProduksiBeras': (context) => ProduksiBerasPage(),
   };
 }
-
-

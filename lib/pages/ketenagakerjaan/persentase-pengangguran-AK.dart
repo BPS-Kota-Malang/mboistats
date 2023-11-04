@@ -7,7 +7,7 @@ class PersentasePengangguranMenurutPendidikanPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Persentase Pengangguran Menurut Pendidikan'),
+        title: Text('Tingkat Pengannguran Terbuka'),
       ),
       body: WebView(
         initialUrl: 'about:blank', // URL awal sementara
