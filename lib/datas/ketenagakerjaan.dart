@@ -7,7 +7,7 @@ List<Ketenagakerjaan> ketenagakerjaan = [
   Ketenagakerjaan(
       'tingkat_partisipasi.png',
       'Tingkat Partisipasi Angkatan Kerja',
-      'Presentase angkatan kerja terhadap usia kerja',
+      'Presentase angkatan kerja pada usia kerja',
       route: '/PartisipasiAngkatanKerja'),
   Ketenagakerjaan('tingkat_pengangguran.png', 'Tingkat Pengangguran Terbuka',
       'Presentase pengangguran angkatan kerja',
