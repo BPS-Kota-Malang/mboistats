@@ -71,4 +71,5 @@ web/build/
 # Ignore build artifacts
 build/
 
-.dart_tool
+# Ignore .dart_tool directory
+.dart_tool/
