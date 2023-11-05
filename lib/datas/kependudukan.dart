@@ -14,5 +14,5 @@ List<Kependudukan> kependudukan = [
   Kependudukan('kependudukan_3.png', 'Penduduk Blimbing',
       'Jumlah penduduk Blimbing', route: '/PBlimbing'),
   Kependudukan('kependudukan_3.png', 'Penduduk Lowokwaru',
-      'Jumlah penduduk Lowokwaru', route: '/Plowokwaru'),
+      'Jumlah penduduk Lowokwaru', route: '/PLowokwaru'),
 ];
