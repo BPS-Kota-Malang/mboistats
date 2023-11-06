@@ -111,9 +111,9 @@
     },
     {
       "name": "flutter_web_plugins",
-      "rootUri": "file:///C:/Users/SONY/flutter/packages/flutter_web_plugins",
+      "rootUri": "file:///D:/Downloads/SDK/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "http",
@@ -243,49 +243,49 @@
     },
     {
       "name": "url_launcher",
-      "rootUri": "file:///C:/Users/SONY/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher-6.2.1",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher-6.2.1",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
     {
       "name": "url_launcher_android",
-      "rootUri": "file:///C:/Users/SONY/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_android-6.2.0",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_android-6.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "url_launcher_ios",
-      "rootUri": "file:///C:/Users/SONY/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_ios-6.2.0",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_ios-6.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "url_launcher_linux",
-      "rootUri": "file:///C:/Users/SONY/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_linux-3.1.0",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_linux-3.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "url_launcher_macos",
-      "rootUri": "file:///C:/Users/SONY/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_macos-3.1.0",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_macos-3.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "url_launcher_platform_interface",
-      "rootUri": "file:///C:/Users/SONY/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_platform_interface-2.2.0",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_platform_interface-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "url_launcher_web",
-      "rootUri": "file:///C:/Users/SONY/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_web-2.2.0",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_web-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
     {
       "name": "url_launcher_windows",
-      "rootUri": "file:///C:/Users/SONY/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_windows-3.1.0",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_windows-3.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -344,7 +344,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-11-06T03:14:39.651387Z",
+  "generated": "2023-11-06T04:58:46.638791Z",
   "generator": "pub",
   "generatorVersion": "3.2.0-210.3.beta"
 }
