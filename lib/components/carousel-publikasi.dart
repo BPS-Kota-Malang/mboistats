@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CarouselPublikasi extends StatefulWidget {
   @override
@@ -34,42 +35,59 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
     }
   }
 
+  void launchPDF(String pdfUrl) async {
+    if (await canLaunch(pdfUrl)) {
+      await launch(pdfUrl);
+    } else {
+      throw 'Could not launch $pdfUrl';
+    }
+  }
+
+  void downloadPDF(String pdfUrl) async {
+    // Implementasi unduhan PDF di sini, contohnya:
+    // await launch(pdfUrl);
+  }
+
   @override
   Widget build(BuildContext context) {
     return dataPublikasi.isEmpty
         ? Center(
-            child: CircularProgressIndicator()) // Indicator saat sedang memuat
+            child: CircularProgressIndicator(),
+          )
         : Column(
             children: [
               Padding(
                 padding: const EdgeInsets.only(
-                    top: 24.0,
-                    bottom:
-                        16.0), // Menambahkan jarak di atas dan di bawah judul
+                  top: 24.0,
+                  bottom: 16.0,
+                ),
                 child: Text(
-                  'PUBLIKASI', // Judul "Publikasi"
+                  'PUBLIKASI',
                   style: TextStyle(
-                    fontSize:
-                        20, // Sesuaikan ukuran teks dengan preferensi Anda
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               CarouselSlider(
                 options: CarouselOptions(
-                  height: 450, // Sesuaikan dengan tinggi kertas A4 dalam piksel
+                  height: 450,
                   enlargeCenterPage: true,
                   autoPlay: true,
-                  aspectRatio: 3 / 4, // Rasio aspek 3:4 untuk layout kertas A4
+                  aspectRatio: 3 / 4,
                 ),
                 items: dataPublikasi.map((item) {
-                  return Container(
-                    width: MediaQuery.of(context)
-                        .size
-                        .width, // Lebar gambar mengikuti lebar layar
-                    child: Image.network(
-                      item['cover'],
-                      fit: BoxFit.cover,
+                  return GestureDetector(
+                    onTap: () {
+                      // Saat gambar ditekan, jalankan atau unduh PDF
+                      launchPDF(item['pdf']);
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Image.network(
+                        item['cover'],
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   );
                 }).toList(),
