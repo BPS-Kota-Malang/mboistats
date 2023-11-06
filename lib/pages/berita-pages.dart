@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mboistat/components/footer.dart';
 import 'package:mboistat/datas/berita.dart';
 import 'package:mboistat/theme.dart';
 
@@ -72,6 +73,7 @@ class BeritaPages extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: Footer(),
     );
   }
 }

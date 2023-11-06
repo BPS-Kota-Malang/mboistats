@@ -83,7 +83,7 @@ class _FooterState extends State<Footer> {
     final currentRoute = ModalRoute.of(context)!.settings.name;
 
     // Tentukan _selectedIndex berdasarkan nama rute halaman yang sedang aktif
-    if (currentRoute == '/faq') {
+    if (currentRoute == '/berita') {
       _selectedIndex = 1;
     } else if (currentRoute == '/contact') {
       _selectedIndex = 2;
@@ -104,7 +104,7 @@ class _FooterState extends State<Footer> {
         break;
       case 1:
         Navigator.of(context)
-            .pushNamed('/faq'); // Ganti dengan rute yang sesuai
+            .pushNamed('/berita'); // Ganti dengan rute yang sesuai
         break;
       case 2:
         Navigator.of(context)
@@ -128,10 +128,10 @@ class _FooterState extends State<Footer> {
         ),
         BottomNavigationBarItem(
           icon: Icon(
-            Icons.question_answer_outlined,
-            color: _selectedIndex == 1 ? Colors.blue : null, // FAQ
+            Icons.newspaper_outlined,
+            color: _selectedIndex == 1 ? Colors.blue : null, // NEWS
           ),
-          label: 'FAQ',
+          label: 'Berita',
         ),
         BottomNavigationBarItem(
           icon: Icon(
