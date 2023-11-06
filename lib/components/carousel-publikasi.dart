@@ -37,14 +37,22 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
   @override
   Widget build(BuildContext context) {
     return dataPublikasi.isEmpty
-        ? Center(child: CircularProgressIndicator()) // Indicator saat sedang memuat
+        ? Center(
+            child: CircularProgressIndicator()) // Indicator saat sedang memuat
         : Column(
             children: [
-              Text(
-                'PUBLIKASI', // Judul "Infografis"
-                style: TextStyle(
-                  fontSize: 24, // Sesuaikan ukuran teks dengan preferensi Anda
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 24.0,
+                    bottom:
+                        16.0), // Menambahkan jarak di atas dan di bawah judul
+                child: Text(
+                  'PUBLIKASI', // Judul "Publikasi"
+                  style: TextStyle(
+                    fontSize:
+                        20, // Sesuaikan ukuran teks dengan preferensi Anda
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               CarouselSlider(
@@ -56,7 +64,9 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
                 ),
                 items: dataPublikasi.map((item) {
                   return Container(
-                    width: MediaQuery.of(context).size.width, // Lebar gambar mengikuti lebar layar
+                    width: MediaQuery.of(context)
+                        .size
+                        .width, // Lebar gambar mengikuti lebar layar
                     child: Image.network(
                       item['cover'],
                       fit: BoxFit.cover,
@@ -68,5 +78,3 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
           );
   }
 }
-
-
