@@ -28,15 +28,18 @@ class BeritaPages extends StatelessWidget {
               height: 24,
             ),
             Center(
-              child: Padding(
-                padding:
-                    const EdgeInsets.only(bottom: 16.0), // Jarak di bawah judul
-                child: Text(
-                  'BERITA RESMI STATISTIK', // Ganti dengan judul yang sesuai
-                  style: bold16.copyWith(color: dark1), // Sesuaikan gaya teks
+                child: Container(
+                  width: 200, // Lebar container sesuai dengan lebar ikon telepon
+                  height: 200, // Tinggi container sesuai dengan tinggi ikon telepon
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/icons/news.png'), // Path ikon telepon
+                      fit: BoxFit.cover, // Sesuaikan dengan tata letak gambar
+                    ),
+                  ),
                 ),
               ),
-            ),
+              SizedBox(height: 10), // Tambahkan SizedBox dengan ketinggian yang diinginkan
             ...berita.map((item) => Padding(
                   padding:
                       const EdgeInsets.only(bottom: 24, left: 16, right: 16),
