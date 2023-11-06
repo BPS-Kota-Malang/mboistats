@@ -1,14 +1,4 @@
-<<<<<<< HEAD
-2023/11/06-08:37:41.775 1cc0 Reusing MANIFEST C:\Users\SONY\AppData\Local\Temp\flutter_tools.dd1c1ab0\flutter_tools_chrome_device.e404ad23\Default\Site Characteristics Database/MANIFEST-000001
-2023/11/06-08:37:41.776 1cc0 Recovering log #3
-2023/11/06-08:37:41.776 1cc0 Level-0 table #3: started
-2023/11/06-08:37:41.786 1cc0 Level-0 table #3: 260 bytes OK
-2023/11/06-08:37:41.786 1cc0 Recovering log #19
-2023/11/06-08:37:41.787 1cc0 Reusing old log C:\Users\SONY\AppData\Local\Temp\flutter_tools.dd1c1ab0\flutter_tools_chrome_device.e404ad23\Default\Site Characteristics Database/000019.log 
-2023/11/06-08:37:41.786 1cc0 Delete type=0 #3
-=======
-2023/11/06-08:48:16.556 61dc Reusing MANIFEST C:\Users\Acha\AppData\Local\Temp\flutter_tools.6c46a4c\flutter_tools_chrome_device.bcf2477e\Default\Site Characteristics Database/MANIFEST-000001
-2023/11/06-08:48:16.557 61dc Recovering log #19
-2023/11/06-08:48:16.558 61dc Reusing old log C:\Users\Acha\AppData\Local\Temp\flutter_tools.6c46a4c\flutter_tools_chrome_device.bcf2477e\Default\Site Characteristics Database/000019.log 
-2023/11/06-08:48:16.559 61dc Delete type=0 #3
->>>>>>> 9a833ee6a43e5df903fa86af55264520c5621979
+2023/11/06-10:07:21.086 5e28 Reusing MANIFEST C:\Users\Acha\AppData\Local\Temp\flutter_tools.9256555b\flutter_tools_chrome_device.693f1291\Default\Site Characteristics Database/MANIFEST-000001
+2023/11/06-10:07:21.089 5e28 Recovering log #19
+2023/11/06-10:07:21.090 5e28 Reusing old log C:\Users\Acha\AppData\Local\Temp\flutter_tools.9256555b\flutter_tools_chrome_device.693f1291\Default\Site Characteristics Database/000019.log 
+2023/11/06-10:07:21.091 5e28 Delete type=0 #3

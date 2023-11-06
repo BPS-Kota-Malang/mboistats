@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mboistat/components/footer.dart';
 import 'package:mboistat/datas/contact.dart';
 import 'package:mboistat/theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Contact extends StatelessWidget {
   @override
@@ -67,45 +68,54 @@ class Contact extends StatelessWidget {
               SizedBox(height: 16), // Tambahkan SizedBox dengan ketinggian yang diinginkan
               ...contact.map((item) => Padding(
                 padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
-                child: Container(
-                  clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: dark4),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey
-                            .withOpacity(0.2), // Warna abu-abu transparan
-                        spreadRadius: 2, // Seberapa tersebar bayangannya
-                        blurRadius: 4, // Seberapa kabur bayangannya
-                        offset:
-                            Offset(0, 2), // Perpindahan bayangan dari widget
-                      ),
-                    ],
-                  ),
-                  child: ListTile(
-                    leading: Image.asset(
-                        'assets/icons/${item.icons}'), // Ikon di sini
-                    title: Text(
-                      item.title,
-                      style: bold16.copyWith(color: dark1),
-                    ),
-                    subtitle: Row(
-                      children: [
-                        Text(
-                          item.description,
-                          style: regular14.copyWith(color: dark2),
-                        ),
-                        Spacer(), // Spacer untuk memberikan jarak antara teks dan ikon
-                        Align(
-                          alignment:
-                              Alignment.center, // Mengatur ikon di tengah
-                          child: Image.asset(
-                            'assets/icons/right-arrow.png',
-                            height: 16,
-                          ), // Ikon panah ke kanan
+                child: InkWell(
+                  onTap: () {
+                    if (item.title == 'Alamat') {
+                      launch('https://www.google.com/maps/place/Jl.+Janti+Barat+No+47,+Sukun');
+                    } else if (item.title == 'Email') {
+                      launch('mailto:bps3573@bps.go.id');
+                    } else if (item.title == 'Instagram') {
+                      launch('https://instagram.com/bpskotamalang');
+                    }
+                  },
+                  child: Container(
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: dark4),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
                         ),
                       ],
+                    ),
+                    child: ListTile(
+                      leading: Image.asset(
+                        'assets/icons/${item.icons}',
+                      ),
+                      title: Text(
+                        item.title,
+                        style: bold16.copyWith(color: dark1),
+                      ),
+                      subtitle: Row(
+                        children: [
+                          Text(
+                            item.description,
+                            style: regular14.copyWith(color: dark2),
+                          ),
+                          Spacer(),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Image.asset(
+                              'assets/icons/right-arrow.png',
+                              height: 16,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
