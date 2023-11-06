@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mboistat/components/buttonSection.dart';
-import 'package:mboistat/components/carousel-berita.dart';
 import 'package:mboistat/components/carousel-infografis.dart';
 import 'package:mboistat/components/carousel-publikasi.dart';
-import 'package:mboistat/components/carousel-tentang.dart';
 import 'package:mboistat/components/footer.dart';
 import 'package:mboistat/components/menus.dart';
 import 'package:mboistat/theme.dart';
@@ -31,11 +29,10 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-
       body: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Padding(
             padding: EdgeInsets.all(16.0), // Tambahkan jarak 16 di semua sisi
             child: Column(
@@ -55,10 +52,8 @@ class HomePage extends StatelessWidget {
           ),
           Menus(),
           ButtonSection(),
-          CarouselBerita(),
           CarouselPublikasi(),
           CarouselInfografis(),
-          CarouselTentang(),
         ],
       )),
       bottomNavigationBar: Footer(),
