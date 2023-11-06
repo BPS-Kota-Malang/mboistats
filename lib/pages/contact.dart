@@ -35,6 +35,19 @@ class Contact extends StatelessWidget {
             children: [
               // const SizedBox(height: 10),
               Center(
+                child: Container(
+                  width: 200, // Lebar container sesuai dengan lebar ikon telepon
+                  height: 200, // Tinggi container sesuai dengan tinggi ikon telepon
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/icons/communication.png'), // Path ikon telepon
+                      fit: BoxFit.cover, // Sesuaikan dengan tata letak gambar
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10), // Tambahkan SizedBox dengan ketinggian yang diinginkan
+              Center(
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 16.0), // Jarak di bawah judul
                   child: Column(
@@ -51,19 +64,7 @@ class Contact extends StatelessWidget {
                   ),
                 ),
               ),
-              Center(
-                child: Column(
-                  children: [
-                    Image.asset(
-                      'assets/images/pic1.jpeg',
-                      width: 200, // Sesuaikan dengan lebar gambar yang diinginkan
-                      height: 100, // Sesuaikan dengan tinggi gambar yang diinginkan
-                      fit: BoxFit.cover, // Sesuaikan dengan tata letak gambar
-                    ),
-                    SizedBox(height: 16), // Tambahkan SizedBox dengan ketinggian yang diinginkan
-                  ],
-                ),
-              ),
+              SizedBox(height: 16), // Tambahkan SizedBox dengan ketinggian yang diinginkan
               ...contact.map((item) => Padding(
                 padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
                 child: Container(
