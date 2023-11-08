@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mboistat/components/footer.dart';
+import 'package:mboistat/theme.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
@@ -77,8 +79,25 @@ class _BeritaPagesState extends State<BeritaPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
-        title: Text('Berita'),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        toolbarHeight: 50,
+        title: const Text(
+          'MBOIStatS+',
+          style: TextStyle(color: Colors.black),
+        ),
+        leading: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Image.asset(
+              'assets/images/Mbois-stat Logo_Fix Putih.png',
+              width: 40,
+              height: 40,
+            ),
+          ],
+        ),
       ),
       body: ListView.builder(
         itemCount: beritaData.length,
@@ -92,22 +111,37 @@ class _BeritaPagesState extends State<BeritaPages> {
             },
             child: Card(
               margin: EdgeInsets.all(8.0),
-              child: Padding(
+              child: Container(
                 padding: const EdgeInsets.all(16.0),
+                clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: dark4),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      beritaData[index]["title"],
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                    ListTile(
+                      leading: Image.asset(
+                        'assets/icons/news.png', 
+                        width: 40, height: 40, 
                       ),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      abstract,
-                      style: TextStyle(fontSize: 16),
+                      title: Text(
+                        beritaData[index]["title"],
+                        style: bold16.copyWith(color: dark1),
+                      ),
+                      subtitle: Text(
+                        abstract,
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                   ],
                 ),
@@ -116,6 +150,7 @@ class _BeritaPagesState extends State<BeritaPages> {
           );
         },
       ),
+       bottomNavigationBar: Footer(),
     );
   }
 }
