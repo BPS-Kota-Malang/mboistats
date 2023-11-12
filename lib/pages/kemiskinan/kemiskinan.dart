@@ -28,7 +28,7 @@ class KemiskinanPages extends StatelessWidget {
           //News
           ...kemiskinan.map((item) => Padding(
                 padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
-                child: GestureDetector(
+                child: InkWell(
                   onTap: () {
                     if (item.route != null) {
                       Navigator.of(context).pushNamed(item.route!);

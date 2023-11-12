@@ -29,8 +29,8 @@ class KependudukanPages extends StatelessWidget {
             //News
             ...kependudukan.map((item) => Padding(
                   padding:
-                      const EdgeInsets.only(bottom: 24, left: 16, right: 16),
-                  child: GestureDetector(
+                  const EdgeInsets.only(bottom: 24, left: 16, right: 16),
+                  child: InkWell(
                     onTap: () {
                       if (item.route != null) {
                         Navigator.of(context).pushNamed(item.route!);
