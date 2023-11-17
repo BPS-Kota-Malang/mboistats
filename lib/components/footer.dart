@@ -50,32 +50,74 @@ class _FooterState extends State<Footer> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: _selectedIndex,
-      onTap: _onItemTapped,
-      items: [
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.home,
-            color: _selectedIndex == 0 ? Colors.blue : null, // Beranda
+    return WillPopScope(
+      onWillPop: () async {
+        // Intersep saat tombol kembali ditekan
+        if (_selectedIndex != 0) {
+          // Jika tidak berada di halaman beranda, navigasi kembali ke halaman beranda
+          Navigator.of(context).pushNamed('/main');
+          return false; // Jangan pop rute saat ini
+        }
+        return true; // Izinkan popping rute saat ini (keluar dari aplikasi)
+      },
+      child: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              color: _selectedIndex == 0 ? Colors.blue : null, // Home
+            ),
+            label: 'Beranda',
           ),
-          label: 'Beranda',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.newspaper_outlined,
-            color: _selectedIndex == 1 ? Colors.blue : null, // NEWS
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.newspaper_outlined,
+              color: _selectedIndex == 1 ? Colors.blue : null, // News
+            ),
+            label: 'Berita',
           ),
-          label: 'Berita',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.contacts,
-            color: _selectedIndex == 2 ? Colors.blue : null, // Kontak
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.contacts,
+              color: _selectedIndex == 2 ? Colors.blue : null, // Contact
+            ),
+            label: 'Kontak',
           ),
-          label: 'Kontak',
-        ),
-      ],
+        ],
+      ),
     );
   }
-}
+  }
+
+  // Widget build(BuildContext context) {
+  //   return BottomNavigationBar(
+  //     currentIndex: _selectedIndex,
+  //     onTap: _onItemTapped,
+  //     items: [
+  //       BottomNavigationBarItem(
+  //         icon: Icon(
+  //           Icons.home,
+  //           color: _selectedIndex == 0 ? Colors.blue : null, // Beranda
+  //         ),
+  //         label: 'Beranda',
+  //       ),
+  //       BottomNavigationBarItem(
+  //         icon: Icon(
+  //           Icons.newspaper_outlined,
+  //           color: _selectedIndex == 1 ? Colors.blue : null, // NEWS
+  //         ),
+  //         label: 'Berita',
+  //       ),
+  //       BottomNavigationBarItem(
+  //         icon: Icon(
+  //           Icons.contacts,
+  //           color: _selectedIndex == 2 ? Colors.blue : null, // Kontak
+  //         ),
+  //         label: 'Kontak',
+  //       ),
+  //     ],
+  //   );
+  // }
+
