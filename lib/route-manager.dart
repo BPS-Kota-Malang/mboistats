@@ -100,8 +100,7 @@ class RouteManager {
         TingkatPartisipasiAngkatanKerjaPage(),
     '/TingkatPengangguran': (context) =>
         PersentasePengangguranMenurutPendidikanPage(),
-    '/PengangguranMenurutPendidikan': (context) =>
-        PengangguranMenurutPendidikanPage(),
+    '/PengangguranMenurutPendidikan': (context) => PengangguranMenurutPendidikan(),
 
     //Kesejahteraan
     '/GiniRasio': (context) => GiniRasioPage(),
