@@ -1,3 +1,4 @@
+
 name: mboistat
 description: "A new Flutter project."
 
@@ -17,9 +18,11 @@ dependencies:
   carousel_slider: ^4.0.0
   cupertino_icons: ^1.0.2
   http: ^0.13.3
-  webview_flutter: ^2.0.13
-  url_launcher: ^6.0.13  # Sesuaikan dengan versi terbaru dari package url_launcher
-
+  webview_flutter: ^3.0.0
+  url_launcher: ^6.0.13
+  flutter_webview_plugin: ^0.4.0
+  flutter_inappwebview: ^5.3.2
+  path_provider: ^2.0.5
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -30,6 +33,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/html/
     # - assets/icons/MboistatLogo.png
     # - assets/icons/ekonomi.png
     # - assets/icons/ipm.png

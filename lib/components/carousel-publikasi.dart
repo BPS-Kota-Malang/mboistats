@@ -26,26 +26,23 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      final images = (data['data'][1] as List).cast<Map<String, dynamic>>();
+      final publications =
+          (data['data'][1] as List).cast<Map<String, dynamic>>();
       setState(() {
-        dataPublikasi = images;
+        dataPublikasi = publications;
       });
     } else {
       throw Exception('Failed to load data');
     }
   }
 
-  void launchPDF(String pdfUrl) async {
-    if (await canLaunch(pdfUrl)) {
-      await launch(pdfUrl);
-    } else {
-      throw 'Could not launch $pdfUrl';
+  Future<void> downloadPDF(String pdfUrl) async {
+    try {
+      // Buka URL dengan aplikasi WebView internal
+      await launch(pdfUrl, forceSafariVC: false, forceWebView: false);
+    } catch (error) {
+      print('Gagal membuka URL: $error');
     }
-  }
-
-  void downloadPDF(String pdfUrl) async {
-    // Implementasi unduhan PDF di sini, contohnya:
-    // await launch(pdfUrl);
   }
 
   @override
@@ -79,8 +76,12 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
                 items: dataPublikasi.map((item) {
                   return GestureDetector(
                     onTap: () {
-                      // Saat gambar ditekan, jalankan atau unduh PDF
-                      launchPDF(item['pdf']);
+                      // Saat gambar ditekan, buka URL dengan url_launcher
+                      if (item['pdf'] != null && item['pdf'].isNotEmpty) {
+                        downloadPDF(item['pdf']);
+                      } else {
+                        print('URL tidak tersedia');
+                      }
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
