@@ -73,3 +73,9 @@ build/
 
 # Ignore .dart_tool directory
 .dart_tool/
+
+
+.flutter-plugins
+.dart_tool/package_config_subset
+.dart_tool/package_config.json
+.flutter-plugins-dependencies

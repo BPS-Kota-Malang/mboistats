@@ -67,19 +67,24 @@ class _InfografisPagesState extends State<InfografisPages> {
     return text;
   }
 
-  void _launchPDF(String pdfUrl) async {
+ void _launchPDF(String pdfUrl) async {
+  try {
     if (await canLaunch(pdfUrl)) {
-      await launch(pdfUrl);
+      await launch(pdfUrl, forceSafariVC: false, forceWebView: false);
     } else {
       throw 'Could not launch $pdfUrl';
     }
+  } catch (e) {
+    // Handle exceptions, if any
+    print('Error launching PDF: $e');
   }
+}
 
  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Infografis'),
+        title: Text('INFOGRAFIS'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -97,7 +102,7 @@ class _InfografisPagesState extends State<InfografisPages> {
 
           return GestureDetector(
             onTap: () {
-              String pdfUrl = dataInfografis[index]["pdf"];
+              String pdfUrl = dataInfografis[index]["dl"];
               _launchPDF(pdfUrl);
             },
             child: Card(
