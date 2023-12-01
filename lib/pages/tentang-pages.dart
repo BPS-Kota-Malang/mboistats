@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/datas/berita.dart';
+import 'package:mboistat/datas/tentang.dart';
 import 'package:mboistat/theme.dart';
 
 class TentangPages extends StatelessWidget {
@@ -50,7 +50,7 @@ class TentangPages extends StatelessWidget {
                 child: Column(),
               ),
             ),
-            ...berita.map((item) => Padding(
+            ...tentang.map((item) => Padding(
                   padding:
                       const EdgeInsets.only(bottom: 24, left: 16, right: 16),
                   child: Container(
@@ -68,13 +68,15 @@ class TentangPages extends StatelessWidget {
                       ],
                     ),
                     child: ListTile(
-                      leading: Image.asset('assets/icons/${item.icons}'),
-                      title: Text(
-                        item.title,
-                        style: bold16.copyWith(color: dark1),
+                      title: Center(
+                        child: Text(
+                          item.title,
+                          style: bold16.copyWith(color: dark1),
+                        ),
                       ),
                       subtitle: Container(
                         padding: EdgeInsets.all(8),
+                        alignment: Alignment.center, // Rata tengah
                         child: Text(
                           item.description,
                           style: regular14.copyWith(color: dark2),

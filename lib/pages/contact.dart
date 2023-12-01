@@ -70,7 +70,36 @@ class Contact extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
                 child: InkWell(
                   onTap: () {
-                    if (item.title == 'Alamat') {
+                    if (item.title == 'Telepon') {
+                      // Menampilkan konfirmasi sebelum meluncurkan panggilan telepon
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text('Konfirmasi Panggilan',
+                          style: TextStyle(color: Colors.blue),
+                          ),
+                          content: Text('Apakah Anda ingin menghubungi ${item.description}?'),
+                          actions: <Widget>[
+                            OutlinedButton(
+                              onPressed: () => Navigator.of(context).pop(false),
+                              style: OutlinedButton.styleFrom(
+                                side: BorderSide(color: Colors.blue), // Warna border biru
+                              ),
+                              child: Text('Batal',
+                                style: TextStyle(color: Colors.blue), // Warna teks biru
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(); // Tutup dialog
+                                launch('tel:${item.description}'); // Meluncurkan panggilan telepon
+                              },
+                              child: Text('Hubungi'),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else if (item.title == 'Alamat') {
                       launch('https://www.google.com/maps/place/Jl.+Janti+Barat+No+47,+Sukun');
                     } else if (item.title == 'Email') {
                       launch('mailto:bps3573@bps.go.id');

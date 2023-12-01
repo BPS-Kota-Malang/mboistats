@@ -59,7 +59,7 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
                   bottom: 16.0,
                 ),
                 child: Text(
-                  'Infografis',
+                  'INFOGRAFIS',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

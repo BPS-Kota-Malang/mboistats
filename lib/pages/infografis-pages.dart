@@ -1,20 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mboistat/theme.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-class Infografis {
-  final String gambarInfografis;
-
-  Infografis({required this.gambarInfografis});
-
-  factory Infografis.fromJson(Map<String, dynamic> json) {
-    return Infografis(
-      gambarInfografis: json['gambarInfografis'],
-    );
-  }
-}
-
-
+import 'package:url_launcher/url_launcher.dart';
 
 class InfografisPages extends StatefulWidget {
   @override
@@ -22,39 +10,72 @@ class InfografisPages extends StatefulWidget {
 }
 
 class _InfografisPagesState extends State<InfografisPages> {
-  // Deklarasikan variabel untuk menyimpan data infografis dari API
-  List<Infografis> infografisData = [];
+  List<Map<String, dynamic>> dataInfografis = [];
+  List<String> abstraksiBrs = [];
 
   @override
   void initState() {
-    // Panggil fungsi untuk mengambil data infografis dari API di sini
-    fetchDataFromAPI();
     super.initState();
+    fetchDataInfografis();
   }
 
-  void fetchDataFromAPI() async {
-    try {
-      final response = await http.get(
-        Uri.parse(
-            'https://webapi.bps.go.id/v1/api/list/domain/3573/model/infographic/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f'),
-      );
+  Future<void> fetchDataInfografis() async {
+    final String apiUrl =
+        "https://webapi.bps.go.id/v1/api/list/domain/3573/model/infographic/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f";
 
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
+    final response = await http.get(Uri.parse(apiUrl));
 
-        setState(() {
-          infografisData = List<Infografis>.from(
-              data['data'].map((data) => Infografis.fromJson(data)));
-        });
-      } else {
-        print('HTTP error ${response.statusCode}');
+    if (response.statusCode == 200) {
+      final parsedResponse = json.decode(response.body);
+      final infografis = parsedResponse["data"][1];
+
+      setState(() {
+        dataInfografis = List<Map<String, dynamic>>.from(infografis);
+      });
+
+      for (int i = 0; i < dataInfografis.length; i++) {
+        final brsId = dataInfografis[i]["brs_id"];
+        fetchAbstraksiBrs(brsId);
       }
-    } catch (e) {
-      print('Error: $e');
+    } else {
+      throw Exception('Failed to load data');
     }
   }
 
-  @override
+  Future<void> fetchAbstraksiBrs(String brsId) async {
+    final url =
+        "https://webapi.bps.go.id/v1/api/list/domain/3573/model/infographic/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f";
+
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final parsedResponse = json.decode(response.body);
+      final abstraksi = parsedResponse['data'][2];
+
+      setState(() {
+        abstraksiBrs.add(abstraksi);
+      });
+    } else {
+      throw Exception('Failed to load abstraksi');
+    }
+  }
+
+  String truncateText(String text, int maxLength) {
+    if (text != null && text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    }
+    return text;
+  }
+
+  void _launchPDF(String pdfUrl) async {
+    if (await canLaunch(pdfUrl)) {
+      await launch(pdfUrl);
+    } else {
+      throw 'Could not launch $pdfUrl';
+    }
+  }
+
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -69,47 +90,56 @@ class _InfografisPagesState extends State<InfografisPages> {
           },
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const SizedBox(
-            height: 24,
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  bottom: 16.0),
-              child: Text(
-                'INFOGRAFIS TERBARU',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Center(
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 0.0,
-                  crossAxisSpacing: 0.0,
-                ),
-                itemCount: infografisData.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
-                    child: Image.network(
-                      infografisData[index].gambarInfografis,
-                      fit: BoxFit.cover,
+      body: ListView.builder(
+        itemCount: dataInfografis.length,
+        itemBuilder: (context, index) {
+          final abstract = truncateText(abstraksiBrs.length > index ? abstraksiBrs[index] : '', 150);
+
+          return GestureDetector(
+            onTap: () {
+              String pdfUrl = dataInfografis[index]["pdf"];
+              _launchPDF(pdfUrl);
+            },
+            child: Card(
+              margin: EdgeInsets.all(8.0),
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: dark4),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
                     ),
-                  );
-                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListTile(
+                      leading: Image.asset(
+                        'assets/icons/infographics.png', 
+                        width: 40, height: 40, 
+                      ),
+                      title: Text(
+                        dataInfografis[index]["title"],
+                        style: bold16.copyWith(color: dark1),
+                      ),
+                      subtitle: Text(
+                        abstract,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

@@ -14,8 +14,7 @@ class HomePage extends StatelessWidget {
     return (await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text(
-            'Konfirmasi Keluar',
+            title: Text('Konfirmasi Keluar',
             style: TextStyle(color: Colors.blue), // Warna teks biru
           ),
           content: Text('Apakah Anda yakin ingin keluar dari aplikasi?'),
@@ -25,8 +24,7 @@ class HomePage extends StatelessWidget {
               style: OutlinedButton.styleFrom(
                 side: BorderSide(color: Colors.blue), // Warna border biru
               ),
-              child: Text(
-                'Tidak',
+              child: Text('Tidak',
                 style: TextStyle(color: Colors.blue), // Warna teks biru
               ),
             ),
