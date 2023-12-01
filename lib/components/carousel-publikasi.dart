@@ -36,14 +36,13 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
     }
   }
 
-  Future<void> downloadPDF(String pdfUrl) async {
-    try {
-      // Buka URL dengan aplikasi WebView internal
-      await launch(pdfUrl, forceSafariVC: false, forceWebView: false);
-    } catch (error) {
-      print('Gagal membuka URL: $error');
-    }
+ Future<void> downloadPDF(String pdfUrl) async {
+  try {
+    await launch(pdfUrl, forceSafariVC: false, forceWebView: false);
+  } catch (error) {
+    print('Error membuka URL: $error');
   }
+}
 
   @override
   Widget build(BuildContext context) {
