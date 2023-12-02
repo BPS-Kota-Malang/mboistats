@@ -84,11 +84,11 @@ class _InfografisPagesState extends State<InfografisPages> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('INFOGRAFIS'),
+        title: Text('Infografis'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
-            height: 18,
+            height: 25,
           ),
           onPressed: () {
             Navigator.of(context).pop();
@@ -100,32 +100,30 @@ class _InfografisPagesState extends State<InfografisPages> {
         itemBuilder: (context, index) {
           final abstract = truncateText(abstraksiBrs.length > index ? abstraksiBrs[index] : '', 150);
 
-          return GestureDetector(
-            onTap: () {
-              String pdfUrl = dataInfografis[index]["dl"];
-              _launchPDF(pdfUrl);
-            },
-            child: Card(
-              margin: EdgeInsets.all(8.0),
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
+            child: InkWell(
+              onTap: () {
+                String pdfUrl = dataInfografis[index]["pdf"];
+                _launchPDF(pdfUrl);
+              },
               child: Container(
-                padding: const EdgeInsets.all(16.0),
                 clipBehavior: Clip.hardEdge,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       border: Border.all(color: dark4),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 2,
-                          blurRadius: 4,
-                          offset: Offset(0, 2),
+                          color: Colors.grey
+                              .withOpacity(0.2), // Warna abu-abu transparan
+                          spreadRadius: 2, // Seberapa tersebar bayangannya
+                          blurRadius: 4, // Seberapa kabur bayangannya
+                          offset:
+                              Offset(0, 2), // Perpindahan bayangan dari widget
                         ),
                       ],
                     ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListTile(
+                    child: ListTile(
                       leading: Image.asset(
                         'assets/icons/infographics.png', 
                         width: 40, height: 40, 
@@ -134,16 +132,72 @@ class _InfografisPagesState extends State<InfografisPages> {
                         dataInfografis[index]["title"],
                         style: bold16.copyWith(color: dark1),
                       ),
-                      subtitle: Text(
-                        abstract,
-                        style: TextStyle(fontSize: 16),
+                      subtitle: Row(
+                        children: [
+                          Text(
+                            abstract,
+                        style: regular14.copyWith(color: dark2),
+                          ),
+                          Spacer(), // Spacer untuk memberikan jarak antara teks dan ikon
+                          Align(
+                            alignment:
+                                Alignment.center, // Mengatur ikon di tengah
+                            child: Image.asset(
+                              'assets/icons/right-arrow.png',
+                              height: 16,
+                            ), // Ikon panah ke kanan
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
+              )
+            )
           );
+          
+          // return GestureDetector(
+          //   onTap: () {
+          //     String pdfUrl = dataInfografis[index]["dl"];
+          //     _launchPDF(pdfUrl);
+          //   },
+          //   child: Card(
+          //     margin: EdgeInsets.all(8.0),
+          //     child: Container(
+          //       padding: const EdgeInsets.all(16.0),
+          //       clipBehavior: Clip.hardEdge,
+          //           decoration: BoxDecoration(
+          //             borderRadius: BorderRadius.circular(15),
+          //             border: Border.all(color: dark4),
+          //             boxShadow: [
+          //               BoxShadow(
+          //                 color: Colors.grey.withOpacity(0.2),
+          //                 spreadRadius: 2,
+          //                 blurRadius: 4,
+          //                 offset: Offset(0, 2),
+          //               ),
+          //             ],
+          //           ),
+          //       child: Column(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           ListTile(
+          //             leading: Image.asset(
+          //               'assets/icons/infographics.png', 
+          //               width: 40, height: 40, 
+          //             ),
+          //             title: Text(
+          //               dataInfografis[index]["title"],
+          //               style: bold16.copyWith(color: dark1),
+          //             ),
+          //             subtitle: Text(
+          //               abstract,
+          //               style: TextStyle(fontSize: 16),
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // );
         },
       ),
     );

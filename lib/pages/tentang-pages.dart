@@ -11,7 +11,7 @@ class TentangPages extends StatelessWidget {
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
-            height: 18,
+            height: 25,
           ),
           onPressed: () {
             Navigator.of(context)
@@ -76,10 +76,10 @@ class TentangPages extends StatelessWidget {
                       ),
                       subtitle: Container(
                         padding: EdgeInsets.all(8),
-                        alignment: Alignment.center, // Rata tengah
                         child: Text(
                           item.description,
                           style: regular14.copyWith(color: dark2),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),

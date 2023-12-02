@@ -12,7 +12,7 @@ class PendudukLowokwaruPage extends StatelessWidget {
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
-            height: 18,
+            height: 25,
           ),
           onPressed: () {
             Navigator.of(context).pop();
