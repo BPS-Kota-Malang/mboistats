@@ -104,7 +104,7 @@ class _InfografisPagesState extends State<InfografisPages> {
             padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
             child: InkWell(
               onTap: () {
-                String pdfUrl = dataInfografis[index]["pdf"];
+                String pdfUrl = dataInfografis[index]["dl"];
                 _launchPDF(pdfUrl);
               },
               child: Container(
