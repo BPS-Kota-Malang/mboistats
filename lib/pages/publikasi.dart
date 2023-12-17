@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:mboistat/theme.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -18,7 +19,18 @@ class _PublikasiPagesState extends State<PublikasiPages> {
     super.initState();
     fetchDataPublikasi();
   }
-
+  Future<void> openPdfView(String pdfUrl) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PDFView(
+          filePath: pdfUrl,
+          enableSwipe: true,
+          swipeHorizontal: false,
+        ),
+      ),
+    );
+  }
   Future<void> fetchDataPublikasi() async {
     final String apiUrl =
         "https://webapi.bps.go.id/v1/api/list/domain/3573/model/publication/lang/ind/id/1/key/9db89e91c3c142df678e65a78c4e547f";
@@ -100,7 +112,7 @@ class _PublikasiPagesState extends State<PublikasiPages> {
             child: InkWell(
               onTap: () {
                 String pdfUrl = dataPublikasi[index]["pdf"];
-                _launchPDF(pdfUrl);
+                openPdfView(pdfUrl);
               },
               child: Container(
                 clipBehavior: Clip.hardEdge,
@@ -198,5 +210,4 @@ class _PublikasiPagesState extends State<PublikasiPages> {
     );
   }
 }
-
 

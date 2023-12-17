@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:path_provider/path_provider.dart';
 
 class CarouselPublikasi extends StatefulWidget {
   @override
@@ -11,6 +14,7 @@ class CarouselPublikasi extends StatefulWidget {
 
 class _CarouselPublikasiState extends State<CarouselPublikasi> {
   List<Map<String, dynamic>> dataPublikasi = [];
+  String pdfUrl = ''; // Variable to store the PDF URL
 
   @override
   void initState() {
@@ -21,7 +25,7 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
   Future<void> fetchData() async {
     final response = await http.get(
       Uri.parse(
-          'https://webapi.bps.go.id/v1/api/list/domain/3573/model/publication/lang/ind/id/1/key/9db89e91c3c142df678e65a78c4e547f'),
+          'http://webapi.bps.go.id/v1/api/list/domain/3573/model/publication/lang/ind/id/1/key/9db89e91c3c142df678e65a78c4e547f'),
     );
 
     if (response.statusCode == 200) {
@@ -35,14 +39,6 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
       throw Exception('Failed to load data');
     }
   }
-
- Future<void> downloadPDF(String pdfUrl) async {
-  try {
-    await launch(pdfUrl, forceSafariVC: false, forceWebView: false);
-  } catch (error) {
-    print('Error membuka URL: $error');
-  }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -74,13 +70,13 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
                 ),
                 items: dataPublikasi.map((item) {
                   return GestureDetector(
-                    onTap: () {
-                      // Saat gambar ditekan, buka URL dengan url_launcher
-                      if (item['pdf'] != null && item['pdf'].isNotEmpty) {
-                        downloadPDF(item['pdf']);
-                      } else {
-                        print('URL tidak tersedia');
-                      }
+                    onTap: () async {
+                      setState(() {
+                        pdfUrl = item['pdf'] ?? '';
+                      });
+
+                      // Show a dialog to confirm whether to download the file
+                      openPdfViewer(context, pdfUrl);
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
@@ -94,5 +90,178 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
               ),
             ],
           );
+  }
+
+  void openPdfViewer(BuildContext context, String pdfUrl) {
+    // Show a dialog to confirm whether to download the file
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Download Confirmation"),
+          content: Text("Apakah Anda Ingin Mendownload File ini ?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // Close the dialog and proceed with the download
+                Navigator.pop(context);
+                downloadAndShowConfirmation(context, pdfUrl);
+              },
+              child: Text("Yes"),
+            ),
+            TextButton(
+              onPressed: () {
+                // Close the dialog and open the PDF directly
+                Navigator.pop(context);
+                openPdfDirectly(context, pdfUrl);
+              },
+              child: Text("No"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // Method to download the file and show confirmation
+  Future<void> downloadAndShowConfirmation(
+      BuildContext context, String pdfUrl) async {
+    try {
+      // Initialize DownloadService
+      DownloadService downloadService = DownloadService();
+
+      // Start the download process
+      String filePath = await downloadService.download(pdfUrl);
+
+      // Check if the download was successful
+      if (filePath.isNotEmpty) {
+        // Display a dialog with the download confirmation
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Download Complete"),
+              content: Text("File downloaded and saved at: $filePath"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    // Close the dialog and open the PDF directly
+                    Navigator.pop(context);
+                    openPdfDirectly(context, filePath);
+                  },
+                  child: Text("Open PDF"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    // Close the dialog
+                    Navigator.pop(context);
+                  },
+                  child: Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        // Display a dialog for download failure
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Download Failed"),
+              content: Text("Failed to download file."),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    // Close the dialog
+                    Navigator.pop(context);
+                  },
+                  child: Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (error) {
+      // Display a dialog for unexpected errors
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text("Error during file download: $error"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  // Close the dialog
+                  Navigator.pop(context);
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  // Method to open the PDF directly
+  void openPdfDirectly(BuildContext context, String pdfUrl) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PDFViewer(pdfUrl: pdfUrl),
+      ),
+    );
+  }
+}
+
+class PDFViewer extends StatelessWidget {
+  final String pdfUrl;
+
+  PDFViewer({required this.pdfUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('PDF Viewer'),
+      ),
+      body: SfPdfViewer.network(
+        pdfUrl,
+      ),
+    );
+  }
+}
+
+class DownloadService {
+  Future<String> download(String pdfUrl) async {
+    var externalDirectory = await getExternalStorageDirectory();
+    if (externalDirectory != null) {
+      var urlImage = pdfUrl;
+      var dio = Dio();
+      var result = await dio.get<List<int>>(urlImage,
+          options: Options(responseType: ResponseType.bytes));
+      if (result.statusCode == 200) {
+        //download sukses
+        //mulai proses save data to local
+        var byteDownloaded = result.data;
+        if (byteDownloaded != null) {
+          //proses lanjut
+          var file = File("${externalDirectory.path}/download-publikasi.pdf");
+          file.writeAsBytesSync(byteDownloaded);
+          return "${file.path}";
+        } else {
+          print("file kosong");
+          return "error file kosong";
+        }
+      } else {
+        return "download error";
+      }
+    } else {
+      print("external directory null");
+      return "error";
+    }
   }
 }
