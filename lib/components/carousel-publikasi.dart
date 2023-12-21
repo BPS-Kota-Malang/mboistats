@@ -93,104 +93,76 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
   }
 
   void openPdfViewer(BuildContext context, String pdfUrl) {
-    // Show a dialog to confirm whether to download the file
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Download Confirmation"),
-          content: Text("Apakah Anda Ingin Mendownload File ini ?"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                // Close the dialog and proceed with the download
-                Navigator.pop(context);
-                downloadAndShowConfirmation(context, pdfUrl);
-              },
-              child: Text("Yes"),
-            ),
-            TextButton(
-              onPressed: () {
-                // Close the dialog and open the PDF directly
-                Navigator.pop(context);
-                openPdfDirectly(context, pdfUrl);
-              },
-              child: Text("No"),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  // Simpan konteks sebelumnya
+  BuildContext previousContext = context;
 
-  // Method to download the file and show confirmation
-  Future<void> downloadAndShowConfirmation(
-      BuildContext context, String pdfUrl) async {
-    try {
-      // Initialize DownloadService
-      DownloadService downloadService = DownloadService();
+  // Show a dialog to confirm whether to download the file
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Download Confirmation"),
+        content: Text("Apakah Anda Ingin Mendownload File ini ?"),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              // Close the dialog and proceed with the download
+              Navigator.pop(context);
+              await downloadAndShowConfirmation(previousContext, pdfUrl);
+            },
+            child: Text("Yes"),
+          ),
+          TextButton(
+            onPressed: () {
+              // Close the dialog and open the PDF directly
+              Navigator.pop(context);
+              openPdfDirectly(previousContext, pdfUrl);
+            },
+            child: Text("Open PDF"),
+          ),
+        ],
+      );
+    },
+  );
+}
 
-      // Start the download process
-      String filePath = await downloadService.download(pdfUrl);
+Future<void> downloadAndShowConfirmation(
+    BuildContext context, String pdfUrl) async {
+  try {
+    // Initialize DownloadService
+    DownloadService downloadService = DownloadService();
 
-      // Check if the download was successful
-      if (filePath.isNotEmpty) {
-        // Display a dialog with the download confirmation
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Download Complete"),
-              content: Text("File downloaded and saved at: $filePath"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    // Close the dialog and open the PDF directly
-                    Navigator.pop(context);
-                    openPdfDirectly(context, filePath);
-                  },
-                  child: Text("Open PDF"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    // Close the dialog
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            );
-          },
-        );
-      } else {
-        // Display a dialog for download failure
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Download Failed"),
-              content: Text("Failed to download file."),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    // Close the dialog
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            );
-          },
-        );
-      }
-    } catch (error) {
-      // Display a dialog for unexpected errors
+    // Start the download process
+    String filePath = await downloadService.download(pdfUrl);
+
+    if (filePath.isNotEmpty) {
+      // Display a dialog with the download confirmation
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Error"),
-            content: Text("Error during file download: $error"),
+            title: Text("Download Complete"),
+            content: Text("File downloaded and saved at: $filePath"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  // Close the dialog
+                  Navigator.pop(context);
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      // Display a dialog for download failure
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Download Failed"),
+            content: Text("Failed to download file."),
             actions: [
               TextButton(
                 onPressed: () {
@@ -204,9 +176,30 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
         },
       );
     }
+  } catch (error) {
+    // Display a dialog for unexpected errors
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Error"),
+          content: Text("Error during file download: $error"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // Close the dialog
+                Navigator.pop(context);
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
   }
+}
 
-  // Method to open the PDF directly
+
   void openPdfDirectly(BuildContext context, String pdfUrl) {
     Navigator.push(
       context,

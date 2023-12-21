@@ -1,9 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:mboistat/theme.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 class PublikasiPages extends StatefulWidget {
   @override
@@ -19,18 +22,103 @@ class _PublikasiPagesState extends State<PublikasiPages> {
     super.initState();
     fetchDataPublikasi();
   }
-  Future<void> openPdfView(String pdfUrl) async {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PDFView(
-          filePath: pdfUrl,
-          enableSwipe: true,
-          swipeHorizontal: false,
-        ),
-      ),
+
+  Future<void> openPdfViewer(BuildContext context, String pdfUrl) async {
+    try {
+      String filePath = await download(pdfUrl);
+
+      if (filePath.isNotEmpty) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Download Complete"),
+              content: Text("File downloaded and saved at: $filePath"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    openPdfDirectly(context, filePath);
+                  },
+                  child: Text("Open PDF"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Download Failed"),
+              content: Text("Failed to download file."),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (error) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text("Error during file download: $error"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  Future<void> showDownloadDialog(BuildContext context, String pdfUrl) async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Download Confirmation"),
+          content: Text("Do you want to download this publication?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                downloadAndShowConfirmation(context, pdfUrl);
+              },
+              child: Text("Download"),
+            ),
+          ],
+        );
+      },
     );
   }
+
   Future<void> fetchDataPublikasi() async {
     final String apiUrl =
         "https://webapi.bps.go.id/v1/api/list/domain/3573/model/publication/lang/ind/id/1/key/9db89e91c3c142df678e65a78c4e547f";
@@ -87,7 +175,116 @@ class _PublikasiPagesState extends State<PublikasiPages> {
     }
   }
 
- @override
+  Future<void> downloadAndShowConfirmation(
+      BuildContext context, String pdfUrl) async {
+    try {
+      String filePath = await download(pdfUrl);
+
+      if (filePath.isNotEmpty) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Download Complete"),
+              content: Text("File downloaded and saved at: $filePath"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    openPdfDirectly(context, filePath);
+                  },
+                  child: Text("Open PDF"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Download Failed"),
+              content: Text("Failed to download file."),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (error) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text("Error during file download: $error"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  Future<String> download(String pdfUrl) async {
+    var externalDirectory = await getExternalStorageDirectory();
+    if (externalDirectory != null) {
+      var urlImage = pdfUrl;
+      var dio = Dio();
+      var result = await dio.get<List<int>>(urlImage,
+          options: Options(responseType: ResponseType.bytes));
+      if (result.statusCode == 200) {
+        var byteDownloaded = result.data;
+        if (byteDownloaded != null) {
+          var file = File("${externalDirectory.path}/download-publikasi.pdf");
+          file.writeAsBytesSync(byteDownloaded);
+          return "${file.path}";
+        } else {
+          print("file kosong");
+          return "error file kosong";
+        }
+      } else {
+        return "download error";
+      }
+    } else {
+      print("external directory null");
+      return "error";
+    }
+  }
+
+  void openPdfDirectly(BuildContext context, String pdfUrl) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PDFView(
+          filePath: pdfUrl,
+          enableSwipe: true,
+          swipeHorizontal: false,
+        ),
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -105,109 +302,62 @@ class _PublikasiPagesState extends State<PublikasiPages> {
       body: ListView.builder(
         itemCount: dataPublikasi.length,
         itemBuilder: (context, index) {
-          final abstract = truncateText(abstraksiBrs.length > index ? abstraksiBrs[index] : '', 150);
+          final abstract =
+              truncateText(abstraksiBrs.length > index ? abstraksiBrs[index] : '', 150);
 
           return Padding(
             padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
             child: InkWell(
               onTap: () {
                 String pdfUrl = dataPublikasi[index]["pdf"];
-                openPdfView(pdfUrl);
+                showDownloadDialog(context, pdfUrl);
               },
               child: Container(
                 clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: dark4),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey
-                              .withOpacity(0.2), // Warna abu-abu transparan
-                          spreadRadius: 2, // Seberapa tersebar bayangannya
-                          blurRadius: 4, // Seberapa kabur bayangannya
-                          offset:
-                              Offset(0, 2), // Perpindahan bayangan dari widget
-                        ),
-                      ],
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(color: dark4),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      spreadRadius: 2,
+                      blurRadius: 4,
+                      offset: Offset(0, 2),
                     ),
-                    child: ListTile(
-                      leading: Image.asset(
-                        'assets/icons/publication.png', 
-                        width: 40, height: 40, 
-                      ),
-                      title: Text(
-                        dataPublikasi[index]["title"],
-                        style: bold16.copyWith(color: dark1),
-                      ),
-                      subtitle: Row(
-                        children: [
-                          Text(
-                            abstract,
+                  ],
+                ),
+                child: ListTile(
+                  leading: Image.asset(
+                    'assets/icons/publication.png',
+                    width: 40,
+                    height: 40,
+                  ),
+                  title: Text(
+                    dataPublikasi[index]["title"],
+                    style: bold16.copyWith(color: dark1),
+                  ),
+                  subtitle: Row(
+                    children: [
+                      Text(
+                        abstract,
                         style: regular14.copyWith(color: dark2),
-                          ),
-                          Spacer(), // Spacer untuk memberikan jarak antara teks dan ikon
-                          Align(
-                            alignment:
-                                Alignment.center, // Mengatur ikon di tengah
-                            child: Image.asset(
-                              'assets/icons/right-arrow.png',
-                              height: 16,
-                            ), // Ikon panah ke kanan
-                          ),
-                        ],
                       ),
-                    ),
-              )
-            )
+                      Spacer(),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Image.asset(
+                          'assets/icons/right-arrow.png',
+                          height: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           );
-
-          // return GestureDetector(
-          //   onTap: () {
-          //     String pdfUrl = dataPublikasi[index]["pdf"];
-          //     _launchPDF(pdfUrl);
-          //   },
-          //   child: Card(
-          //     margin: EdgeInsets.all(8.0),
-          //     child: Container(
-          //       padding: const EdgeInsets.all(16.0),
-          //       clipBehavior: Clip.hardEdge,
-          //           decoration: BoxDecoration(
-          //             borderRadius: BorderRadius.circular(15),
-          //             border: Border.all(color: dark4),
-          //             boxShadow: [
-          //               BoxShadow(
-          //                 color: Colors.grey.withOpacity(0.2),
-          //                 spreadRadius: 2,
-          //                 blurRadius: 4,
-          //                 offset: Offset(0, 2),
-          //               ),
-          //             ],
-          //           ),
-          //       child: Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: [
-          //           ListTile(
-          //             leading: Image.asset(
-          //               'assets/icons/publication.png', 
-          //               width: 40, height: 40, 
-          //             ),
-          //             title: Text(
-          //               dataPublikasi[index]["title"],
-          //               style: bold16.copyWith(color: dark1),
-          //             ),
-          //             subtitle: Text(
-          //               abstract,
-          //               style: TextStyle(fontSize: 16),
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // );
         },
       ),
     );
   }
 }
-
