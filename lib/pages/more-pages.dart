@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mboistat/datas/more.dart';
 import 'package:mboistat/theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MorePages extends StatelessWidget {
   @override
@@ -14,8 +15,7 @@ class MorePages extends StatelessWidget {
             height: 25,
           ),
           onPressed: () {
-            Navigator.of(context)
-                .pop(); // Menavigasi kembali ke halaman sebelumnya
+            Navigator.of(context).pop(); // Menavigasi kembali ke halaman sebelumnya
           },
         ),
       ),
@@ -25,48 +25,51 @@ class MorePages extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          //News
+          // News
           ...more.map((item) => Padding(
                 padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
-                child: Container(
-                  clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: dark4),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey
-                            .withOpacity(0.2), // Warna abu-abu transparan
-                        spreadRadius: 2, // Seberapa tersebar bayangannya
-                        blurRadius: 4, // Seberapa kabur bayangannya
-                        offset:
-                            Offset(0, 2), // Perpindahan bayangan dari widget
-                      ),
-                    ],
-                  ),
-                  child: ListTile(
-                    leading: Image.asset(
-                        'assets/icons/${item.icons}'), // Ikon di sini
-                    title: Text(
-                      item.title,
-                      style: bold16.copyWith(color: dark1),
-                    ),
-                    subtitle: Row(
-                      children: [
-                        Text(
-                          item.description,
-                          style: regular14.copyWith(color: dark2),
-                        ),
-                        Spacer(), // Spacer untuk memberikan jarak antara teks dan ikon
-                        Align(
-                          alignment:
-                              Alignment.center, // Mengatur ikon di tengah
-                          child: Image.asset(
-                            'assets/icons/right-arrow.png',
-                            height: 16,
-                          ), // Ikon panah ke kanan
+                child: InkWell(
+                  onTap: () {
+                    if (item.title == 'Galeri InovaZI') {
+                      launch('https://sites.google.com/view/bincangdata/halaman-muka');
+                    }
+                  },
+                  child: Container(
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: dark4),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
                         ),
                       ],
+                    ),
+                    child: ListTile(
+                      leading: Image.asset('assets/icons/${item.icons}'),
+                      title: Text(
+                        item.title,
+                        style: bold16.copyWith(color: dark1),
+                      ),
+                      subtitle: Row(
+                        children: [
+                          Text(
+                            item.description,
+                            style: regular14.copyWith(color: dark2),
+                          ),
+                          Spacer(),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Image.asset(
+                              'assets/icons/right-arrow.png',
+                              height: 16,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

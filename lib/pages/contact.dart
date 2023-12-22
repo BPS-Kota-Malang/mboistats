@@ -105,6 +105,8 @@ class Contact extends StatelessWidget {
                       launch('mailto:bps3573@bps.go.id');
                     } else if (item.title == 'Instagram') {
                       launch('https://instagram.com/bpskotamalang');
+                    } else if (item.title == 'Website') {
+                      launch ('https://malangkota.bps.go.id/');
                     }
                   },
                   child: Container(

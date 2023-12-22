@@ -76,7 +76,7 @@ class _FooterState extends State<Footer> {
               Icons.newspaper_outlined,
               color: _selectedIndex == 1 ? Colors.blue : null, // News
             ),
-            label: 'Berita',
+            label: 'BRS',
           ),
           BottomNavigationBarItem(
             icon: Icon(
