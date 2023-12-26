@@ -15,7 +15,8 @@ class MorePages extends StatelessWidget {
             height: 25,
           ),
           onPressed: () {
-            Navigator.of(context).pop(); // Menavigasi kembali ke halaman sebelumnya
+            Navigator.of(context)
+                .pop(); // Menavigasi kembali ke halaman sebelumnya
           },
         ),
       ),
@@ -31,7 +32,10 @@ class MorePages extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     if (item.title == 'Galeri InovaZI') {
-                      launch('https://sites.google.com/view/bincangdata/halaman-muka');
+                      launch(
+                          'https://sites.google.com/view/bincangdata/halaman-muka');
+                    } else if (item.title == 'LAPOR') {
+                      launch('https://s.bps.go.id/lapor3573');
                     }
                   },
                   child: Container(

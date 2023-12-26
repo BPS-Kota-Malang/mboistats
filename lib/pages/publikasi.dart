@@ -32,7 +32,7 @@ class _PublikasiPagesState extends State<PublikasiPages> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text("Download Complete"),
+              title: Text("Konfirmasi Unduh"),
               content: Text("File downloaded and saved at: $filePath"),
               actions: [
                 TextButton(
@@ -302,8 +302,8 @@ class _PublikasiPagesState extends State<PublikasiPages> {
       body: ListView.builder(
         itemCount: dataPublikasi.length,
         itemBuilder: (context, index) {
-          final abstract =
-              truncateText(abstraksiBrs.length > index ? abstraksiBrs[index] : '', 150);
+          final abstract = truncateText(
+              abstraksiBrs.length > index ? abstraksiBrs[index] : '', 150);
 
           return Padding(
             padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
