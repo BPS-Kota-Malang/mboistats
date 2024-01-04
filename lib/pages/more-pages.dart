@@ -53,18 +53,18 @@ class MorePages extends StatelessWidget {
                       ],
                     ),
                     child: ListTile(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
                       leading: Image.asset('assets/icons/${item.icons}'),
-                      title: Text(
-                        item.title,
-                        style: bold16.copyWith(color: dark1),
-                      ),
-                      subtitle: Row(
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            item.description,
-                            style: regular14.copyWith(color: dark2),
+                          Flexible(
+                            child: Text(
+                              item.title,
+                              style: bold16.copyWith(color: dark1),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
-                          Spacer(),
                           Align(
                             alignment: Alignment.center,
                             child: Image.asset(

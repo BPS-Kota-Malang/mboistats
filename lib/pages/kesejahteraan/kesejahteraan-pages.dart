@@ -51,32 +51,35 @@ class KesejahteraanPages extends StatelessWidget {
                     ],
                   ),
                   child: ListTile(
-                   leading: GestureDetector(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                      leading: GestureDetector(
                         onTap: () {
                           if (item.route != null) {
                             Navigator.of(context).pushNamed(item.route!);
                           }
                         },
                         child: Image.asset('assets/icons/${item.icons}'),
-                      ), // Ikon di sini
-                    title: Text(
-                      item.title,
-                      style: bold16.copyWith(color: dark1),
+                      ),
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              item.title,
+                              style: bold16.copyWith(color: dark1),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Image.asset(
+                              'assets/icons/right-arrow.png',
+                              height: 16,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    subtitle: Row(
-                      children: [
-                        Spacer(), // Spacer untuk memberikan jarak antara teks dan ikon
-                        Align(
-                          alignment:
-                              Alignment.center, // Mengatur ikon di tengah
-                          child: Image.asset(
-                            'assets/icons/right-arrow.png',
-                            height: 16,
-                          ), // Ikon panah ke kanan
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
                  ),
               )),
