@@ -102,7 +102,7 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text("Konfirmasi Unduh"),
-          content: Text("Apakah Anda Ingin Mendownload File ini ?"),
+          content: Text("Apakah Anda Ingin Mendownload/Membuka File ini?"),
           actions: [
             TextButton(
               onPressed: () async {

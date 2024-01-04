@@ -4,7 +4,7 @@ import 'package:mboistat/models/mboistat_icon.dart';
 List<MboistatIcon> mboistatMenuIcon = [
   MboistatIcon(
       icon: 'ketenagakerjaan',
-      title: 'Ketenagakerjaan',
+      title: 'Tenaga Kerja',
       route: '/ketenagakerjaan'),
   MboistatIcon(icon: 'ekonomi', title: 'Perekonomian', route: '/ekonomi'),
   MboistatIcon(icon: 'ipm', title: 'IPM', route: '/ipm'),

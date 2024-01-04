@@ -62,10 +62,6 @@ class IPMPages extends StatelessWidget {
                       ),
                       subtitle: Row(
                         children: [
-                          Text(
-                            item.description,
-                            style: regular14.copyWith(color: dark2),
-                          ),
                           Spacer(),
                           Align(
                             alignment: Alignment.center,

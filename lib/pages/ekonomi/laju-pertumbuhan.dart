@@ -24,7 +24,7 @@ class LajuPertumbuhan extends StatelessWidget {
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) async {
           // Load HTML content from the file
-          final String path = 'assets/html/perekonomian_lpe.html';
+          final String path = 'assets/web/perekonomian_lpe.html';
           final String fileHtmlContents =
               await rootBundle.loadString(path);
 

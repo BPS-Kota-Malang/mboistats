@@ -65,10 +65,6 @@ class PertanianPages extends StatelessWidget {
                     ),
                     subtitle: Row(
                       children: [
-                        Text(
-                          item.description,
-                          style: regular14.copyWith(color: dark2),
-                        ),
                         Spacer(), // Spacer untuk memberikan jarak antara teks dan ikon
                         Align(
                           alignment:

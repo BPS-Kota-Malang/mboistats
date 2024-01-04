@@ -24,7 +24,7 @@ class InflasiTahunanPage extends StatelessWidget {
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) async {
           // Load HTML content from the file
-          final String path = 'assets/html/perekonomian_inflasi_tahunan.html';
+          final String path = 'assets/web/perekonomian_inflasi_tahunan.html';
           final String fileHtmlContents =
               await rootBundle.loadString(path);
 
