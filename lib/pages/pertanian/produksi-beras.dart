@@ -24,7 +24,7 @@ class ProduksiBerasPage extends StatelessWidget {
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) async {
           // Load HTML content from the file
-          final String path = 'assets/html/pertanian_produksi_beras.html';
+          final String path = 'assets/web/pertanian_produksi_beras.html';
           final String fileHtmlContents =
               await rootBundle.loadString(path);
 

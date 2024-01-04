@@ -54,7 +54,15 @@
 			const thA = data.tahun;
 			const thB = thA.map(c => c.label);
 			var pjThData = thB.length;
-			//alert('Your query 3: ' + sumberB +" count= " + thB.length);
+			var maxThData=[], maxData;
+			if(pjThData > 10){
+				maxData=10;
+				maxThData = thB.slice(thB.length-10,thB.length)
+			}
+			else {
+				maxData = pjThData;
+				maxThData = thB;
+			}
 
 			const valData = Object.values(data.datacontent);
             //alert('Count: ' + val3573.length + " data: " + val3573);
@@ -74,15 +82,25 @@
             <table border = "0" align ="center" style="background-color:transparent;" cellpadding="10">
                 <tr id="chart" align ="center" style="width:50%; text-align:center; height:15px;" >
                     <script>
+							var dataCategories = kolomB;
+							dataCategories = dataCategories.reverse();
+							dataCategories = dataCategories.slice(1,dataCategories.length);
+							
+							var data1=[], data2=[];
+							for(var i=46; i > 0; i-=3){
+								data1.push(-(valData[(pjThData*i)-1]));
+								data2.push(valData[(pjThData*(i+1))-1]);
+							}
+							
 							 var options = {
 							  series: [
 							  {
 								name: kolomD[kolomD.length-3],
-                                data: [ -(valData[(pjThData*46)-1]), -(valData[(pjThData*43)-1]),-(valData[(pjThData*40)-1]),-(valData[(pjThData*37)-1]),-(valData[(pjThData*34)-1]),-(valData[(pjThData*31)-1]),-(valData[(pjThData*28)-1]),-(valData[(pjThData*25)-1]),-(valData[(pjThData*22)-1]),-(valData[(pjThData*19)-1]),-(valData[(pjThData*16)-1]),-(valData[(pjThData*13)-1]),-(valData[(pjThData*10)-1]),-(valData[(pjThData*7)-1]),-(valData[(pjThData*4)-1]),-(valData[(pjThData*1)-1])]
+                                data: data1
                                 },
                                 {
                                 name: kolomD[kolomD.length-2],
-                                data: [  valData[(pjThData*47)-1], valData[(pjThData*44)-1], valData[(pjThData*41)-1], valData[(pjThData*38)-1], valData[(pjThData*35)-1], valData[(pjThData*32)-1], valData[(pjThData*29)-1], valData[(pjThData*26)-1], valData[(pjThData*23)-1], valData[(pjThData*20)-1], valData[(pjThData*17)-1], valData[(pjThData*14)-1], valData[(pjThData*11)-1], valData[(pjThData*8)-1], valData[(pjThData*5)-1], valData[(pjThData*2)-1]]
+                                data: data2
                                 },
                             ],
 							chart: {
@@ -144,10 +162,7 @@
                                 }
                             },
                          xaxis: {
-                            categories: [kolomB[15].toUpperCase(),  kolomB[14].toUpperCase(),kolomB[13].toUpperCase(), kolomB[12].toUpperCase(), kolomB[11].toUpperCase(), kolomB[10].toUpperCase(),
-                            kolomB[9].toUpperCase(), kolomB[8].toUpperCase(), kolomB[7].toUpperCase() , kolomB[6].toUpperCase(), kolomB[5].toUpperCase(), kolomB[4].toUpperCase() , kolomB[3].toUpperCase(), kolomB[2].toUpperCase(), kolomB[1].toUpperCase(),
-                            kolomB[0].toUpperCase()
-                            ],
+                            categories: dataCategories,
                             title:{
                                 text: satuanB
                             },
@@ -223,92 +238,28 @@
                     <!-- <td>LAKI-LAKI</td>
                     <td>PEREMPUAN</td>
                     <td>TOTAL</td> -->
-                    <script>
-						document.write('<td width="22%">' + kolomD[0].toUpperCase() + '</td>');
-						document.write('<td width="22%">' + kolomD[1].toUpperCase() + '</td>');
-                        document.write('<td width="22%">' + kolomD[2].toUpperCase() + '</td>');
+					<script>
+						if(kolomD.length > 0){
+							for (var i = 0; i < kolomD.length; i++) 
+								document.write('<td>' + kolomD[i].toUpperCase() + '</td>');
+						}
 					</script>
                 </tr>
-                <tr align ="center" style="background-color:#adb7d6; font-weight:bold; ">
-                    <script>
-						document.write('<td>' + thB[pjThData-10] + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*49)-10]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*50)-10]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*51)-10])+ '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#d6d9e4; font-weight:bold;">
-                    <script>
-						document.write('<td>' + thB[pjThData-9] + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*49)-9]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*50)-9]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*51)-9]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#adb7d6; font-weight:bold; ">
-                    <script>
-						document.write('<td>' + thB[pjThData-8] + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*49)-8]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*50)-8]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*51)-8]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#d6d9e4;font-weight:bold;">
-                    <script>
-						document.write('<td>' + thB[pjThData-7] + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*49)-7]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*50)-7]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*51)-7]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#adb7d6; font-weight:bold; ">
-                    <script>
-						document.write('<td>' + thB[pjThData-6] + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*49)-6]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*50)-6]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*51)-6]) + '</td>');
-                        </script>
-                </tr>
-                <tr align ="center" style="background-color:#d6d9e4; font-weight:bold;">
-                    <script>
-						document.write('<td>' + thB[pjThData-5] + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*49)-5]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*50)-5]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*51)-5]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#adb7d6; font-weight:bold; ">
-                    <script>
-						document.write('<td>' + thB[pjThData-4] + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*49)-4]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*50)-4]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*51)-4]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#d6d9e4; font-weight:bold;">
-                    <script>
-						document.write('<td>' + thB[pjThData-3] + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*49)-3]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*50)-3]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*51)-3]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#adb7d6; font-weight:bold; ">
-                    <script>
-						document.write('<td>' + thB[pjThData-2] + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*49)-2]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*50)-2]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*51)-2]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#d6d9e4; font-weight:bold;">
-                    <script>
-						document.write('<td>' + thB[pjThData-1] + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*49)-1]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*50)-1]) + '</td>');
-                        document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*51)-1]) + '</td>');
-					</script>
-                </tr>
+				<script>
+					if(maxData > 0){
+					//Looping Baris
+						for (var i = maxData; i > 0; i--) {
+							if(i % 2 ==0) document.write('<tr align ="center" style="background-color:#adb7d6; font-weight:bold; ">');
+							else document.write('<tr align ="center" style="background-color:#d6d9e4; font-weight:bold;">');
+								
+							document.write('<td>' + thB[pjThData-i] + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*49)-i]) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*50)-i]) + '</td>');
+							document.write('<td>' + new Intl.NumberFormat('ID',{ minimumSignificantDigits: 2 }).format(valData[(pjThData*51)-i])+ '</td>');
+							document.write('</tr>');
+						}
+					}
+				</script>
                 <tr align ="left" style="background-color:transparent; line-height:auto;">
                     <script>
 						document.write('<td colspan="4" style="#fab;height:auto;width:100px;word-wrap:break-word;"><strong style="font-size: 9px;">' + sumberB + '</strong></td>');

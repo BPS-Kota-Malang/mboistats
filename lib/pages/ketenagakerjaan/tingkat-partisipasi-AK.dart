@@ -24,7 +24,7 @@ class TingkatPartisipasiAngkatanKerjaPage extends StatelessWidget {
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) async {
           // Load HTML content from the file
-          final String path = 'assets/html/ketenagakerjaan_tpak.html';
+          final String path = 'assets/web/ketenagakerjaan_tpak.html';
           final String fileHtmlContents =
               await rootBundle.loadString(path);
 

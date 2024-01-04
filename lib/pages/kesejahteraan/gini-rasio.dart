@@ -24,7 +24,7 @@ class GiniRasioPage extends StatelessWidget {
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) async {
           // Load HTML content from the file
-          final String path = 'assets/html/kesejahteraan_gini_rasio.html';
+          final String path = 'assets/web/kesejahteraan_gini_rasio.html';
           final String fileHtmlContents =
               await rootBundle.loadString(path);
 

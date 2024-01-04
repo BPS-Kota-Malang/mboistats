@@ -24,7 +24,7 @@ class PengeluaranEkonomiPage extends StatelessWidget {
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) async {
           // Load HTML content from the file
-          final String path = 'assets/html/kesejahteraan_pengeluaran_perkapita.html';
+          final String path = 'assets/web/kesejahteraan_pengeluaran_perkapita.html';
           final String fileHtmlContents =
               await rootBundle.loadString(path);
 

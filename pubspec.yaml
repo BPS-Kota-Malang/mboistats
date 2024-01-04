@@ -43,7 +43,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-    - assets/html/
+    - assets/web/
     # - assets/icons/MboistatLogo.png
     # - assets/icons/ekonomi.png
     # - assets/icons/ipm.png

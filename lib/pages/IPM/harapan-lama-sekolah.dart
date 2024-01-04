@@ -24,7 +24,7 @@ class HarapanLamaSekolahPage extends StatelessWidget {
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) async {
           // Load HTML content from the file
-          final String path = 'assets/html/ipm_hls.html';
+          final String path = 'assets/web/ipm_hls.html';
           final String fileHtmlContents =
               await rootBundle.loadString(path);
 

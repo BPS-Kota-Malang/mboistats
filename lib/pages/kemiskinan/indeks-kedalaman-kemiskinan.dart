@@ -24,7 +24,7 @@ class IndeksKedalamanKemiskinanPage extends StatelessWidget {
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) async {
           // Load HTML content from the file
-          final String path = 'assets/html/kemiskinan_indeks_kedalaman.html';
+          final String path = 'assets/web/kemiskinan_indeks_kedalaman.html';
           final String fileHtmlContents =
               await rootBundle.loadString(path);
 

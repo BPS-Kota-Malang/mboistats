@@ -10,7 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2355516e-4a0a-42b0-908b-cd3ab65d93c8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/mboisat.iml" beforeDir="false" afterPath="$PROJECT_DIR$/mboisat.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/html/ipm.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/html/ipm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/html/ipm_daya_belii.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/html/ipm_daya_belii.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/html/ipm_hls.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/html/ipm_hls.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

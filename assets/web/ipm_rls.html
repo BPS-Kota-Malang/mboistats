@@ -25,7 +25,7 @@
     </head>
     <script>
 			var data;
-			url='https://webapi.bps.go.id/v1/api/list/model/data/domain/3573/var/285/key/9db89e91c3c142df678e65a78c4e547f';
+			url='https://webapi.bps.go.id/v1/api/list/model/data/domain/3573/var/585/key/9db89e91c3c142df678e65a78c4e547f';
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', url, false);
 			xhr.onreadystatechange = function() {
@@ -50,8 +50,17 @@
 			const kolomB = kolomA.map(c => c.label);
 			const thA = data.tahun;
 			const thB = thA.map(d => d.label);
-			var pjData = thB.length;
-			//alert('Your query 3: ' + sumberB +" count= " + thB.length);
+			var pjThData = thB.length;
+			
+			var maxThData=[], maxData;
+			if(pjThData > 10){
+				maxData=10;
+				maxThData = thB.slice(thB.length-10,thB.length)
+			}
+			else {
+				maxData = pjThData;
+				maxThData = thB;
+			}
 
 			const valData = Object.values(data.datacontent);
 			//alert('Count: ' + val3573.length + " data: " + val3573);
@@ -70,19 +79,27 @@
             <table border = "0" align ="center" style="background-color:transparent;" cellpadding="10">
 					<tr id="chart" align ="center" style="width:50%; text-align:center; height:15px;" >
 						 <script>
+							var data1=[], data2=[], data3=[];
+							for(var i=maxData; i > 0; i--){
+								data1.push(valData[(pjThData*1)-i]);
+								data2.push(valData[(pjThData*2)-i]);
+								data3.push(valData[(pjThData*3)-i]);
+							}
+							
 							 var options = {
-							  series: [
+							
+							 series: [
 							  {
 								name: kolomB[0],
-								data: [valData[(pjData*1)-10], valData[(pjData*1)-9], valData[(pjData*1)-8], valData[(pjData*1)-7], valData[(pjData*1)-6], valData[(pjData*1)-5], valData[(pjData*1)-4], valData[(pjData*1)-3], valData[(pjData*1)-2], valData[(pjData*1)-1]]
+								data: data1
 							  },
 							  {
 								name: kolomB[1],
-								data: [valData[(pjData*2)-10], valData[(pjData*2)-9], valData[(pjData*2)-8], valData[(pjData*2)-7], valData[(pjData*2)-6], valData[(pjData*2)-5], valData[(pjData*2)-4], valData[(pjData*2)-3], valData[(pjData*2)-2], valData[(pjData*2)-1]]
+								data: data2
 							  },
 							  {
 								name: kolomB[2],
-								data: [valData[(pjData*3)-10], valData[(pjData*3)-9], valData[(pjData*3)-8], valData[(pjData*3)-7], valData[(pjData*3)-6], valData[(pjData*3)-5], valData[(pjData*3)-4], valData[(pjData*3)-3], valData[(pjData*3)-2], valData[(pjData*3)-1]]
+								data: data3
 							  }
 							],
 							  chart: {
@@ -155,7 +172,7 @@
 							  }
 							},
 							xaxis: {
-							  categories: [thB[pjData-10],thB[pjData-9],thB[pjData-8],thB[pjData-7],thB[pjData-6],thB[pjData-5],thB[pjData-4],thB[pjData-3],thB[pjData-2],thB[pjData-1]],
+							  categories: maxThData,
 							  labels: {
 								  style: {
 										fontSize: '9px',
@@ -207,91 +224,28 @@ penduduk berumur 25 tahun ke atas dalam menjalani pendidikan formal</text></p>
                 <tr align ="center" style="background-color:#843C0C; font-weight:bold; color: white; font-family: sans-serif;">
                     <td>TAHUN</td>
                     <script>
-						document.write('<td>' + kolomB[0].toUpperCase() + '</td>');
-						document.write('<td>' + kolomB[1].toUpperCase() + '</td>');
-						document.write('<td>' + kolomB[2].toUpperCase() + '</td>');
+						if(kolomB.length > 0){
+							for (var i = 0; i < kolomB.length; i++) 
+								document.write('<td>' + kolomB[i].toUpperCase() + '</td>');
+						}
 					</script>
                 </tr>
-                <tr align ="center" style="background-color:#D5AD93; font-weight:bold; ">
-                    <script>
-						document.write('<td>' + thB[pjData-10] + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-10]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*2)-10]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-10]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#D7C3B7; font-weight:bold;">
-                    <script>
-						document.write('<td>' + thB[pjData-9] + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-9]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*2)-9]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-9]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#D5AD93; font-weight:bold; ">
-                    <script>
-						document.write('<td>' + thB[pjData-8] + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-8]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*2)-8]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-8]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#D7C3B7; font-weight:bold;">
-                    <script>
-						document.write('<td>' + thB[pjData-7] + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-7]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*2)-7]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-7]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#D5AD93; font-weight:bold; ">
-                    <script>
-						document.write('<td>' + thB[pjData-6] + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-6]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*2)-6]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-6]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#D7C3B7; font-weight:bold;">
-                    <script>
-						document.write('<td>' + thB[pjData-5] + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-5]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*2)-5]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-5]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#D5AD93; font-weight:bold; ">
-                    <script>
-						document.write('<td>' + thB[pjData-4] + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-4]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*2)-4]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-4]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#D7C3B7; font-weight:bold;">
-                    <script>
-						document.write('<td>' + thB[pjData-3] + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-3]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*2)-3]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-3]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#D5AD93; font-weight:bold; ">
-                    <script>
-						document.write('<td>' + thB[pjData-2] + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-2]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*2)-2]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-2]) + '</td>');
-					</script>
-                </tr>
-                <tr align ="center" style="background-color:#D7C3B7; font-weight:bold;">
-                    <script>
-						document.write('<td>' + thB[pjData-1] + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*1)-1]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*2)-1]) + '</td>');
-						document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjData*3)-1]) + '</td>');
-					</script>
-                </tr>
+			
+				<script>
+					if(maxData > 0){
+					//Looping Baris
+						for (var i = maxData; i > 0; i--) {
+							if(i % 2 ==0) document.write('<tr align ="center" style="background-color:#D5AD93; font-weight:bold; ">');
+							else document.write('<tr align ="center" style="background-color:#D7C3B7; font-weight:bold;">');
+								
+							document.write('<td>' + thB[pjThData-i] + '</td>');
+							for (var j = 1; j <= kolomB.length; j++)
+								document.write('<td>' + new Intl.NumberFormat('ID',{ minimumFractionDigits: 2 }).format(valData[(pjThData*j)-i]) + '</td>');
+							document.write('</tr>');
+						}
+					}
+				</script>
+				
                 <tr align ="left" style="background-color:transparent; line-height:auto;">
                     <script>
 						document.write('<td colspan="4" style="#fab;height:auto;width:100px;word-wrap:break-word;"><strong style="font-size: 9px;">' + sumberB + '</strong></td>');

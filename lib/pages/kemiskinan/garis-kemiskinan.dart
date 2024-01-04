@@ -24,7 +24,7 @@ class GarisKemiskinanPage extends StatelessWidget {
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) async {
           // Load HTML content from the file
-          final String path = 'assets/html/kemiskinan_garis.html';
+          final String path = 'assets/web/kemiskinan_garis.html';
           final String fileHtmlContents =
               await rootBundle.loadString(path);
 
