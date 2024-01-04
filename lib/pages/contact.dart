@@ -151,6 +151,21 @@ class Contact extends StatelessWidget {
                   ),
                 ),
               )),
+              SizedBox(height: 16),
+              Center(
+                child: Column(
+                  children: [
+                    Text(
+                      'App Version: ',
+                      style: regular14.copyWith(color: dark2),
+                    ),
+                    Text(
+                      'Version Code: ',
+                      style: regular14.copyWith(color: dark2),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

@@ -327,31 +327,31 @@ class _PublikasiPagesState extends State<PublikasiPages> {
                   ],
                 ),
                 child: ListTile(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
                   leading: Image.asset(
                     'assets/icons/publication.png',
                     width: 40,
                     height: 40,
                   ),
-                  title: Text(
-                    dataPublikasi[index]["title"],
-                    style: bold16.copyWith(color: dark1),
-                  ),
-                  subtitle: Row(
-                    children: [
-                      Text(
-                        abstract,
-                        style: regular14.copyWith(color: dark2),
-                      ),
-                      Spacer(),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Image.asset(
-                          'assets/icons/right-arrow.png',
-                          height: 16,
+                  title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            dataPublikasi[index]["title"],
+                            style: bold16.copyWith(color: dark1),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Image.asset(
+                            'assets/icons/right-arrow.png',
+                            height: 16,
+                          ),
+                        ),
+                      ],
+                    ),
                 ),
               ),
             ),

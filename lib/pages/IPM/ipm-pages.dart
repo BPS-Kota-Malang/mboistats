@@ -48,6 +48,7 @@ class IPMPages extends StatelessWidget {
                       ],
                     ),
                     child: ListTile(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
                       leading: GestureDetector(
                         onTap: () {
                           if (item.route != null) {
@@ -56,13 +57,16 @@ class IPMPages extends StatelessWidget {
                         },
                         child: Image.asset('assets/icons/${item.icons}'),
                       ),
-                      title: Text(
-                        item.title,
-                        style: bold16.copyWith(color: dark1),
-                      ),
-                      subtitle: Row(
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Spacer(),
+                          Flexible(
+                            child: Text(
+                              item.title,
+                              style: bold16.copyWith(color: dark1),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
                           Align(
                             alignment: Alignment.center,
                             child: Image.asset(
