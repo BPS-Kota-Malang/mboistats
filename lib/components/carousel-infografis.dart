@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -123,27 +122,7 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
       if (confirmDownload == true) {
         openPdfViewer(context, imageUrl);
       }
-    } catch (error) {
-      // Display a dialog for unexpected errors
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("Error"),
-            content: Text("Error during download: $error"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  // Close the dialog
-                  Navigator.pop(context);
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
-      );
-    }
+    } catch (error) {}
   }
 
   void openPdfViewer(BuildContext context, String imageUrl) async {
@@ -196,27 +175,7 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
           },
         );
       }
-    } catch (error) {
-      // Display a dialog for unexpected errors
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("Error"),
-            content: Text("Error during image download: $error"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  // Close the dialog
-                  Navigator.pop(context);
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
-      );
-    }
+    } catch (error) {}
   }
 }
 
