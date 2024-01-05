@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:mboistat/theme.dart';
+// import 'package:mboistat/theme.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
@@ -65,7 +65,7 @@ class _InfografisPagesState extends State<InfografisPages> {
   }
 
   String truncateText(String text, int maxLength) {
-    if (text != null && text.length > maxLength) {
+    if (text.length > maxLength) {
       return text.substring(0, maxLength) + '...';
     }
     return text;
