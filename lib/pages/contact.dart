@@ -1,10 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:package_info/package_info.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:mboistat/components/footer.dart';
 import 'package:mboistat/datas/contact.dart';
 import 'package:mboistat/theme.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class Contact extends StatelessWidget {
+class Contact extends StatefulWidget {
+  @override
+  _ContactState createState() => _ContactState();
+}
+
+class _ContactState extends State<Contact> {
+  String appVersion = '';
+  String buildNumber = '';
+
+  @override
+  void initState() {
+    super.initState();
+    getAppInfo();
+  }
+
+  Future<void> getAppInfo() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    setState(() {
+      appVersion = packageInfo.version;
+      buildNumber = packageInfo.buildNumber;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -152,20 +175,21 @@ class Contact extends StatelessWidget {
                 ),
               )),
               SizedBox(height: 16),
-              Center(
-                child: Column(
-                  children: [
-                    Text(
-                      'App Version: ',
-                      style: regular14.copyWith(color: dark2),
-                    ),
-                    Text(
-                      'Version Code: ',
-                      style: regular14.copyWith(color: dark2),
-                    ),
-                  ],
+            Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        'App Version: $appVersion',
+                        style: regular14.copyWith(color: dark2),
+                      ),
+                      Text(
+                        'Build Number: $buildNumber',
+                        style: regular14.copyWith(color: dark2),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+
             ],
           ),
         ),

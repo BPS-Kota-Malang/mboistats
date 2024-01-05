@@ -7,7 +7,7 @@ description: "A new Flutter project."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
-version: 1.0.0+1
+version: 3.0.0+50
 
 environment:
  sdk: '>=2.12.0 <4.0.0'
@@ -29,8 +29,7 @@ dependencies:
   flutter_pdfview: ^1.2.7
   file_picker: ^4.0.10
   dio: ^4.0.0
-
-  
+  package_info: ^2.0.2
 
   
 dev_dependencies:

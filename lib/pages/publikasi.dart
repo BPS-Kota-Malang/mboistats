@@ -7,6 +7,8 @@ import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:package_info/package_info.dart';
+
 
 class PublikasiPages extends StatefulWidget {
   @override
