@@ -161,7 +161,7 @@ class _PublikasiPagesState extends State<PublikasiPages> {
   }
 
   String truncateText(String text, int maxLength) {
-    if (text != null && text.length > maxLength) {
+    if (text.length > maxLength) {
       return text.substring(0, maxLength) + '...';
     }
     return text;
