@@ -3,12 +3,12 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 
-class PengeluaranEkonomiPage extends StatelessWidget {
+class PengeluaranPerkapitaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pengeluaran'),
+        title: Text('Pengeluaran Perkapita'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',

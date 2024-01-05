@@ -99,21 +99,21 @@ class _PublikasiPagesState extends State<PublikasiPages> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Download Confirmation"),
-          content: Text("Do you want to download this publication?"),
+          title: Text("Konfirmasi Unduh"),
+          content: Text("Apakah Anda ingin mengunduh file ini?"),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text("Cancel"),
+              child: Text("Tidak"),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 downloadAndShowConfirmation(context, pdfUrl);
               },
-              child: Text("Download"),
+              child: Text("Ya"),
             ),
           ],
         );

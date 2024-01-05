@@ -8,7 +8,7 @@ class InflasiTahunanPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inflasi Tahunan'),
+        title: Text('Inflasi Tahun Kalender'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',

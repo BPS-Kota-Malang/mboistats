@@ -8,7 +8,7 @@ class KependudukanMenurutKecamatanPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kependudukan Menurut Kecamatan'),
+        title: Text('Kependudukan'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',

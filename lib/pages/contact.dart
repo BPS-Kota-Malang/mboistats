@@ -131,7 +131,7 @@ class _ContactState extends State<Contact> {
                     } else if (item.title == 'Instagram') {
                       launch('https://instagram.com/bpskotamalang');
                     } else if (item.title == 'WhatsApp') {
-                       launch('https://wa.me/');
+                       launch('https://wa.me/+6281250503573');
                     } else if (item.title == 'Website') {
                       launch ('https://malangkota.bps.go.id/');
                     }
@@ -183,13 +183,10 @@ class _ContactState extends State<Contact> {
                   child: Column(
                     children: [
                       Text(
-                        'App Version: $appVersion',
+                        'App Version: $appVersion + $buildNumber',
                         style: regular14.copyWith(color: dark2),
                       ),
-                      Text(
-                        'Build Number: $buildNumber',
-                        style: regular14.copyWith(color: dark2),
-                      ),
+      
                     ],
                   ),
                 ),

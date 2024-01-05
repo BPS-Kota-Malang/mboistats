@@ -8,7 +8,7 @@ class TingkatPartisipasiAngkatanKerjaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Persentase Pengangguran Angkatan Kerja'),
+        title: Text('TPAK'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',

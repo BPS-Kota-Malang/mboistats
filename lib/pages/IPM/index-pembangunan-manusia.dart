@@ -8,7 +8,7 @@ class IndexPembangunanManusiaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Indeks Pembangunan Manusia'),
+        title: Text('IPM'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',

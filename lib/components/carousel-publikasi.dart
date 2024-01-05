@@ -102,17 +102,9 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text("Konfirmasi Unduh"),
-          content: Text("Apakah Anda ingin mendownload/membuka file ini?"),
+          content: Text("Apakah Anda ingin mengunduh/membuka file ini?"),
           actions: [
-            TextButton(
-              onPressed: () async {
-                // Close the dialog and proceed with the download
-                Navigator.pop(context);
-                await downloadAndShowConfirmation(previousContext, pdfUrl);
-              },
-              child: Text("Ya"),
-            ),
-            TextButton(
+             TextButton(
               onPressed: () {
                 // Close the dialog and open the PDF directly
                 Navigator.pop(context);
@@ -120,6 +112,22 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
               },
               child: Text("Buka PDF"),
             ),
+             TextButton(
+              onPressed: () {
+                  // Close the dialog and cancel download
+                  Navigator.pop(context, false);
+              },
+              child: Text("Tidak"),
+            ),
+            TextButton(
+              onPressed: () async {
+                // Close the dialog and proceed with the download
+                Navigator.pop(context);
+                await downloadAndShowConfirmation(previousContext, pdfUrl);
+              },
+              child: Text("Unduh"),
+            ),
+           
           ],
         );
       },

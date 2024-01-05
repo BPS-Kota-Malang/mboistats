@@ -167,14 +167,14 @@ class _BeritaPagesState extends State<BeritaPages> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text("Cancel"),
+              child: Text("Tidak"),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 downloadAndShowConfirmation(context, pdfUrl);
               },
-              child: Text("Download"),
+              child: Text("Ya"),
             ),
           ],
         );

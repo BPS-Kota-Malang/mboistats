@@ -26,7 +26,7 @@ import 'package:mboistat/pages/kependudukan/penduduk-blimbing.dart';
 import 'package:mboistat/pages/kependudukan/penduduk-kedungkandang.dart';
 import 'package:mboistat/pages/kependudukan/penduduk-klojen.dart';
 import 'package:mboistat/pages/kependudukan/penduduk-sukun.dart';
-import 'package:mboistat/pages/kependudukan/penduduk-lowokmaru.dart';
+import 'package:mboistat/pages/kependudukan/penduduk-lowokwaru.dart';
 import 'package:mboistat/pages/ekonomi/inflasi-bulanan.dart';
 import 'package:mboistat/pages/ekonomi/inflasi-tahunan.dart';
 import 'package:mboistat/pages/ekonomi/laju-pertumbuhan.dart';
@@ -104,10 +104,10 @@ class RouteManager {
 
     //Kesejahteraan
     '/GiniRasio': (context) => GiniRasioPage(),
-    '/PengeluaranEkonomi': (context) => PengeluaranEkonomiPage(),
+    '/PengeluaranPerkapita': (context) => PengeluaranPerkapitaPage(),
 
     //Pertanian
-    '/LuasLahanPadi': (context) => LuasLahanPadiPage(),
+    '/LuasPanenPadi': (context) => LuasPanenPadiPage(),
     '/ProduksiPadi': (context) => ProduksiPadiPage(),
     '/ProduktivitasPadi': (context) => ProduktivitasPadiPage(),
     '/ProduksiBeras': (context) => ProduksiBerasPage(),

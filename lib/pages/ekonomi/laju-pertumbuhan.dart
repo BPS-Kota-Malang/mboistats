@@ -8,7 +8,7 @@ class LajuPertumbuhan extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inflasi Laju Pertumbuhan'),
+        title: Text('Laju Pertumbuhan Ekonomi'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
