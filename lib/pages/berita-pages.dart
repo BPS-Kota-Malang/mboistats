@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mboistat/components/footer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:mboistat/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
@@ -222,7 +223,7 @@ class _BeritaPagesState extends State<BeritaPages> {
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: Colors.grey),
+                  border: Border.all(color: dark4),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.2),
@@ -233,31 +234,31 @@ class _BeritaPagesState extends State<BeritaPages> {
                   ],
                 ),
                 child: ListTile(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
                   leading: Image.asset(
                     'assets/icons/news.png',
                     width: 40,
                     height: 40,
                   ),
-                  title: Text(
-                    beritaData[index]["title"],
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Row(
-                    children: [
-                      Text(
-                        abstract,
-                        style: TextStyle(fontSize: 14, color: Colors.grey),
-                      ),
-                      Spacer(),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Image.asset(
-                          'assets/icons/right-arrow.png',
-                          height: 16,
+                  title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            beritaData[index]["title"],
+                            style: bold16.copyWith(color: dark1),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Image.asset(
+                            'assets/icons/right-arrow.png',
+                            height: 16,
+                          ),
+                        ),
+                      ],
+                    ),
                 ),
               ),
             ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:mboistat/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-// import 'package:mboistat/theme.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
@@ -16,6 +16,7 @@ class InfografisPages extends StatefulWidget {
 class _InfografisPagesState extends State<InfografisPages> {
   List<Map<String, dynamic>> dataInfografis = [];
   List<String> abstraksiBrs = [];
+  String imageUrl = ''; // Variable to store the PDF URL
 
   @override
   void initState() {
@@ -71,27 +72,26 @@ class _InfografisPagesState extends State<InfografisPages> {
     return text;
   }
 
-  void _launchPDF(String pdfUrl) async {
+  void openDownloadConfirmation(BuildContext context, String imageUrl) async {
     try {
-      // Tambahkan konfirmasi unduh di sini
       bool confirmDownload = await showDialog(
         context: context,
-        builder: (BuildContext context) {
+        builder: (context) {
           return AlertDialog(
             title: Text("Konfirmasi Unduh"),
-            content: Text("Apakah Anda ingin mengunduh file PDF ini?"),
+            content: Text("Apakah Anda ingin mengunduh file ini?"),
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop(true); // Konfirmasi unduh
+                  Navigator.pop(context, true);
                 },
                 child: Text("Ya"),
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop(false); // Batal unduh
+                  Navigator.pop(context, false);
                 },
-                child: Text("Batal"),
+                child: Text("Tidak"),
               ),
             ],
           );
@@ -99,38 +99,25 @@ class _InfografisPagesState extends State<InfografisPages> {
       );
 
       if (confirmDownload == true) {
-        if (await canLaunch(pdfUrl)) {
-          await launch(pdfUrl, forceSafariVC: false, forceWebView: false);
-        } else {
-          throw 'Could not launch $pdfUrl';
-        }
+        openPdfViewer(context, imageUrl);
       }
-    } catch (e) {
-      // Tangani pengecualian, jika ada
-      print('Error launching PDF: $e');
-    }
+    } catch (error) {}
   }
 
-  Future<void> downloadAndShowConfirmation(
-      BuildContext context, String pdfUrl) async {
+  void openPdfViewer(BuildContext context, String pdfUrl) async {
+    DownloadService downloadService = DownloadService();
+
     try {
-      String filePath = await download(pdfUrl);
+      String filePath = await downloadService.download(pdfUrl);
 
       if (filePath.isNotEmpty) {
         showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text("Download Complete"),
-              content: Text("File downloaded and saved at: $filePath"),
+              title: Text("Unduh Selesai"),
+              content: Text("File diunduh dan disimpan di: $filePath"),
               actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    openPdfDirectly(context, filePath);
-                  },
-                  child: Text("Open PDF"),
-                ),
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
@@ -146,8 +133,8 @@ class _InfografisPagesState extends State<InfografisPages> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text("Download Failed"),
-              content: Text("Failed to download file."),
+              title: Text("Unduh Gagal"),
+              content: Text("Gagal mengunduh file."),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -160,25 +147,7 @@ class _InfografisPagesState extends State<InfografisPages> {
           },
         );
       }
-    } catch (error) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("Error"),
-            content: Text("Error during file download: $error"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
-      );
-    }
+    } catch (error) {}
   }
 
   Future<String> download(String pdfUrl) async {
@@ -191,7 +160,7 @@ class _InfografisPagesState extends State<InfografisPages> {
       if (result.statusCode == 200) {
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
-          var file = File("${externalDirectory.path}/download-infografis.pdf");
+          var file = File("${externalDirectory.path}/download-infografis.jpg");
           file.writeAsBytesSync(byteDownloaded);
           return "${file.path}";
         } else {
@@ -205,19 +174,6 @@ class _InfografisPagesState extends State<InfografisPages> {
       print("external directory null");
       return "error";
     }
-  }
-
-  void openPdfDirectly(BuildContext context, String pdfUrl) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PDFView(
-          filePath: pdfUrl,
-          enableSwipe: true,
-          swipeHorizontal: false,
-        ),
-      ),
-    );
   }
 
   @override
@@ -246,13 +202,13 @@ class _InfografisPagesState extends State<InfografisPages> {
             child: InkWell(
               onTap: () {
                 String pdfUrl = dataInfografis[index]["dl"];
-                _launchPDF(pdfUrl);
+                openDownloadConfirmation(context, pdfUrl);
               },
               child: Container(
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: Colors.grey),
+                  border: Border.all(color: dark4),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.2),
@@ -263,31 +219,31 @@ class _InfografisPagesState extends State<InfografisPages> {
                   ],
                 ),
                 child: ListTile(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
                   leading: Image.asset(
-                    'assets/icons/infographics.png',
+                    'assets/icons/publication.png',
                     width: 40,
                     height: 40,
                   ),
-                  title: Text(
-                    dataInfografis[index]["title"],
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Row(
-                    children: [
-                      Text(
-                        abstract,
-                        style: TextStyle(fontSize: 14, color: Colors.grey),
-                      ),
-                      Spacer(),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Image.asset(
-                          'assets/icons/right-arrow.png',
-                          height: 16,
+                  title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            dataInfografis[index]["title"],
+                            style: bold16.copyWith(color: dark1),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Image.asset(
+                            'assets/icons/right-arrow.png',
+                            height: 16,
+                          ),
+                        ),
+                      ],
+                    ),
                 ),
               ),
             ),
@@ -295,5 +251,33 @@ class _InfografisPagesState extends State<InfografisPages> {
         },
       ),
     );
+  }
+}
+
+class DownloadService {
+  Future<String> download(String pdfUrl) async {
+    var externalDirectory = await getExternalStorageDirectory();
+    if (externalDirectory != null) {
+      var urlImage = pdfUrl;
+      var dio = Dio();
+      var result = await dio.get<List<int>>(urlImage,
+          options: Options(responseType: ResponseType.bytes));
+      if (result.statusCode == 200) {
+        var byteDownloaded = result.data;
+        if (byteDownloaded != null) {
+          var file = File("${externalDirectory.path}/download-infografis.jpg");
+          file.writeAsBytesSync(byteDownloaded);
+          return "${file.path}";
+        } else {
+          print("file kosong");
+          return "error file kosong";
+        }
+      } else {
+        return "download error";
+      }
+    } else {
+      print("external directory null");
+      return "error";
+    }
   }
 }

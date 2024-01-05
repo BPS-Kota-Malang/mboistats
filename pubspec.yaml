@@ -30,6 +30,7 @@ dependencies:
   file_picker: ^4.0.10
   dio: ^4.0.0
   package_info: ^2.0.2
+  cached_network_image: ^3.0.0
 
   
 dev_dependencies:
