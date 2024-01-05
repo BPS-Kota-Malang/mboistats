@@ -247,11 +247,11 @@ class _BeritaPagesState extends State<BeritaPages> {
                           child: Text(
                             beritaData[index]["title"],
                             style: bold16.copyWith(color: dark1),
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.left,
                           ),
                         ),
                         Align(
-                          alignment: Alignment.center,
+                          alignment: Alignment.centerRight,
                           child: Image.asset(
                             'assets/icons/right-arrow.png',
                             height: 16,

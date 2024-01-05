@@ -78,11 +78,13 @@ class _ContactState extends State<Contact> {
                     children: [
                       Text(
                         'Kontak Kami', // Ganti dengan judul yang sesuai
-                        style: bold16.copyWith(color: dark1, height: 1.5), // Sesuaikan gaya teks
+                        style: bold16.copyWith(color: dark1, height: 1.5),
+                        textAlign: TextAlign.center, // Sesuaikan gaya teks
                       ),
                       Text(
                         'Kami siap membantu Anda. Hubungi kami untuk informasi lebih lanjut', // Teks tambahan di bawah judul
                         style: regular14.copyWith(color: dark2, height: 1.5),
+                        textAlign: TextAlign.center,
                       ),
                     ],
                   ),
@@ -128,6 +130,8 @@ class _ContactState extends State<Contact> {
                       launch('mailto:bps3573@bps.go.id');
                     } else if (item.title == 'Instagram') {
                       launch('https://instagram.com/bpskotamalang');
+                    } else if (item.title == 'WhatsApp') {
+                       launch('https://wa.me/');
                     } else if (item.title == 'Website') {
                       launch ('https://malangkota.bps.go.id/');
                     }
