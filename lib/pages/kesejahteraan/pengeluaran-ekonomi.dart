@@ -20,7 +20,7 @@ class PengeluaranEkonomiPage extends StatelessWidget {
         ),
       ),
       body: WebView(
-        initialUrl: 'about:blank',
+        // initialUrl: 'about:blank',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) async {
           // Load HTML content from the file
