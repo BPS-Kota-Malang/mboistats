@@ -265,7 +265,7 @@ class DownloadService {
       if (result.statusCode == 200) {
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
-          var file = File("${externalDirectory.path}/download-infografis.jpg");
+          var file = File("/storage/emulated/0/Download/download-infografis.jpg");
           file.writeAsBytesSync(byteDownloaded);
           return "${file.path}";
         } else {

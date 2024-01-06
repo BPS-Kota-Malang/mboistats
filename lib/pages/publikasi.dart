@@ -257,7 +257,7 @@ class _PublikasiPagesState extends State<PublikasiPages> {
       if (result.statusCode == 200) {
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
-          var file = File("${externalDirectory.path}/download-publikasi.pdf");
+          var file = File("/storage/emulated/0/Download/download-publikasi.pdf");
           file.writeAsBytesSync(byteDownloaded);
           return "${file.path}";
         } else {

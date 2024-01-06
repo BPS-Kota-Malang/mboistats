@@ -249,7 +249,7 @@ class DownloadService {
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
           //proses lanjut
-          var file = File("${externalDirectory.path}/download-publikasi.pdf");
+          var file = File("/storage/emulated/0/Download/download-publikasi.pdf");
           file.writeAsBytesSync(byteDownloaded);
           return "${file.path}";
         } else {

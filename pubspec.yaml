@@ -22,16 +22,15 @@ dependencies:
   url_launcher: ^6.0.13
   path_provider: ^2.0.9
   open_file: ^3.2.1
-  flutter_inappwebview: ^5.8.0
   syncfusion_flutter_pdfviewer: ^20.4.54
   flutter_downloader: ^1.6.1
   permission_handler: ^11.1.0
   flutter_pdfview: ^1.2.7
-  file_picker: ^4.0.10
   dio: ^4.0.0
   package_info: ^2.0.2
   cached_network_image: ^3.0.0
-
+  flutter_file_downloader: ^1.2.0
+ 
   
 dev_dependencies:
   flutter_test:
