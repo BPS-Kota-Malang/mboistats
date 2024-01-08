@@ -78,16 +78,24 @@ class _BeritaPagesState extends State<BeritaPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
-        title: Text('BRS'),
-        leading: IconButton(
-          icon: Image.asset(
-            'assets/icons/left-arrow.png',
-            height: 25,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+        backgroundColor: Colors.white,
+        elevation: 0,
+        toolbarHeight: 50,
+        title: const Text(
+          'MBOIStatS+',
+          style: TextStyle(color: Colors.black),
+        ),
+        leading: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Image.asset(
+              'assets/images/Mbois-stat Logo_Fix Putih.png',
+              width: 40,
+              height: 40,
+            ),
+          ],
         ),
       ),
       body: ListView.builder(
@@ -120,7 +128,7 @@ class _BeritaPagesState extends State<BeritaPages> {
                 child: ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
                   leading: Image.asset(
-                    'assets/icons/publication.png',
+                    'assets/icons/news.png',
                     width: 40,
                     height: 40,
                   ),

@@ -221,7 +221,7 @@ class _InfografisPagesState extends State<InfografisPages> {
                 child: ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
                   leading: Image.asset(
-                    'assets/icons/publication.png',
+                    'assets/icons/infographics.png',
                     width: 40,
                     height: 40,
                   ),
