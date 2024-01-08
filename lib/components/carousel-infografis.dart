@@ -140,8 +140,8 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text("Download Complete"),
-              content: Text("Image downloaded and saved at: $filePath"),
+              title: Text("Unduhan Selesai"),
+              content: Text("Berkas infografis disimpan di $filePath"),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -160,8 +160,8 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text("Download Failed"),
-              content: Text("Failed to download image."),
+              title: Text("Unduhan Gagal"),
+              content: Text("Gagal Mengunduh File."),
               actions: [
                 TextButton(
                   onPressed: () {

@@ -53,7 +53,7 @@ class RouteManager {
     '/berita': (context) => BeritaPages(),
     '/infografis': (context) => InfografisPages(),
     '/tentang': (context) => TentangPages(),
-    '/publikasi': (context) => PublikasiPages(),
+    '/publikasi': (context) => PublikasiPage(),
     '/contact': (context) => Contact(),
     '/kependudukan': (context) => KependudukanPages(),
 

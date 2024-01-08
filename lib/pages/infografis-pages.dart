@@ -116,7 +116,7 @@ class _InfografisPagesState extends State<InfografisPages> {
           builder: (context) {
             return AlertDialog(
               title: Text("Unduh Selesai"),
-              content: Text("File diunduh dan disimpan di: $filePath"),
+              content: Text("Berkas infografis disimpan di $filePath"),
               actions: [
                 TextButton(
                   onPressed: () {

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/components/footer.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:mboistat/components/footer.dart';
 import 'package:mboistat/theme.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:path_provider/path_provider.dart';
+import 'dart:convert';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:path_provider/path_provider.dart';
 
 class BeritaPages extends StatefulWidget {
   @override
@@ -15,34 +14,34 @@ class BeritaPages extends StatefulWidget {
 }
 
 class _BeritaPagesState extends State<BeritaPages> {
-  List<Map<String, dynamic>> beritaData = [];
+  List<Map<String, dynamic>> dataPublikasi = [];
   List<String> abstraksiBrs = [];
-
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  String pdfUrl = '';
 
   @override
   void initState() {
     super.initState();
-    fetchBeritaData();
+    fetchDataPublikasi();
   }
 
-  Future<void> fetchBeritaData() async {
+  Future<void> fetchDataPublikasi() async {
     final String apiUrl =
-        "https://webapi.bps.go.id/v1/api/list/model/pressrelease/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f";
+         "https://webapi.bps.go.id/v1/api/list/model/pressrelease/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f";
+
 
     final response = await http.get(Uri.parse(apiUrl));
 
     if (response.statusCode == 200) {
       final parsedResponse = json.decode(response.body);
-      final berita = parsedResponse["data"][1];
+      final publikasi = parsedResponse["data"][1];
 
       setState(() {
-        beritaData = List<Map<String, dynamic>>.from(berita);
+        dataPublikasi = List<Map<String, dynamic>>.from(publikasi);
       });
 
-      for (int i = 0; i < beritaData.length; i++) {
-        final brsId = beritaData[i]["brs_id"];
-        fetchAbstraksiBrs(brsId);
+      for (int i = 0; i < dataPublikasi.length; i++) {
+        final brsId = dataPublikasi[i]["brs_id"];
+        await fetchAbstraksiBrs(brsId);
       }
     } else {
       throw Exception('Failed to load data');
@@ -52,6 +51,8 @@ class _BeritaPagesState extends State<BeritaPages> {
   Future<void> fetchAbstraksiBrs(String brsId) async {
     final url =
         "https://webapi.bps.go.id/v1/api/list/model/pressrelease/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f";
+
+
 
     final response = await http.get(Uri.parse(url));
 
@@ -74,140 +75,23 @@ class _BeritaPagesState extends State<BeritaPages> {
     return text;
   }
 
-  Future<void> downloadAndShowConfirmation(
-      BuildContext context, String pdfUrl) async {
-    try {
-      // Initialize DownloadService
-      DownloadService downloadService = DownloadService();
-
-      // Start the download process
-      String filePath = await downloadService.download(pdfUrl);
-
-      if (filePath.isNotEmpty) {
-        // Display a dialog with the download confirmation
-        showDialog(
-          context: scaffoldKey.currentContext!,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Download Complete"),
-              content: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("File downloaded and saved at:"),
-                  SizedBox(height: 8),
-                  Text(filePath),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    // Close the dialog
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            );
-          },
-        );
-      } else {
-        // Display a dialog for download failure
-        showDialog(
-          context: scaffoldKey.currentContext!,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Download Failed"),
-              content: Text("Failed to download file."),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    // Close the dialog
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            );
-          },
-        );
-      }
-    } catch (error) {
-      // Display a dialog for unexpected errors
-      showDialog(
-        context: scaffoldKey.currentContext!,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("Error"),
-            content: Text("Error during file download: $error"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  // Close the dialog
-                  Navigator.pop(context);
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
-      );
-    }
-  }
-
-  void showDownloadDialog(BuildContext context, String pdfUrl) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text("Konfirmasi Unduh"),
-          content: Text("Apakah Anda ingin mengunduh file PDF ini?"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text("Tidak"),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                downloadAndShowConfirmation(context, pdfUrl);
-              },
-              child: Text("Ya"),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        toolbarHeight: 50,
-        title: const Text(
-          'MBOIStatS+',
-          style: TextStyle(color: Colors.black),
-        ),
-        leading: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Image.asset(
-              'assets/images/Mbois-stat Logo_Fix Putih.png',
-              width: 40,
-              height: 40,
-            ),
-          ],
+        title: Text('BRS'),
+        leading: IconButton(
+          icon: Image.asset(
+            'assets/icons/left-arrow.png',
+            height: 25,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
       ),
       body: ListView.builder(
-        itemCount: beritaData.length,
+        itemCount: dataPublikasi.length,
         itemBuilder: (context, index) {
           final abstract = truncateText(
               abstraksiBrs.length > index ? abstraksiBrs[index] : '', 150);
@@ -216,7 +100,7 @@ class _BeritaPagesState extends State<BeritaPages> {
             padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
             child: InkWell(
               onTap: () {
-                String pdfUrl = beritaData[index]["pdf"];
+                String pdfUrl = dataPublikasi[index]["pdf"];
                 showDownloadDialog(context, pdfUrl);
               },
               child: Container(
@@ -236,36 +120,164 @@ class _BeritaPagesState extends State<BeritaPages> {
                 child: ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
                   leading: Image.asset(
-                    'assets/icons/news.png',
+                    'assets/icons/publication.png',
                     width: 40,
                     height: 40,
                   ),
                   title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            beritaData[index]["title"],
-                            style: bold16.copyWith(color: dark1),
-                            textAlign: TextAlign.left,
-                          ),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          dataPublikasi[index]["title"],
+                          style: bold16.copyWith(color: dark1),
+                          textAlign: TextAlign.left,
                         ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Image.asset(
-                            'assets/icons/right-arrow.png',
-                            height: 16,
-                          ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Image.asset(
+                          'assets/icons/right-arrow.png',
+                          height: 16,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           );
         },
+          
       ),
-      bottomNavigationBar: Footer(),
+       bottomNavigationBar: Footer(),
+    );
+  }
+
+  void showDownloadDialog(BuildContext context, String pdfUrl) {
+    BuildContext previousContext = context;
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Konfirmasi Unduh"),
+          content: Text("Apakah Anda ingin mengunduh/membuka file ini?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                openPdfDirectly(previousContext, pdfUrl);
+              },
+              child: Text("Buka PDF"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              child: Text("Tidak"),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context);
+                await downloadAndShowConfirmation(previousContext, pdfUrl);
+              },
+              child: Text("Unduh"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> downloadAndShowConfirmation(
+      BuildContext context, String pdfUrl) async {
+    try {
+      DownloadService downloadService = DownloadService();
+      String filePath = await downloadService.download(pdfUrl);
+
+      if (filePath.isNotEmpty) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Unduhan Selesai"),
+              content: Text("Berkas publikasi disimpan di $filePath"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Download Failed"),
+              content: Text("Failed to download file."),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (error) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text("Error during file download: $error"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  void openPdfDirectly(BuildContext context, String pdfUrl) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PDFViewer(pdfUrl: pdfUrl),
+      ),
+    );
+  }
+}
+
+class PDFViewer extends StatelessWidget {
+  final String pdfUrl;
+
+  PDFViewer({required this.pdfUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('PDF Viewer'),
+      ),
+      body: SfPdfViewer.network(
+        pdfUrl,
+      ),
     );
   }
 }
@@ -281,7 +293,7 @@ class DownloadService {
       if (result.statusCode == 200) {
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
-          var file = File("/storage/emulated/0/Download/download-berita.pdf");
+          var file = File("/storage/emulated/0/Download/download-brs.pdf");
           file.writeAsBytesSync(byteDownloaded);
           return "${file.path}";
         } else {

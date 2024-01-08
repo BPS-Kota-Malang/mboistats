@@ -149,8 +149,8 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text("Download Complete"),
-              content: Text("File downloaded and saved at: $filePath"),
+              title: Text("Unduhan Selesai"),
+              content: Text("Berkas publikasi disimpan di $filePath"),
               actions: [
                 TextButton(
                   onPressed: () {

@@ -1,124 +1,26 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:mboistat/theme.dart';
 import 'package:http/http.dart' as http;
+import 'package:mboistat/theme.dart';
 import 'dart:convert';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'dart:io';
-import 'package:package_info/package_info.dart';
+import 'package:dio/dio.dart';
+import 'package:path_provider/path_provider.dart';
 
-
-class PublikasiPages extends StatefulWidget {
+class PublikasiPage extends StatefulWidget {
   @override
-  _PublikasiPagesState createState() => _PublikasiPagesState();
+  _PublikasiPageState createState() => _PublikasiPageState();
 }
 
-class _PublikasiPagesState extends State<PublikasiPages> {
+class _PublikasiPageState extends State<PublikasiPage> {
   List<Map<String, dynamic>> dataPublikasi = [];
   List<String> abstraksiBrs = [];
+  String pdfUrl = '';
 
   @override
   void initState() {
     super.initState();
     fetchDataPublikasi();
-  }
-
-  Future<void> openPdfViewer(BuildContext context, String pdfUrl) async {
-    try {
-      String filePath = await download(pdfUrl);
-
-      if (filePath.isNotEmpty) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Konfirmasi Unduh"),
-              content: Text("File downloaded and saved at: $filePath"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    openPdfDirectly(context, filePath);
-                  },
-                  child: Text("Open PDF"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            );
-          },
-        );
-      } else {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Download Failed"),
-              content: Text("Failed to download file."),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            );
-          },
-        );
-      }
-    } catch (error) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("Error"),
-            content: Text("Error during file download: $error"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
-      );
-    }
-  }
-
-  Future<void> showDownloadDialog(BuildContext context, String pdfUrl) async {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text("Konfirmasi Unduh"),
-          content: Text("Apakah Anda ingin mengunduh file ini?"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text("Tidak"),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                downloadAndShowConfirmation(context, pdfUrl);
-              },
-              child: Text("Ya"),
-            ),
-          ],
-        );
-      },
-    );
   }
 
   Future<void> fetchDataPublikasi() async {
@@ -137,7 +39,7 @@ class _PublikasiPagesState extends State<PublikasiPages> {
 
       for (int i = 0; i < dataPublikasi.length; i++) {
         final brsId = dataPublikasi[i]["brs_id"];
-        fetchAbstraksiBrs(brsId);
+        await fetchAbstraksiBrs(brsId);
       }
     } else {
       throw Exception('Failed to load data');
@@ -167,123 +69,6 @@ class _PublikasiPagesState extends State<PublikasiPages> {
       return text.substring(0, maxLength) + '...';
     }
     return text;
-  }
-
-  void _launchPDF(String pdfUrl) async {
-    if (await canLaunch(pdfUrl)) {
-      await launch(pdfUrl);
-    } else {
-      throw 'Could not launch $pdfUrl';
-    }
-  }
-
-  Future<void> downloadAndShowConfirmation(
-      BuildContext context, String pdfUrl) async {
-    try {
-      String filePath = await download(pdfUrl);
-
-      if (filePath.isNotEmpty) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Download Complete"),
-              content: Text("File downloaded and saved at: $filePath"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    openPdfDirectly(context, filePath);
-                  },
-                  child: Text("Open PDF"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            );
-          },
-        );
-      } else {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Download Failed"),
-              content: Text("Failed to download file."),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            );
-          },
-        );
-      }
-    } catch (error) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("Error"),
-            content: Text("Error during file download: $error"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
-      );
-    }
-  }
-
-  Future<String> download(String pdfUrl) async {
-    var externalDirectory = await getExternalStorageDirectory();
-    if (externalDirectory != null) {
-      var urlImage = pdfUrl;
-      var dio = Dio();
-      var result = await dio.get<List<int>>(urlImage,
-          options: Options(responseType: ResponseType.bytes));
-      if (result.statusCode == 200) {
-        var byteDownloaded = result.data;
-        if (byteDownloaded != null) {
-          var file = File("/storage/emulated/0/Download/download-publikasi.pdf");
-          file.writeAsBytesSync(byteDownloaded);
-          return "${file.path}";
-        } else {
-          print("file kosong");
-          return "error file kosong";
-        }
-      } else {
-        return "download error";
-      }
-    } else {
-      print("external directory null");
-      return "error";
-    }
-  }
-
-  void openPdfDirectly(BuildContext context, String pdfUrl) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PDFView(
-          filePath: pdfUrl,
-          enableSwipe: true,
-          swipeHorizontal: false,
-        ),
-      ),
-    );
   }
 
   @override
@@ -336,24 +121,24 @@ class _PublikasiPagesState extends State<PublikasiPages> {
                     height: 40,
                   ),
                   title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            dataPublikasi[index]["title"],
-                            style: bold16.copyWith(color: dark1),
-                            textAlign: TextAlign.left,
-                          ),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          dataPublikasi[index]["title"],
+                          style: bold16.copyWith(color: dark1),
+                          textAlign: TextAlign.left,
                         ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Image.asset(
-                            'assets/icons/right-arrow.png',
-                            height: 16,
-                          ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Image.asset(
+                          'assets/icons/right-arrow.png',
+                          height: 16,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -361,5 +146,160 @@ class _PublikasiPagesState extends State<PublikasiPages> {
         },
       ),
     );
+  }
+
+  void showDownloadDialog(BuildContext context, String pdfUrl) {
+    BuildContext previousContext = context;
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Konfirmasi Unduh"),
+          content: Text("Apakah Anda ingin mengunduh/membuka file ini?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                openPdfDirectly(previousContext, pdfUrl);
+              },
+              child: Text("Buka PDF"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              child: Text("Tidak"),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context);
+                await downloadAndShowConfirmation(previousContext, pdfUrl);
+              },
+              child: Text("Unduh"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> downloadAndShowConfirmation(
+      BuildContext context, String pdfUrl) async {
+    try {
+      DownloadService downloadService = DownloadService();
+      String filePath = await downloadService.download(pdfUrl);
+
+      if (filePath.isNotEmpty) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Unduhan Selesai"),
+              content: Text("Berkas publikasi disimpan di $filePath"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Download Failed"),
+              content: Text("Failed to download file."),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (error) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text("Error during file download: $error"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  void openPdfDirectly(BuildContext context, String pdfUrl) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PDFViewer(pdfUrl: pdfUrl),
+      ),
+    );
+  }
+}
+
+class PDFViewer extends StatelessWidget {
+  final String pdfUrl;
+
+  PDFViewer({required this.pdfUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('PDF Viewer'),
+      ),
+      body: SfPdfViewer.network(
+        pdfUrl,
+      ),
+    );
+  }
+}
+
+class DownloadService {
+  Future<String> download(String pdfUrl) async {
+    var externalDirectory = await getExternalStorageDirectory();
+    if (externalDirectory != null) {
+      var urlImage = pdfUrl;
+      var dio = Dio();
+      var result = await dio.get<List<int>>(urlImage,
+          options: Options(responseType: ResponseType.bytes));
+      if (result.statusCode == 200) {
+        var byteDownloaded = result.data;
+        if (byteDownloaded != null) {
+          var file = File("/storage/emulated/0/Download/download-publikasi.pdf");
+          file.writeAsBytesSync(byteDownloaded);
+          return "${file.path}";
+        } else {
+          print("file kosong");
+          return "error file kosong";
+        }
+      } else {
+        return "download error";
+      }
+    } else {
+      print("external directory null");
+      return "error";
+    }
   }
 }
