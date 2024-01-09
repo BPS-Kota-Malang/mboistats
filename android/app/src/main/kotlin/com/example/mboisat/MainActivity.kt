@@ -1,4 +1,4 @@
-package com.example.mboisat
+package com.bps.mboistats
 
 import io.flutter.embedding.android.FlutterActivity
 
