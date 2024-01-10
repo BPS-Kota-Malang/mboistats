@@ -13,19 +13,23 @@ void main() async {
   if (status.isDenied) {
     // Izin ditolak, minta izin
     await Permission.storage.request();
+    // Pastikan izin diminta lagi secara eksplisit
+    await _requestPermissions();
   }
 
   runApp(MyApp());
 }
 
-
 Future<void> _requestPermissions() async {
   // Memeriksa dan meminta izin WRITE_EXTERNAL_STORAGE
   var status = await Permission.storage.status;
-  if (!status.isDenied) {
+  if (!status.isGranted) {
     await Permission.storage.request();
   }
 }
+
+
+
 
 
 class MyApp extends StatelessWidget {
