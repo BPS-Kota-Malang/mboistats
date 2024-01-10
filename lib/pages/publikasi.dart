@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:mboistat/theme.dart';
 import 'dart:convert';
@@ -6,6 +7,8 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 
 class PublikasiPage extends StatefulWidget {
   @override
@@ -37,32 +40,11 @@ class _PublikasiPageState extends State<PublikasiPage> {
         dataPublikasi = List<Map<String, dynamic>>.from(publikasi);
       });
 
-      for (int i = 0; i < dataPublikasi.length; i++) {
-        final brsId = dataPublikasi[i]["brs_id"];
-        await fetchAbstraksiBrs(brsId);
-      }
     } else {
       throw Exception('Failed to load data');
     }
   }
 
-  Future<void> fetchAbstraksiBrs(String brsId) async {
-    final url =
-        "https://webapi.bps.go.id/v1/api/list/domain/3573/model/publication/lang/ind/id/1/key/9db89e91c3c142df678e65a78c4e547f";
-
-    final response = await http.get(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      final parsedResponse = json.decode(response.body);
-      final abstraksi = parsedResponse['data'][2];
-
-      setState(() {
-        abstraksiBrs.add(abstraksi);
-      });
-    } else {
-      throw Exception('Failed to load abstraksi');
-    }
-  }
 
   String truncateText(String text, int maxLength) {
     if (text.length > maxLength) {
@@ -91,12 +73,13 @@ class _PublikasiPageState extends State<PublikasiPage> {
         itemBuilder: (context, index) {
           final abstract = truncateText(
               abstraksiBrs.length > index ? abstraksiBrs[index] : '', 150);
-
+            // showToastMessage(dataPublikasi.length.toString());
           return Padding(
             padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
             child: InkWell(
               onTap: () {
                 String pdfUrl = dataPublikasi[index]["pdf"];
+                
                 showDownloadDialog(context, pdfUrl);
               },
               child: Container(
@@ -174,6 +157,7 @@ class _PublikasiPageState extends State<PublikasiPage> {
             TextButton(
               onPressed: () async {
                 Navigator.pop(context);
+                showToastMessage(pdfUrl);
                 await downloadAndShowConfirmation(previousContext, pdfUrl);
               },
               child: Text("Unduh"),
@@ -184,7 +168,10 @@ class _PublikasiPageState extends State<PublikasiPage> {
     );
   }
 
-  Future<void> downloadAndShowConfirmation(
+
+
+
+   Future<void> downloadAndShowConfirmation(
       BuildContext context, String pdfUrl) async {
     try {
       DownloadService downloadService = DownloadService();
@@ -195,7 +182,7 @@ class _PublikasiPageState extends State<PublikasiPage> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text("Unduhan Selesai"),
+              title: Text("Informasi Unduhan"),
               content: Text("Berkas publikasi disimpan di $filePath"),
               actions: [
                 TextButton(
@@ -213,8 +200,8 @@ class _PublikasiPageState extends State<PublikasiPage> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text("Download Failed"),
-              content: Text("Failed to download file."),
+              title: Text("Unduhan Gagal"),
+              content: Text("Gagal Mengunduh File"),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -233,13 +220,21 @@ class _PublikasiPageState extends State<PublikasiPage> {
         builder: (context) {
           return AlertDialog(
             title: Text("Error"),
-            content: Text("Error during file download: $error"),
+            content: Text(
+                "Akses Ditolak, Tolong izinkan aplikasi ini untuk mengakses file"),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
+                  openAppSettings(); // Open app settings to allow the user to grant permissions
                 },
-                child: Text("OK"),
+                child: Text("Buka Pengaturan Aplikasi"),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("Tutup"),
               ),
             ],
           );
@@ -247,7 +242,6 @@ class _PublikasiPageState extends State<PublikasiPage> {
       );
     }
   }
-
   void openPdfDirectly(BuildContext context, String pdfUrl) {
     Navigator.push(
       context,
@@ -276,30 +270,50 @@ class PDFViewer extends StatelessWidget {
   }
 }
 
+void showToastMessage(String pdfUrl) {
+  Fluttertoast.showToast(
+        msg: pdfUrl,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+  }
+
 class DownloadService {
   Future<String> download(String pdfUrl) async {
-    var externalDirectory = await getExternalStorageDirectory();
-    if (externalDirectory != null) {
+    try {
+      // Request runtime permissions if not granted
+      if (Platform.isAndroid) {
+        var status = await Permission.manageExternalStorage.status;
+        if (!status.isGranted) {
+          await Permission.manageExternalStorage.request();
+        }
+      }
+
       var urlImage = pdfUrl;
       var dio = Dio();
       var result = await dio.get<List<int>>(urlImage,
           options: Options(responseType: ResponseType.bytes));
+
       if (result.statusCode == 200) {
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
           var file = File("/storage/emulated/0/Download/download-publikasi.pdf");
-          file.writeAsBytesSync(byteDownloaded);
-          return "${file.path}";
+          await file.writeAsBytes(byteDownloaded);
+
+          return file.path;
         } else {
-          print("file kosong");
-          return "error file kosong";
+          return "Error: File is empty";
         }
       } else {
-        return "download error";
+        return "Download error: ${result.statusCode}";
       }
-    } else {
-      print("external directory null");
-      return "error";
+    } catch (error) {
+      return "Error during file download: $error";
     }
   }
 }
+

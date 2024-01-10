@@ -16,7 +16,6 @@ class BeritaPages extends StatefulWidget {
 class _BeritaPagesState extends State<BeritaPages> {
   List<Map<String, dynamic>> dataPublikasi = [];
   List<String> abstraksiBrs = [];
-  String pdfUrl = '';
 
   @override
   void initState() {
@@ -26,8 +25,7 @@ class _BeritaPagesState extends State<BeritaPages> {
 
   Future<void> fetchDataPublikasi() async {
     final String apiUrl =
-         "https://webapi.bps.go.id/v1/api/list/model/pressrelease/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f";
-
+        "https://webapi.bps.go.id/v1/api/list/model/pressrelease/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f";
 
     final response = await http.get(Uri.parse(apiUrl));
 
@@ -51,8 +49,6 @@ class _BeritaPagesState extends State<BeritaPages> {
   Future<void> fetchAbstraksiBrs(String brsId) async {
     final url =
         "https://webapi.bps.go.id/v1/api/list/model/pressrelease/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f";
-
-
 
     final response = await http.get(Uri.parse(url));
 
@@ -109,7 +105,7 @@ class _BeritaPagesState extends State<BeritaPages> {
             child: InkWell(
               onTap: () {
                 String pdfUrl = dataPublikasi[index]["pdf"];
-                showDownloadDialog(context, pdfUrl);
+                showDownloadDialog(context, pdfUrl, index);
               },
               child: Container(
                 clipBehavior: Clip.hardEdge,
@@ -156,15 +152,12 @@ class _BeritaPagesState extends State<BeritaPages> {
             ),
           );
         },
-          
       ),
-       bottomNavigationBar: Footer(),
+      bottomNavigationBar: Footer(),
     );
   }
 
-  void showDownloadDialog(BuildContext context, String pdfUrl) {
-    BuildContext previousContext = context;
-
+  void showDownloadDialog(BuildContext context, String pdfUrl, int index) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -175,7 +168,7 @@ class _BeritaPagesState extends State<BeritaPages> {
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
-                openPdfDirectly(previousContext, pdfUrl);
+                openPdfDirectly(context, pdfUrl);
               },
               child: Text("Buka PDF"),
             ),
@@ -188,7 +181,7 @@ class _BeritaPagesState extends State<BeritaPages> {
             TextButton(
               onPressed: () async {
                 Navigator.pop(context);
-                await downloadAndShowConfirmation(previousContext, pdfUrl);
+                await downloadAndShowConfirmation(context, pdfUrl, index);
               },
               child: Text("Unduh"),
             ),
@@ -199,10 +192,10 @@ class _BeritaPagesState extends State<BeritaPages> {
   }
 
   Future<void> downloadAndShowConfirmation(
-      BuildContext context, String pdfUrl) async {
+      BuildContext context, String pdfUrl, int index) async {
     try {
       DownloadService downloadService = DownloadService();
-      String filePath = await downloadService.download(pdfUrl);
+      String filePath = await downloadService.download(pdfUrl, dataPublikasi[index]["title"]);
 
       if (filePath.isNotEmpty) {
         showDialog(
@@ -291,7 +284,7 @@ class PDFViewer extends StatelessWidget {
 }
 
 class DownloadService {
-  Future<String> download(String pdfUrl) async {
+  Future<String> download(String pdfUrl, String title) async {
     var externalDirectory = await getExternalStorageDirectory();
     if (externalDirectory != null) {
       var urlImage = pdfUrl;
@@ -301,7 +294,8 @@ class DownloadService {
       if (result.statusCode == 200) {
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
-          var file = File("/storage/emulated/0/Download/download-brs.pdf");
+          var fileName = title.replaceAll(RegExp(r"[^\w\s]+"), "") + ".pdf";
+          var file = File("/storage/emulated/0/Download/$fileName");
           file.writeAsBytesSync(byteDownloaded);
           return "${file.path}";
         } else {

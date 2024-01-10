@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:mboistat/theme.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
@@ -72,7 +70,7 @@ class _InfografisPagesState extends State<InfografisPages> {
     return text;
   }
 
-  void openDownloadConfirmation(BuildContext context, String imageUrl) async {
+  void openDownloadConfirmation(BuildContext context, String imageUrl, String title) async {
     try {
       bool confirmDownload = await showDialog(
         context: context,
@@ -99,16 +97,16 @@ class _InfografisPagesState extends State<InfografisPages> {
       );
 
       if (confirmDownload == true) {
-        openPdfViewer(context, imageUrl);
+        openPdfViewer(context, imageUrl, title);
       }
     } catch (error) {}
   }
 
-  void openPdfViewer(BuildContext context, String pdfUrl) async {
+  void openPdfViewer(BuildContext context, String pdfUrl, String title) async {
     DownloadService downloadService = DownloadService();
 
     try {
-      String filePath = await downloadService.download(pdfUrl);
+      String filePath = await downloadService.download(pdfUrl, title);
 
       if (filePath.isNotEmpty) {
         showDialog(
@@ -116,7 +114,7 @@ class _InfografisPagesState extends State<InfografisPages> {
           builder: (context) {
             return AlertDialog(
               title: Text("Unduh Selesai"),
-              content: Text("Berkas infografis disimpan di $filePath"),
+              content: Text("Berkas infografis '$title' disimpan di $filePath"),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -150,7 +148,7 @@ class _InfografisPagesState extends State<InfografisPages> {
     } catch (error) {}
   }
 
-  Future<String> download(String pdfUrl) async {
+  Future<String> download(String pdfUrl, String title) async {
     var externalDirectory = await getExternalStorageDirectory();
     if (externalDirectory != null) {
       var urlImage = pdfUrl;
@@ -160,7 +158,8 @@ class _InfografisPagesState extends State<InfografisPages> {
       if (result.statusCode == 200) {
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
-          var file = File("${externalDirectory.path}/download-infografis.jpg");
+          var fileName = title.replaceAll(RegExp(r"[^\w\s]+"), "") + ".jpg";
+          var file = File("${externalDirectory.path}/Download/$fileName");
           file.writeAsBytesSync(byteDownloaded);
           return "${file.path}";
         } else {
@@ -202,7 +201,8 @@ class _InfografisPagesState extends State<InfografisPages> {
             child: InkWell(
               onTap: () {
                 String pdfUrl = dataInfografis[index]["dl"];
-                openDownloadConfirmation(context, pdfUrl);
+                String title = dataInfografis[index]["title"];
+                openDownloadConfirmation(context, pdfUrl, title);
               },
               child: Container(
                 clipBehavior: Clip.hardEdge,
@@ -226,24 +226,24 @@ class _InfografisPagesState extends State<InfografisPages> {
                     height: 40,
                   ),
                   title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            dataInfografis[index]["title"],
-                            style: bold16.copyWith(color: dark1),
-                            textAlign: TextAlign.left,
-                          ),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          dataInfografis[index]["title"],
+                          style: bold16.copyWith(color: dark1),
+                          textAlign: TextAlign.left,
                         ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Image.asset(
-                            'assets/icons/right-arrow.png',
-                            height: 16,
-                          ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Image.asset(
+                          'assets/icons/right-arrow.png',
+                          height: 16,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -255,7 +255,7 @@ class _InfografisPagesState extends State<InfografisPages> {
 }
 
 class DownloadService {
-  Future<String> download(String pdfUrl) async {
+  Future<String> download(String pdfUrl, String title) async {
     var externalDirectory = await getExternalStorageDirectory();
     if (externalDirectory != null) {
       var urlImage = pdfUrl;
@@ -265,7 +265,8 @@ class DownloadService {
       if (result.statusCode == 200) {
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
-          var file = File("/storage/emulated/0/Download/download-infografis.jpg");
+          var fileName = title.replaceAll(RegExp(r"[^\w\s]+"), "") + ".jpg";
+          var file = File("/storage/emulated/0/Download/$fileName");
           file.writeAsBytesSync(byteDownloaded);
           return "${file.path}";
         } else {

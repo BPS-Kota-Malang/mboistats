@@ -6,26 +6,40 @@ import 'package:mboistat/components/carousel-publikasi.dart';
 import 'package:mboistat/components/footer.dart';
 import 'package:mboistat/components/menus.dart';
 import 'package:mboistat/theme.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   Future<bool> _onWillPop(BuildContext context) async {
-    return (await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Konfirmasi Keluar',
-            style: TextStyle(color: Colors.blue), // Warna teks biru
+  // Memeriksa dan meminta izin WRITE_EXTERNAL_STORAGE
+  var status = await Permission.storage.status;
+  if (!status.isGranted) {
+    // Menampilkan dialog permintaan izin
+    var result = await Permission.storage.request();
+    if (result != PermissionStatus.granted) {
+      // Izin tidak diberikan, tampilkan pesan atau ambil tindakan sesuai kebutuhan
+      return false;
+    }
+  }
+
+  return (await showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(
+            'Konfirmasi Keluar',
+            style: TextStyle(color: Colors.blue),
           ),
           content: Text('Apakah Anda yakin ingin keluar dari aplikasi?'),
-            actions: <Widget>[
+          actions: <Widget>[
             OutlinedButton(
               onPressed: () => Navigator.of(context).pop(false),
               style: OutlinedButton.styleFrom(
-                side: BorderSide(color: Colors.blue), // Warna border biru
+                side: BorderSide(color: Colors.blue),
               ),
-              child: Text('Tidak',
-                style: TextStyle(color: Colors.blue), // Warna teks biru
+              child: Text(
+                'Tidak',
+                style: TextStyle(color: Colors.blue),
               ),
             ),
             ElevatedButton(
@@ -36,11 +50,10 @@ class HomePage extends StatelessWidget {
               child: Text('Ya'),
             ),
           ],
-          ),
-        )) ??
-        false;
-  }
-
+        ),
+      )) ??
+      false;
+}
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

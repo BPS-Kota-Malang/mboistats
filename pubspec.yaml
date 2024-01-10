@@ -25,11 +25,13 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^20.4.54
   flutter_downloader: ^1.6.1
   permission_handler: ^11.1.0
-  flutter_pdfview: ^1.2.7
   dio: ^4.0.0
   package_info: ^2.0.2
   cached_network_image: ^3.0.0
   flutter_file_downloader: ^1.2.0
+  connectivity: ^3.0.6
+  fluttertoast: ^8.2.4
+  toast: ^0.3.0
  
   
 dev_dependencies:

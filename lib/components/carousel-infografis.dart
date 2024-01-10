@@ -211,7 +211,7 @@ class DownloadService {
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
           //proses lanjut
-          var file = File("/storage/emulated/0/Download//download-image.jpg");
+          var file = File("/storage/emulated/0/Download/download-image.jpg");
           file.writeAsBytesSync(byteDownloaded);
           return "${file.path}";
         } else {

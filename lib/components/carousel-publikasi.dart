@@ -76,7 +76,7 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
                       });
 
                       // Show a dialog to confirm whether to download the file
-                      openPdfViewer(context, pdfUrl);
+                      openPdfViewer(context, pdfUrl, item['title']);
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
@@ -92,7 +92,7 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
           );
   }
 
-  void openPdfViewer(BuildContext context, String pdfUrl) {
+  void openPdfViewer(BuildContext context, String pdfUrl, String title) {
     // Simpan konteks sebelumnya
     BuildContext previousContext = context;
 
@@ -104,7 +104,7 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
           title: Text("Konfirmasi Unduh"),
           content: Text("Apakah Anda ingin mengunduh/membuka file ini?"),
           actions: [
-             TextButton(
+            TextButton(
               onPressed: () {
                 // Close the dialog and open the PDF directly
                 Navigator.pop(context);
@@ -112,10 +112,10 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
               },
               child: Text("Buka PDF"),
             ),
-             TextButton(
+            TextButton(
               onPressed: () {
-                  // Close the dialog and cancel download
-                  Navigator.pop(context, false);
+                // Close the dialog and cancel download
+                Navigator.pop(context, false);
               },
               child: Text("Tidak"),
             ),
@@ -123,11 +123,10 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
               onPressed: () async {
                 // Close the dialog and proceed with the download
                 Navigator.pop(context);
-                await downloadAndShowConfirmation(previousContext, pdfUrl);
+                await downloadAndShowConfirmation(previousContext, pdfUrl, title);
               },
               child: Text("Unduh"),
             ),
-           
           ],
         );
       },
@@ -135,13 +134,13 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
   }
 
   Future<void> downloadAndShowConfirmation(
-      BuildContext context, String pdfUrl) async {
+      BuildContext context, String pdfUrl, String title) async {
     try {
       // Initialize DownloadService
       DownloadService downloadService = DownloadService();
 
       // Start the download process
-      String filePath = await downloadService.download(pdfUrl);
+      String filePath = await downloadService.download(pdfUrl, title);
 
       if (filePath.isNotEmpty) {
         // Display a dialog with the download confirmation
@@ -150,7 +149,7 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
           builder: (context) {
             return AlertDialog(
               title: Text("Unduhan Selesai"),
-              content: Text("Berkas publikasi disimpan di $filePath"),
+              content: Text("Berkas publikasi '$title' disimpan di $filePath"),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -236,7 +235,7 @@ class PDFViewer extends StatelessWidget {
 }
 
 class DownloadService {
-  Future<String> download(String pdfUrl) async {
+  Future<String> download(String pdfUrl, String title) async {
     var externalDirectory = await getExternalStorageDirectory();
     if (externalDirectory != null) {
       var urlImage = pdfUrl;
@@ -249,7 +248,8 @@ class DownloadService {
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
           //proses lanjut
-          var file = File("/storage/emulated/0/Download/download-publikasi.pdf");
+          var fileName = title.replaceAll(RegExp(r"[^\w\s]+"), "") + ".pdf";
+          var file = File("/storage/emulated/0/Download/$fileName");
           file.writeAsBytesSync(byteDownloaded);
           return "${file.path}";
         } else {
