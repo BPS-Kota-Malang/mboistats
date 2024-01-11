@@ -7,30 +7,9 @@ import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  // Memeriksa dan meminta izin WRITE_EXTERNAL_STORAGE
-  var status = await Permission.storage.status;
-  if (status.isDenied) {
-    // Izin ditolak, minta izin
-    await Permission.storage.request();
-    // Pastikan izin diminta lagi secara eksplisit
-    await _requestPermissions();
-  }
 
   runApp(MyApp());
 }
-
-Future<void> _requestPermissions() async {
-  // Memeriksa dan meminta izin WRITE_EXTERNAL_STORAGE
-  var status = await Permission.storage.status;
-  if (!status.isGranted) {
-    await Permission.storage.request();
-  }
-}
-
-
-
-
 
 class MyApp extends StatelessWidget {
   @override

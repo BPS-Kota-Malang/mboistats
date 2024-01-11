@@ -6,6 +6,8 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 
 class CarouselPublikasi extends StatefulWidget {
   @override
@@ -238,6 +240,13 @@ class DownloadService {
   Future<String> download(String pdfUrl, String title) async {
     var externalDirectory = await getExternalStorageDirectory();
     if (externalDirectory != null) {
+
+       if (Platform.isAndroid) {
+        var status = await Permission.manageExternalStorage.status;
+        if (!status.isGranted) {
+          await Permission.manageExternalStorage.request();
+        }
+      }
       var urlImage = pdfUrl;
       var dio = Dio();
       var result = await dio.get<List<int>>(urlImage,

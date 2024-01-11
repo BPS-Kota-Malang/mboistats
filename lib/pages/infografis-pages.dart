@@ -5,6 +5,8 @@ import 'package:mboistat/theme.dart';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:permission_handler/permission_handler.dart';
+
 
 class InfografisPages extends StatefulWidget {
   @override
