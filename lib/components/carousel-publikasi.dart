@@ -162,7 +162,6 @@ Future<bool> _checkPermission() async {
       String filePath = await downloadService.download(pdfUrl, fileName);
 
       if (filePath.isNotEmpty) {
-        // Navigator.pop(context); // Close the download dialog
         showDialog(
           context: context,
           builder: (context) {
