@@ -150,7 +150,7 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text("Unduhan Selesai"),
+              title: Text("Konfirmasi Unduhan"),
               content: Text("Berkas publikasi '$title' disimpan di $filePath"),
               actions: [
                 TextButton(
@@ -238,39 +238,45 @@ class PDFViewer extends StatelessWidget {
 
 class DownloadService {
   Future<String> download(String pdfUrl, String title) async {
-    var externalDirectory = await getExternalStorageDirectory();
-    if (externalDirectory != null) {
-
-       if (Platform.isAndroid) {
+    try {
+      // Request runtime permissions if not granted
+      if (Platform.isAndroid) {
         var status = await Permission.manageExternalStorage.status;
         if (!status.isGranted) {
           await Permission.manageExternalStorage.request();
+          
+          // Check permission status again after requesting
+          status = await Permission.manageExternalStorage.status;
+          if (!status.isGranted) {
+            return "Error: Penyimpanan tidak diizinkan";
+          }
         }
       }
+
       var urlImage = pdfUrl;
       var dio = Dio();
       var result = await dio.get<List<int>>(urlImage,
           options: Options(responseType: ResponseType.bytes));
+
       if (result.statusCode == 200) {
-        //download sukses
-        //mulai proses save data to local
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
-          //proses lanjut
-          var fileName = title.replaceAll(RegExp(r"[^\w\s]+"), "") + ".pdf";
+          // Use the "title" to construct the filename
+          var fileName = title.replaceAll(RegExp(r"[^a-zA-Z0-9]+"), "_") + ".pdf";
           var file = File("/storage/emulated/0/Download/$fileName");
-          file.writeAsBytesSync(byteDownloaded);
-          return "${file.path}";
+          await file.writeAsBytes(byteDownloaded);
+
+          return file.path;
         } else {
-          print("file kosong");
-          return "error file kosong";
+          return "Error: File Kosong";
         }
       } else {
-        return "download error";
+        // return "Download Gagal: ${result.statusCode}";
+        return "Download Gagal";
       }
-    } else {
-      print("external directory null");
-      return "error";
+    } catch (error) {
+      // return "Error during file download: $error";
+      return "Error Selama Mendownload ";
     }
   }
 }

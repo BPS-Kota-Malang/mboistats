@@ -4,7 +4,6 @@
     {
       "name": "archive",
       "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/archive-3.4.9",
-      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/archive-3.4.9",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -639,7 +638,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2024-01-10T13:10:07.638317Z",
+  "generated": "2024-01-11T11:40:51.835700Z",
   "generator": "pub",
   "generatorVersion": "3.3.0-174.3.beta"
 }

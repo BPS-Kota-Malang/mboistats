@@ -19,24 +19,40 @@ class KependudukanMenurutKecamatanPage extends StatelessWidget {
           },
         ),
       ),
-      body: WebView(
-        // initialUrl: 'about:blank',
-        javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (WebViewController webViewController) async {
-          // Load HTML content from the file
-          final String path = 'assets/web/kependudukan_kecamatan.html';
-          final String fileHtmlContents =
-              await rootBundle.loadString(path);
+      body: Stack(
+        children: [
+          // Background Image
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/back_kependudukan.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          // WebView
+          WebView(
+            // initialUrl: 'about:blank',
+            javascriptMode: JavascriptMode.unrestricted,
+            onWebViewCreated: (WebViewController webViewController) async {
+              // Load HTML content from the file
+              final String path = 'assets/web/kependudukan_kecamatan.html';
+              final String fileHtmlContents =
+                  await rootBundle.loadString(path);
 
-          // Load HTML into the WebView
-          webViewController.loadUrl(
-            Uri.dataFromString(
-              fileHtmlContents,
-              mimeType: 'text/html',
-              encoding: Encoding.getByName('utf-8'),
-            ).toString(),
-          );
-        },
+              // Load HTML into the WebView
+              webViewController.loadUrl(
+                Uri.dataFromString(
+                  fileHtmlContents,
+                  mimeType: 'text/html',
+                  encoding: Encoding.getByName('utf-8'),
+                ).toString(),
+              );
+            },
+            // Set the background color to transparent
+            backgroundColor: Colors.transparent,
+          ),
+        ],
       ),
     );
   }

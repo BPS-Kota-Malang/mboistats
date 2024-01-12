@@ -132,13 +132,22 @@ class _BeritaPagesState extends State<BeritaPages> {
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Flexible(
-                        child: Text(
-                          dataPublikasi[index]["title"],
-                          style: bold16.copyWith(color: dark1),
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
+                       Flexible(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            dataPublikasi[index]["title"],
+            style: bold16.copyWith(color: dark1),
+            textAlign: TextAlign.left,
+          ),
+          Text(
+            "Size: ${dataPublikasi[index]["size"]}",
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+        ],
+      ),
+    ),
                       Align(
                         alignment: Alignment.centerRight,
                         child: Image.asset(
@@ -292,6 +301,12 @@ class DownloadService {
         var status = await Permission.manageExternalStorage.status;
         if (!status.isGranted) {
           await Permission.manageExternalStorage.request();
+          
+          // Check permission status again after requesting
+          status = await Permission.manageExternalStorage.status;
+          if (!status.isGranted) {
+            return "Error: Penyimpanan tidak diizinkan";
+          }
         }
       }
 
@@ -310,14 +325,15 @@ class DownloadService {
 
           return file.path;
         } else {
-          return "Error: File is empty";
+          return "Error: File Kosong";
         }
       } else {
-        return "Download error: ${result.statusCode}";
+        // return "Download Gagal: ${result.statusCode}";
+        return "Download Gagal";
       }
     } catch (error) {
-      return "Error during file download: $error";
+      // return "Error during file download: $error";
+      return "Error Selama Mendownload ";
     }
   }
 }
-

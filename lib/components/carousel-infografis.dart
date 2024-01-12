@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
@@ -74,7 +73,7 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
                     onTap: () {
                       setState(() {
                         imageUrl = item['dl'] ?? '';
-                        openDownloadConfirmation(context, imageUrl);
+                        openDownloadConfirmation(context, imageUrl, item['title']);
                       });
                     },
                     child: Container(
@@ -91,7 +90,7 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
           );
   }
 
-  void openDownloadConfirmation(BuildContext context, String imageUrl) async {
+  void openDownloadConfirmation(BuildContext context, String imageUrl, String title) async {
     try {
       // Display a dialog with the download confirmation
       bool confirmDownload = await showDialog(
@@ -121,18 +120,18 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
       );
 
       if (confirmDownload == true) {
-        openPdfViewer(context, imageUrl);
+        prosesDownload(context, imageUrl, title);
       }
     } catch (error) {}
   }
 
-  void openPdfViewer(BuildContext context, String imageUrl) async {
+  void prosesDownload(BuildContext context, String imageUrl, String title) async {
     // Initialize DownloadService
     DownloadService downloadService = DownloadService();
 
     try {
       // Start the download process
-      String filePath = await downloadService.download(imageUrl);
+      String filePath = await downloadService.download(imageUrl, title);
 
       // Check if the download was successful
       if (filePath.isNotEmpty) {
@@ -180,58 +179,47 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
   }
 }
 
-class PDFViewer extends StatelessWidget {
-  final String imageUrl;
-
-  PDFViewer({required this.imageUrl});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('PDF Viewer'),
-      ),
-      body: SfPdfViewer.network(
-        imageUrl,
-      ),
-    );
-  }
-}
-
 class DownloadService {
-  Future<String> download(String imageUrl) async {
-
-       if (Platform.isAndroid) {
+  Future<String> download(String imageUrl, String title) async {
+    try {
+      // Request runtime permissions if not granted
+      if (Platform.isAndroid) {
         var status = await Permission.manageExternalStorage.status;
         if (!status.isGranted) {
           await Permission.manageExternalStorage.request();
+
+          // Check permission status again after requesting
+          status = await Permission.manageExternalStorage.status;
+          if (!status.isGranted) {
+            return "Error: Penyimpanan tidak diizinkan";
+          }
         }
       }
-    var externalDirectory = await getExternalStorageDirectory();
-    if (externalDirectory != null) {
+
       var urlImage = imageUrl;
       var dio = Dio();
       var result = await dio.get<List<int>>(urlImage,
           options: Options(responseType: ResponseType.bytes));
+
       if (result.statusCode == 200) {
-        //download sukses
-        //mulai proses save data to local
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
-          //proses lanjut
-          var file = File("/storage/emulated/0/Download/download-image.jpg");
-          file.writeAsBytesSync(byteDownloaded);
-          return "${file.path}";
+          // Use the "title" to construct the filename
+          var fileName = title.replaceAll(RegExp(r"[^a-zA-Z0-9]+"), "_") + ".jpg";
+          var file = File("/storage/emulated/0/Download/$fileName");
+          await file.writeAsBytes(byteDownloaded);
+
+          return file.path;
         } else {
-          print("file kosong");
-          return "error file kosong";
+          return "Error: File Kosong";
         }
       } else {
-        return "download error";
+        // return "Download Gagal: ${result.statusCode}";
+        return "Download Gagal";
       }
-    } else {
-      print("external directory null");
-      return "error";
+    } catch (error) {
+      // return "Error during file download: $error";
+      return "Error Selama Mendownload ";
     }
   }
 }

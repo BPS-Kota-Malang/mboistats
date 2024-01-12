@@ -99,16 +99,18 @@ class _InfografisPagesState extends State<InfografisPages> {
       );
 
       if (confirmDownload == true) {
-        openPdfViewer(context, imageUrl, title);
+        prosesDownload(context, imageUrl, title);
       }
     } catch (error) {}
   }
 
-  void openPdfViewer(BuildContext context, String pdfUrl, String title) async {
+  
+
+  void prosesDownload(BuildContext context, String imageUrl, String title) async {
     DownloadService downloadService = DownloadService();
 
     try {
-      String filePath = await downloadService.download(pdfUrl, title);
+      String filePath = await downloadService.download(imageUrl, title);
 
       if (filePath.isNotEmpty) {
         showDialog(
@@ -150,10 +152,10 @@ class _InfografisPagesState extends State<InfografisPages> {
     } catch (error) {}
   }
 
-  Future<String> download(String pdfUrl, String title) async {
+  Future<String> download(String imageUrl, String title) async {
     var externalDirectory = await getExternalStorageDirectory();
     if (externalDirectory != null) {
-      var urlImage = pdfUrl;
+      var urlImage = imageUrl;
       var dio = Dio();
       var result = await dio.get<List<int>>(urlImage,
           options: Options(responseType: ResponseType.bytes));
@@ -202,9 +204,9 @@ class _InfografisPagesState extends State<InfografisPages> {
             padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
             child: InkWell(
               onTap: () {
-                String pdfUrl = dataInfografis[index]["dl"];
+                String imageUrl = dataInfografis[index]["dl"];
                 String title = dataInfografis[index]["title"];
-                openDownloadConfirmation(context, pdfUrl, title);
+                openDownloadConfirmation(context, imageUrl, title);
               },
               child: Container(
                 clipBehavior: Clip.hardEdge,
@@ -258,29 +260,45 @@ class _InfografisPagesState extends State<InfografisPages> {
 
 class DownloadService {
   Future<String> download(String pdfUrl, String title) async {
-    var externalDirectory = await getExternalStorageDirectory();
-    if (externalDirectory != null) {
+    try {
+      // Request runtime permissions if not granted
+      if (Platform.isAndroid) {
+        var status = await Permission.manageExternalStorage.status;
+        if (!status.isGranted) {
+          await Permission.manageExternalStorage.request();
+          
+          // Check permission status again after requesting
+          status = await Permission.manageExternalStorage.status;
+          if (!status.isGranted) {
+            return "Error: Penyimpanan tidak diizinkan";
+          }
+        }
+      }
+
       var urlImage = pdfUrl;
       var dio = Dio();
       var result = await dio.get<List<int>>(urlImage,
           options: Options(responseType: ResponseType.bytes));
+
       if (result.statusCode == 200) {
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
-          var fileName = title.replaceAll(RegExp(r"[^\w\s]+"), "") + ".jpg";
+          // Use the "title" to construct the filename
+          var fileName = title.replaceAll(RegExp(r"[^a-zA-Z0-9]+"), "_") + ".jpg";
           var file = File("/storage/emulated/0/Download/$fileName");
-          file.writeAsBytesSync(byteDownloaded);
-          return "${file.path}";
+          await file.writeAsBytes(byteDownloaded);
+
+          return file.path;
         } else {
-          print("file kosong");
-          return "error file kosong";
+          return "Error: File Kosong";
         }
       } else {
-        return "download error";
+        // return "Download Gagal: ${result.statusCode}";
+        return "Download Gagal";
       }
-    } else {
-      print("external directory null");
-      return "error";
+    } catch (error) {
+      // return "Error during file download: $error";
+      return "Error Selama Mendownload ";
     }
   }
 }
