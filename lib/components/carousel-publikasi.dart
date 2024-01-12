@@ -7,7 +7,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CarouselPublikasi extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class CarouselPublikasi extends StatefulWidget {
 
 class _CarouselPublikasiState extends State<CarouselPublikasi> {
   List<Map<String, dynamic>> dataPublikasi = [];
-  String pdfUrl = ''; // Variable to store the PDF URL
+  String pdfUrl = '';
 
   @override
   void initState() {
@@ -25,20 +25,23 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
   }
 
   Future<void> fetchData() async {
-    final response = await http.get(
-      Uri.parse(
-          'http://webapi.bps.go.id/v1/api/list/domain/3573/model/publication/lang/ind/id/1/key/9db89e91c3c142df678e65a78c4e547f'),
-    );
+    try {
+      final response = await http.get(
+        Uri.parse(
+            'http://webapi.bps.go.id/v1/api/list/domain/3573/model/publication/lang/ind/id/1/key/9db89e91c3c142df678e65a78c4e547f'),
+      );
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final publications =
-          (data['data'][1] as List).cast<Map<String, dynamic>>();
-      setState(() {
-        dataPublikasi = publications;
-      });
-    } else {
-      throw Exception('Failed to load data');
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final publications = (data['data'][1] as List).cast<Map<String, dynamic>>();
+        setState(() {
+          dataPublikasi = publications;
+        });
+      } else {
+        throw Exception('Failed to load data');
+      }
+    } catch (error) {
+      print('Error fetching data: $error');
     }
   }
 
@@ -77,7 +80,6 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
                         pdfUrl = item['pdf'] ?? '';
                       });
 
-                      // Show a dialog to confirm whether to download the file
                       openPdfViewer(context, pdfUrl, item['title']);
                     },
                     child: Container(
@@ -93,12 +95,21 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
             ],
           );
   }
-
+Future<bool> _checkPermission() async {
+  if (Platform.isAndroid) {
+    var status = await Permission.manageExternalStorage.status;
+    if (!status.isGranted) {
+      // Request permission and check again
+      await Permission.manageExternalStorage.request();
+      status = await Permission.manageExternalStorage.status;
+      return status.isGranted;
+    }
+  }
+  return true;
+}
   void openPdfViewer(BuildContext context, String pdfUrl, String title) {
-    // Simpan konteks sebelumnya
     BuildContext previousContext = context;
 
-    // Show a dialog to confirm whether to download the file
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -108,7 +119,6 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
           actions: [
             TextButton(
               onPressed: () {
-                // Close the dialog and open the PDF directly
                 Navigator.pop(context);
                 openPdfDirectly(previousContext, pdfUrl);
               },
@@ -116,14 +126,12 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
             ),
             TextButton(
               onPressed: () {
-                // Close the dialog and cancel download
                 Navigator.pop(context, false);
               },
               child: Text("Tidak"),
             ),
             TextButton(
               onPressed: () async {
-                // Close the dialog and proceed with the download
                 Navigator.pop(context);
                 await downloadAndShowConfirmation(previousContext, pdfUrl, title);
               },
@@ -135,27 +143,35 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
     );
   }
 
-  Future<void> downloadAndShowConfirmation(
-      BuildContext context, String pdfUrl, String title) async {
-    try {
-      // Initialize DownloadService
-      DownloadService downloadService = DownloadService();
+ Future<void> downloadAndShowConfirmation(
+    BuildContext context, String pdfUrl, String fileName) async {
+  // Check if the necessary permissions are granted
+  if (await _checkPermission()) {
+    Fluttertoast.showToast(
+      msg: "Mendownload...",
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.blue,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
 
-      // Start the download process
-      String filePath = await downloadService.download(pdfUrl, title);
+    try {
+      DownloadService downloadService = DownloadService();
+      String filePath = await downloadService.download(pdfUrl, fileName);
 
       if (filePath.isNotEmpty) {
-        // Display a dialog with the download confirmation
+        Navigator.pop(context); // Close the download dialog
         showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text("Konfirmasi Unduhan"),
-              content: Text("Berkas publikasi '$title' disimpan di $filePath"),
+              title: Text("Informasi Unduhan"),
+              content: Text("Berkas publikasi disimpan di $filePath"),
               actions: [
                 TextButton(
                   onPressed: () {
-                    // Close the dialog
                     Navigator.pop(context);
                   },
                   child: Text("OK"),
@@ -165,49 +181,42 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
           },
         );
       } else {
-        // Display a dialog for download failure
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Download Failed"),
-              content: Text("Failed to download file."),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    // Close the dialog
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            );
-          },
+        Navigator.pop(context); // Close the download dialog
+        Fluttertoast.showToast(
+          msg: "Gagal mengunduh file",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0,
         );
       }
     } catch (error) {
-      // Display a dialog for unexpected errors
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("Error"),
-            content: Text("Error during file download: $error"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  // Close the dialog
-                  Navigator.pop(context);
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
+      Navigator.pop(context); // Close the download dialog
+      Fluttertoast.showToast(
+        msg: "Error selama mendownload: $error",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
     }
+  } else {
+    // Display a toast message if storage permission is not granted
+    Fluttertoast.showToast(
+      msg: "Aplikasi belum diizinkan untuk mengakses file",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
   }
-
+}
   void openPdfDirectly(BuildContext context, String pdfUrl) {
     Navigator.push(
       context,
@@ -239,15 +248,21 @@ class PDFViewer extends StatelessWidget {
 class DownloadService {
   Future<String> download(String pdfUrl, String title) async {
     try {
-      // Request runtime permissions if not granted
       if (Platform.isAndroid) {
         var status = await Permission.manageExternalStorage.status;
         if (!status.isGranted) {
-          await Permission.manageExternalStorage.request();
-          
-          // Check permission status again after requesting
-          status = await Permission.manageExternalStorage.status;
-          if (!status.isGranted) {
+          var result = await Permission.manageExternalStorage.request();
+
+          if (result != PermissionStatus.granted) {
+            Fluttertoast.showToast(
+              msg: "Aplikasi ini tidak mengizinkan penyimpanan.",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
             return "Error: Penyimpanan tidak diizinkan";
           }
         }
@@ -255,28 +270,37 @@ class DownloadService {
 
       var urlImage = pdfUrl;
       var dio = Dio();
-      var result = await dio.get<List<int>>(urlImage,
-          options: Options(responseType: ResponseType.bytes));
+      var result = await dio.get<List<int>>(
+        urlImage,
+        options: Options(responseType: ResponseType.bytes),
+        onReceiveProgress: (int received, int total) {
+          print('Received: $received, Total: $total');
+        },
+      );
 
       if (result.statusCode == 200) {
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
-          // Use the "title" to construct the filename
           var fileName = title.replaceAll(RegExp(r"[^a-zA-Z0-9]+"), "_") + ".pdf";
-          var file = File("/storage/emulated/0/Download/$fileName");
+          var fileDirectory = (await getExternalStorageDirectory())!.path;
+          var file = File("$fileDirectory/$fileName");
           await file.writeAsBytes(byteDownloaded);
 
-          return file.path;
+          if (await file.exists()) {
+            return file.path;
+          } else {
+            return "Error: Failed to save file";
+          }
         } else {
-          return "Error: File Kosong";
+          return "Error: Empty File";
         }
       } else {
-        // return "Download Gagal: ${result.statusCode}";
-        return "Download Gagal";
+        return "Error: Download Failed (${result.statusCode})";
       }
     } catch (error) {
-      // return "Error during file download: $error";
-      return "Error Selama Mendownload ";
+      return "Error During Download: $error";
     }
   }
 }
+
+
