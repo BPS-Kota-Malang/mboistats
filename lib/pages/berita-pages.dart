@@ -232,7 +232,7 @@ class _BeritaPageState extends State<BeritaPages> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.blue,
             textColor: Colors.white,
             fontSize: 16.0,
           );
@@ -244,7 +244,7 @@ class _BeritaPageState extends State<BeritaPages> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.blue,
           textColor: Colors.white,
           fontSize: 16.0,
         );
@@ -256,7 +256,7 @@ class _BeritaPageState extends State<BeritaPages> {
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blue,
         textColor: Colors.white,
         fontSize: 16.0,
       );
@@ -310,7 +310,7 @@ class PDFViewer extends StatelessWidget {
 //     toastLength: Toast.LENGTH_SHORT,
 //     gravity: ToastGravity.CENTER,
 //     timeInSecForIosWeb: 1,
-//     backgroundColor: Colors.red,
+//     backgroundColor: Colors.blue,
 //     textColor: Colors.white,
 //     fontSize: 16.0,
 //   );

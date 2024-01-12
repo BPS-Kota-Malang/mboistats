@@ -6,7 +6,6 @@ import 'dart:convert';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PublikasiPage extends StatefulWidget {
@@ -221,7 +220,7 @@ class _PublikasiPageState extends State<PublikasiPage> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.blue,
             textColor: Colors.white,
             fontSize: 16.0,
           );
@@ -233,7 +232,7 @@ class _PublikasiPageState extends State<PublikasiPage> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.blue,
           textColor: Colors.white,
           fontSize: 16.0,
         );
@@ -245,7 +244,7 @@ class _PublikasiPageState extends State<PublikasiPage> {
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blue,
         textColor: Colors.white,
         fontSize: 16.0,
       );
@@ -299,7 +298,7 @@ class PDFViewer extends StatelessWidget {
 //     toastLength: Toast.LENGTH_SHORT,
 //     gravity: ToastGravity.CENTER,
 //     timeInSecForIosWeb: 1,
-//     backgroundColor: Colors.red,
+//     backgroundColor: Colors.blue,
 //     textColor: Colors.white,
 //     fontSize: 16.0,
 //   );
