@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:mboistat/theme.dart';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 
 class InfografisPages extends StatefulWidget {
   @override
@@ -104,78 +103,31 @@ class _InfografisPagesState extends State<InfografisPages> {
     } catch (error) {}
   }
 
-  
-
-  void prosesDownload(BuildContext context, String imageUrl, String title) async {
-    DownloadService downloadService = DownloadService();
-
+  Future<void> prosesDownload(BuildContext context, String imageUrl, String title) async {
     try {
+      // Meminta izin penyimpanan eksternal
+      var status = await Permission.manageExternalStorage.status;
+      if (!status.isGranted) {
+        await Permission.manageExternalStorage.request();
+
+        // Cek status izin lagi setelah meminta izin
+        status = await Permission.manageExternalStorage.status;
+        if (!status.isGranted) {
+          _showToast(context, "Error: Penyimpanan tidak diizinkan");
+          return;
+        }
+      }
+
+      DownloadService downloadService = DownloadService();
       String filePath = await downloadService.download(imageUrl, title);
 
       if (filePath.isNotEmpty) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Unduh Selesai"),
-              content: Text("Berkas infografis '$title' disimpan di $filePath"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            );
-          },
-        );
+        _showDialog(context, "Unduh Selesai", "Berkas infografis '$title' disimpan di $filePath");
       } else {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Unduh Gagal"),
-              content: Text("Gagal mengunduh file."),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            );
-          },
-        );
+        _showDialog(context, "Unduh Gagal", "Gagal mengunduh file.");
       }
-    } catch (error) {}
-  }
-
-  Future<String> download(String imageUrl, String title) async {
-    var externalDirectory = await getExternalStorageDirectory();
-    if (externalDirectory != null) {
-      var urlImage = imageUrl;
-      var dio = Dio();
-      var result = await dio.get<List<int>>(urlImage,
-          options: Options(responseType: ResponseType.bytes));
-      if (result.statusCode == 200) {
-        var byteDownloaded = result.data;
-        if (byteDownloaded != null) {
-          var fileName = title.replaceAll(RegExp(r"[^\w\s]+"), "") + ".jpg";
-          var file = File("${externalDirectory.path}/Download/$fileName");
-          file.writeAsBytesSync(byteDownloaded);
-          return "${file.path}";
-        } else {
-          print("file kosong");
-          return "error file kosong";
-        }
-      } else {
-        return "download error";
-      }
-    } else {
-      print("external directory null");
-      return "error";
+    } catch (error) {
+      _showDialog(context, "Error", "Terjadi kesalahan saat mengunduh file: $error");
     }
   }
 
@@ -212,7 +164,7 @@ class _InfografisPagesState extends State<InfografisPages> {
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: dark4),
+                  border: Border.all(color: Colors.black),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.2),
@@ -235,8 +187,7 @@ class _InfografisPagesState extends State<InfografisPages> {
                       Flexible(
                         child: Text(
                           dataInfografis[index]["title"],
-                          style: bold16.copyWith(color: dark1),
-                          textAlign: TextAlign.left,
+                          style: TextStyle(fontSize: 16),
                         ),
                       ),
                       Align(
@@ -256,49 +207,68 @@ class _InfografisPagesState extends State<InfografisPages> {
       ),
     );
   }
+
+  void _showDialog(BuildContext context, String title, String content) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(content),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showToast(BuildContext context, String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  }
 }
 
 class DownloadService {
   Future<String> download(String pdfUrl, String title) async {
     try {
-      // Request runtime permissions if not granted
-      if (Platform.isAndroid) {
-        var status = await Permission.manageExternalStorage.status;
-        if (!status.isGranted) {
-          await Permission.manageExternalStorage.request();
-          
-          // Check permission status again after requesting
-          status = await Permission.manageExternalStorage.status;
-          if (!status.isGranted) {
-            return "Error: Penyimpanan tidak diizinkan";
+      var externalDirectory = await getExternalStorageDirectory();
+      if (externalDirectory != null) {
+        var urlImage = pdfUrl;
+        var dio = Dio();
+        var result = await dio.get<List<int>>(urlImage,
+            options: Options(responseType: ResponseType.bytes));
+
+        if (result.statusCode == 200) {
+          var byteDownloaded = result.data;
+          if (byteDownloaded != null) {
+            var fileName = title.replaceAll(RegExp(r"[^\w\s]+"), "") + ".jpg";
+            var file = File("${externalDirectory.path}/Download/$fileName");
+            file.writeAsBytesSync(byteDownloaded);
+            return "${file.path}";
+          } else {
+            return "error file kosong";
           }
-        }
-      }
-
-      var urlImage = pdfUrl;
-      var dio = Dio();
-      var result = await dio.get<List<int>>(urlImage,
-          options: Options(responseType: ResponseType.bytes));
-
-      if (result.statusCode == 200) {
-        var byteDownloaded = result.data;
-        if (byteDownloaded != null) {
-          // Use the "title" to construct the filename
-          var fileName = title.replaceAll(RegExp(r"[^a-zA-Z0-9]+"), "_") + ".jpg";
-          var file = File("/storage/emulated/0/Download/$fileName");
-          await file.writeAsBytes(byteDownloaded);
-
-          return file.path;
         } else {
-          return "Error: File Kosong";
+          return "download error";
         }
       } else {
-        // return "Download Gagal: ${result.statusCode}";
-        return "Download Gagal";
+        return "error";
       }
     } catch (error) {
-      // return "Error during file download: $error";
-      return "Error Selama Mendownload ";
+      return "error";
     }
   }
 }
