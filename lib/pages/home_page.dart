@@ -13,16 +13,6 @@ class HomePage extends StatelessWidget {
 
   Future<bool> _onWillPop(BuildContext context) async {
   // Memeriksa dan meminta izin WRITE_EXTERNAL_STORAGE
-  var status = await Permission.storage.status;
-  if (!status.isGranted) {
-    // Menampilkan dialog permintaan izin
-    var result = await Permission.storage.request();
-    if (result != PermissionStatus.granted) {
-      // Izin tidak diberikan, tampilkan pesan atau ambil tindakan sesuai kebutuhan
-      return false;
-    }
-  }
-
   return (await showDialog(
         context: context,
         builder: (context) => AlertDialog(
