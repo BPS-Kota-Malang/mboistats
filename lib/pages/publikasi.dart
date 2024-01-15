@@ -6,7 +6,6 @@ import 'dart:convert';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PublikasiPage extends StatefulWidget {
@@ -72,10 +71,9 @@ class _PublikasiPageState extends State<PublikasiPage> {
             padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
             child: InkWell(
               onTap: () {
-  String pdfUrl = dataPublikasi[index]["pdf"];
-  showDownloadDialog(context, pdfUrl, index);
-},
-
+                String pdfUrl = dataPublikasi[index]["pdf"];
+                showDownloadDialog(context, pdfUrl, index);
+              },
               child: Container(
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
@@ -97,34 +95,34 @@ class _PublikasiPageState extends State<PublikasiPage> {
                     width: 40,
                     height: 40,
                   ),
-                  title:Row(
-  children: [
-    Flexible(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            dataPublikasi[index]["title"],
-            style: bold16.copyWith(color: dark1),
-            textAlign: TextAlign.left,
-          ),
-          Text(
-            "Size: ${dataPublikasi[index]["size"]}",
-            style: TextStyle(fontSize: 12, color: Colors.grey),
-          ),
-        ],
-      ),
-    ),
-    Align(
-      alignment: Alignment.centerRight,
-      child: Image.asset(
-        'assets/icons/right-arrow.png',
-        height: 16,
-      ),
-    ),
-  ],
-),
-
+                  title: Row(
+                    children: [
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              dataPublikasi[index]["title"],
+                              style: bold16.copyWith(color: dark1),
+                              textAlign: TextAlign.left,
+                            ),
+                            Text(
+                              "Size: ${dataPublikasi[index]["size"]}",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Image.asset(
+                          'assets/icons/right-arrow.png',
+                          height: 16,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -134,140 +132,137 @@ class _PublikasiPageState extends State<PublikasiPage> {
     );
   }
 
- void showDownloadDialog(BuildContext context, String pdfUrl, int index) {
-  BuildContext previousContext = context;
+  void showDownloadDialog(BuildContext context, String pdfUrl, int index) {
+    BuildContext previousContext = context;
 
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text("Konfirmasi Unduh"),
-        content: Text("Apakah Anda ingin mengunduh/membuka file ini?"),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              openPdfDirectly(previousContext, pdfUrl);
-            },
-            child: Text("Buka PDF"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context, false);
-            },
-            child: Text("Tidak"),
-          ),
-          TextButton(
-            onPressed: () async {
-              Navigator.pop(context);
-              // showToastMessage(pdfUrl);
-              String fileName = dataPublikasi[index]["title"];
-              await downloadAndShowConfirmation(
-                previousContext,
-                pdfUrl,
-                fileName,
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Konfirmasi Unduh"),
+          content: Text("Apakah Anda ingin mengunduh/membuka file ini?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                openPdfDirectly(previousContext, pdfUrl);
+              },
+              child: Text("Buka PDF"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              child: Text("Tidak"),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context);
+                // showToastMessage(pdfUrl);
+                String fileName = dataPublikasi[index]["title"];
+                await downloadAndShowConfirmation(
+                  previousContext,
+                  pdfUrl,
+                  fileName,
+                );
+              },
+              child: Text("Unduh"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> downloadAndShowConfirmation(
+    BuildContext context,
+    String pdfUrl,
+    String fileName,
+  ) async {
+    // Check if the necessary permissions are granted
+    if (await _checkPermission()) {
+      Fluttertoast.showToast(
+        msg: "Mendownload...",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.blue,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+
+      try {
+        DownloadService downloadService = DownloadService();
+        String filePath = await downloadService.download(pdfUrl, fileName);
+
+        if (filePath.isNotEmpty) {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text("Informasi Unduhan"),
+                content: Text("Berkas publikasi disimpan di $filePath"),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("OK"),
+                  ),
+                ],
               );
             },
-            child: Text("Unduh"),
-          ),
-        ],
-      );
-    },
-  );
-}
-
-
-Future<void> downloadAndShowConfirmation(
-  BuildContext context,
-  String pdfUrl,
-  String fileName,
-) async {
-  // Check if the necessary permissions are granted
-  if (await _checkPermission()) {
-    Fluttertoast.showToast(
-      msg: "Mendownload...",
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.blue,
-      textColor: Colors.white,
-      fontSize: 16.0,
-    );
-
-    try {
-      DownloadService downloadService = DownloadService();
-      String filePath = await downloadService.download(pdfUrl, fileName);
-
-      if (filePath.isNotEmpty) {
-        Navigator.pop(context); // Close the download dialog
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Informasi Unduhan"),
-              content: Text("Berkas publikasi disimpan di $filePath"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            );
-          },
-        );
-      } else {
+          );
+        } else {
+          Navigator.pop(context); // Close the download dialog
+          Fluttertoast.showToast(
+            msg: "Gagal mengunduh file",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.blue,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
+        }
+      } catch (error) {
         Navigator.pop(context); // Close the download dialog
         Fluttertoast.showToast(
-          msg: "Gagal mengunduh file",
+          msg: "Error selama mendownload: $error",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.blue,
           textColor: Colors.white,
           fontSize: 16.0,
         );
       }
-    } catch (error) {
-      Navigator.pop(context); // Close the download dialog
+    } else {
+      // Display a message indicating that the application is not authorized
       Fluttertoast.showToast(
-        msg: "Error selama mendownload: $error",
+        msg: "Aplikasi belum diizinkan untuk mengakses file",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blue,
         textColor: Colors.white,
         fontSize: 16.0,
       );
     }
-  } else {
-    // Display a message indicating that the application is not authorized
-    Fluttertoast.showToast(
-      msg: "Aplikasi belum diizinkan untuk mengakses file",
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.red,
-      textColor: Colors.white,
-      fontSize: 16.0,
-    );
   }
-}
 
-Future<bool> _checkPermission() async {
-  if (Platform.isAndroid) {
-    var status = await Permission.manageExternalStorage.status;
-    if (!status.isGranted) {
-      // Request permission and check again
-      await Permission.manageExternalStorage.request();
-      status = await Permission.manageExternalStorage.status;
-      return status.isGranted;
+  Future<bool> _checkPermission() async {
+    if (Platform.isAndroid) {
+      var status = await Permission.manageExternalStorage.status;
+      if (!status.isGranted) {
+        // Request permission and check again
+        await Permission.manageExternalStorage.request();
+        status = await Permission.manageExternalStorage.status;
+        return status.isGranted;
+      }
     }
+    return true;
   }
-  return true;
-}
-
 
   void openPdfDirectly(BuildContext context, String pdfUrl) {
     Navigator.push(
@@ -303,7 +298,7 @@ class PDFViewer extends StatelessWidget {
 //     toastLength: Toast.LENGTH_SHORT,
 //     gravity: ToastGravity.CENTER,
 //     timeInSecForIosWeb: 1,
-//     backgroundColor: Colors.red,
+//     backgroundColor: Colors.blue,
 //     textColor: Colors.white,
 //     fontSize: 16.0,
 //   );
@@ -317,7 +312,7 @@ class DownloadService {
         var status = await Permission.manageExternalStorage.status;
         if (!status.isGranted) {
           await Permission.manageExternalStorage.request();
-          
+
           // Check permission status again after requesting
           status = await Permission.manageExternalStorage.status;
           if (!status.isGranted) {
@@ -335,7 +330,8 @@ class DownloadService {
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
           // Use the "title" to construct the filename
-          var fileName = title.replaceAll(RegExp(r"[^a-zA-Z0-9]+"), "_") + ".pdf";
+          var fileName =
+              title.replaceAll(RegExp(r"[^a-zA-Z0-9]+"), "_") + ".pdf";
           var file = File("/storage/emulated/0/Download/$fileName");
           await file.writeAsBytes(byteDownloaded);
 

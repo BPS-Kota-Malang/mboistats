@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:mboistat/theme.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
@@ -164,7 +165,7 @@ class _InfografisPagesState extends State<InfografisPages> {
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: Colors.black),
+                  border: Border.all(color: dark4),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.2),
@@ -187,7 +188,8 @@ class _InfografisPagesState extends State<InfografisPages> {
                       Flexible(
                         child: Text(
                           dataInfografis[index]["title"],
-                          style: TextStyle(fontSize: 16),
+                          style: bold16.copyWith(color: dark1),
+                          textAlign: TextAlign.left,
                         ),
                       ),
                       Align(

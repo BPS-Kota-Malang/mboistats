@@ -8,7 +8,7 @@ class AngkatanKerjaMenurutPendidikanPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Angkatan Kerja Menurut Pendidikan'),
+        title: Text('Angkatan Kerja Pendidikan'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
