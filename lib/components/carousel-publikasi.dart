@@ -162,7 +162,7 @@ Future<bool> isStoragePermission() async {
     );
   }
 
-  Future<void> downloadAndShowConfirmation(
+ Future<void> downloadAndShowConfirmation(
     BuildContext context, String pdfUrl, String title) async {
   // Check if the necessary permissions are granted
   if (await isStoragePermission()) {
@@ -236,12 +236,19 @@ Future<bool> isStoragePermission() async {
     );
 
     // Request the WRITE_EXTERNAL_STORAGE permission
-   await Permission.storage.request();
+    await Permission.storage.request();
 
-    // Open app settings
-    AppSettings.openAppSettings();
+    // Re-check permission after the request
+    if (await isStoragePermission()) {
+      // Permission granted, proceed with download
+      await downloadAndShowConfirmation(context, pdfUrl, title);
+    } else {
+      // Permission still not granted, open app settings
+      AppSettings.openAppSettings();
+    }
   }
 }
+
 
   void openPdfDirectly(BuildContext context, String pdfUrl) {
     Navigator.push(
