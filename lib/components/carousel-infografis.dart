@@ -1,11 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class CarouselInfografis extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class CarouselInfografis extends StatefulWidget {
 
 class _CarouselInfografisState extends State<CarouselInfografis> {
   List<Map<String, dynamic>> dataInfografis = [];
-  String imageUrl = ''; // Variable to store the PDF URL
+  String imageUrl = '';
 
   @override
   void initState() {
@@ -23,20 +24,25 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
   }
 
   Future<void> fetchData() async {
-    final response = await http.get(
-      Uri.parse(
-          'https://webapi.bps.go.id/v1/api/list/domain/3573/model/infographic/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f'),
-    );
+    try {
+      final response = await http.get(
+        Uri.parse(
+          'https://webapi.bps.go.id/v1/api/list/domain/3573/model/infographic/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f',
+        ),
+      );
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final publications =
-          (data['data'][1] as List).cast<Map<String, dynamic>>();
-      setState(() {
-        dataInfografis = publications;
-      });
-    } else {
-      throw Exception('Failed to load data');
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final publications =
+            (data['data'][1] as List).cast<Map<String, dynamic>>();
+        setState(() {
+          dataInfografis = publications;
+        });
+      } else {
+        throw Exception('Failed to load data');
+      }
+    } catch (error) {
+      print("Error fetching data: $error");
     }
   }
 
@@ -92,7 +98,6 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
 
   void openDownloadConfirmation(BuildContext context, String imageUrl, String title) async {
     try {
-      // Display a dialog with the download confirmation
       bool confirmDownload = await showDialog(
         context: context,
         builder: (context) {
@@ -102,14 +107,12 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
             actions: [
               TextButton(
                 onPressed: () {
-                  // Close the dialog and proceed with download
                   Navigator.pop(context, true);
                 },
                 child: Text("Ya"),
               ),
               TextButton(
                 onPressed: () {
-                  // Close the dialog and cancel download
                   Navigator.pop(context, false);
                 },
                 child: Text("Tidak"),
@@ -120,32 +123,62 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
       );
 
       if (confirmDownload == true) {
-        prosesDownload(context, imageUrl, title);
+        saveImage(imageUrl, title);
       }
-    } catch (error) {}
+    } catch (error) {
+      print("Error opening download confirmation: $error");
+    }
   }
 
-  void prosesDownload(BuildContext context, String imageUrl, String title) async {
-    // Initialize DownloadService
-    DownloadService downloadService = DownloadService();
-
+  Future<void> saveImage(String url, String fileName) async {
     try {
-      // Start the download process
-      String filePath = await downloadService.download(imageUrl, title);
+      if (Platform.isAndroid) {
+        var status = await Permission.storage.status;
+        if (!status.isGranted) {
+          await Permission.storage.request();
+          status = await Permission.storage.status;
+          if (!status.isGranted) {
+            throw Exception("Error: Penyimpanan tidak diizinkan");
+          }
+        }
+      }
 
-      // Check if the download was successful
-      if (filePath.isNotEmpty) {
-        // Display a dialog with the download confirmation
+      Directory? directory = await getExternalStorageDirectory();
+      String newPath = "";
+      List<String> paths = directory!.path.split("/");
+      for (int x = 1; x < paths.length; x++) {
+        String folder = paths[x];
+        if (folder != "Android") {
+          newPath += "/" + folder;
+        } else {
+          break;
+        }
+      }
+      newPath = newPath + "/PDF_Download";
+      directory = Directory(newPath);
+
+      File saveFile = File(directory.path + "/$fileName.jpg");
+      if (kDebugMode) {
+        print(saveFile.path);
+      }
+      if (!await directory.exists()) {
+        await directory.create(recursive: true);
+      }
+      if (await directory.exists()) {
+        await Dio().download(
+          url,
+          saveFile.path,
+        );
+
         showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
               title: Text("Unduhan Selesai"),
-              content: Text("Berkas infografis disimpan di $filePath"),
+              content: Text("Berkas infografis disimpan di ${saveFile.path}"),
               actions: [
                 TextButton(
                   onPressed: () {
-                    // Close the dialog
                     Navigator.pop(context);
                   },
                   child: Text("OK"),
@@ -154,72 +187,26 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
             );
           },
         );
-      } else {
-        // Display a dialog for download failure
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Unduhan Gagal"),
-              content: Text("Gagal Mengunduh File."),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    // Close the dialog
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            );
-          },
-        );
-      }
-    } catch (error) {}
-  }
-}
-
-class DownloadService {
-  Future<String> download(String imageUrl, String title) async {
-    try {
-      // Request runtime permissions if not granted
-      if (Platform.isAndroid) {
-        var status = await Permission.manageExternalStorage.status;
-        if (!status.isGranted) {
-          await Permission.manageExternalStorage.request();
-
-          // Check permission status again after requesting
-          status = await Permission.manageExternalStorage.status;
-          if (!status.isGranted) {
-            return "Error: Penyimpanan tidak diizinkan";
-          }
-        }
-      }
-
-      var urlImage = imageUrl;
-      var dio = Dio();
-      var result = await dio.get<List<int>>(urlImage,
-          options: Options(responseType: ResponseType.bytes));
-
-      if (result.statusCode == 200) {
-        var byteDownloaded = result.data;
-        if (byteDownloaded != null) {
-          // Use the "title" to construct the filename
-          var fileName = title.replaceAll(RegExp(r"[^a-zA-Z0-9]+"), "_") + ".jpg";
-          var file = File("/storage/emulated/0/Download/$fileName");
-          await file.writeAsBytes(byteDownloaded);
-
-          return file.path;
-        } else {
-          return "Error: File Kosong";
-        }
-      } else {
-        // return "Download Gagal: ${result.statusCode}";
-        return "Download Gagal";
       }
     } catch (error) {
-      // return "Error during file download: $error";
-      return "Error Selama Mendownload ";
+      print("Error during file download: $error");
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Unduhan Gagal"),
+            content: Text("Gagal Mengunduh File."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
     }
   }
 }
