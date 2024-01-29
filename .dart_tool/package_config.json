@@ -290,6 +290,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "open_settings",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/open_settings-2.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "package_info",
       "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/package_info-2.0.2",
       "packageUri": "lib/",
@@ -632,7 +638,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2024-01-18T02:44:36.399913Z",
+  "generated": "2024-01-28T02:16:59.497958Z",
   "generator": "pub",
   "generatorVersion": "3.1.3"
 }

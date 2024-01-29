@@ -109,7 +109,7 @@ class _InfografisPagesState extends State<InfografisPages> {
       // Meminta izin penyimpanan eksternal
       var status = await Permission.manageExternalStorage.status;
       if (!status.isGranted) {
-        await Permission.manageExternalStorage.request();
+        // await Permission.manageExternalStorage.request();
 
         // Cek status izin lagi setelah meminta izin
         status = await Permission.manageExternalStorage.status;

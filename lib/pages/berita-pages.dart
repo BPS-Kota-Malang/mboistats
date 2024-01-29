@@ -268,7 +268,7 @@ class _BeritaPageState extends State<BeritaPages> {
       var status = await Permission.manageExternalStorage.status;
       if (!status.isGranted) {
         // Request permission and check again
-        await Permission.manageExternalStorage.request();
+        // await Permission.manageExternalStorage.request();
         status = await Permission.manageExternalStorage.status;
         return status.isGranted;
       }

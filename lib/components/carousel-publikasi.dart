@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -8,7 +9,6 @@ import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:app_settings/app_settings.dart';
 
 class CarouselPublikasi extends StatefulWidget {
   @override
@@ -34,8 +34,7 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        final publications =
-            (data['data'][1] as List).cast<Map<String, dynamic>>();
+        final publications = (data['data'][1] as List).cast<Map<String, dynamic>>();
         setState(() {
           dataPublikasi = publications;
         });
@@ -97,34 +96,18 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
             ],
           );
   }
-
-Future<bool> isStoragePermission() async {
-  var storagePermission = await Permission.storage.status;
-  if (storagePermission.isDenied || storagePermission.isRestricted) {
-    // Request permission and check again
-    await Permission.storage.request();
-    storagePermission = await Permission.storage.status; // Update permission status after request
+Future<bool> _checkPermission() async {
+  if (Platform.isAndroid) {
+    var status = await Permission.manageExternalStorage.status;
+    if (!status.isGranted) {
+      // Request permission and check again
+      // status = await Permission.manageExternalStorage.request();
+      status = await Permission.manageExternalStorage.status;
+      return status.isGranted;
+    }
   }
-
-  if (storagePermission.isGranted) {
-    return true;
-  } else if (storagePermission.isPermanentlyDenied) {
-    // Handle the case when the user has permanently denied the permission
-    Fluttertoast.showToast(
-      msg: "Aplikasi tidak memiliki izin untuk mengakses penyimpanan.",
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.red,
-      textColor: Colors.white,
-      fontSize: 16.0,
-    );
-    return false;
-  } else {
-    return false;
-  }
+  return true;
 }
-
   void openPdfViewer(BuildContext context, String pdfUrl, String title) {
     BuildContext previousContext = context;
 
@@ -151,8 +134,7 @@ Future<bool> isStoragePermission() async {
             TextButton(
               onPressed: () async {
                 Navigator.pop(context);
-                await downloadAndShowConfirmation(
-                    previousContext, pdfUrl, title);
+                await downloadAndShowConfirmation(previousContext, pdfUrl, title);
               },
               child: Text("Unduh"),
             ),
@@ -163,9 +145,9 @@ Future<bool> isStoragePermission() async {
   }
 
  Future<void> downloadAndShowConfirmation(
-    BuildContext context, String pdfUrl, String title) async {
+    BuildContext context, String pdfUrl, String fileName) async {
   // Check if the necessary permissions are granted
-  if (await isStoragePermission()) {
+  if (await _checkPermission()) {
     Fluttertoast.showToast(
       msg: "Mendownload...",
       toastLength: Toast.LENGTH_LONG,
@@ -178,8 +160,7 @@ Future<bool> isStoragePermission() async {
 
     try {
       DownloadService downloadService = DownloadService();
-      String filePath =
-          await downloadService.download(pdfUrl, title);
+      String filePath = await downloadService.download(pdfUrl, fileName);
 
       if (filePath.isNotEmpty) {
         showDialog(
@@ -226,7 +207,7 @@ Future<bool> isStoragePermission() async {
   } else {
     // Display a toast message if storage permission is not granted
     Fluttertoast.showToast(
-      msg: "Aplikasi belum diizinkan untuk mengakses file.",
+      msg: "Aplikasi belum diizinkan untuk mengakses file",
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.CENTER,
       timeInSecForIosWeb: 1,
@@ -234,22 +215,8 @@ Future<bool> isStoragePermission() async {
       textColor: Colors.white,
       fontSize: 16.0,
     );
-
-    // Request the WRITE_EXTERNAL_STORAGE permission
-    await Permission.storage.request();
-
-    // Re-check permission after the request
-    if (await isStoragePermission()) {
-      // Permission granted, proceed with download
-      await downloadAndShowConfirmation(context, pdfUrl, title);
-    } else {
-      // Permission still not granted, open app settings
-      AppSettings.openAppSettings();
-    }
   }
 }
-
-
   void openPdfDirectly(BuildContext context, String pdfUrl) {
     Navigator.push(
       context,
@@ -282,9 +249,9 @@ class DownloadService {
   Future<String> download(String pdfUrl, String title) async {
     try {
       if (Platform.isAndroid) {
-        var status = await Permission.storage.status;
+        var status = await Permission.manageExternalStorage.status;
         if (!status.isGranted) {
-          var result = await Permission.storage.request();
+          var result = await Permission.manageExternalStorage.request();
 
           if (result != PermissionStatus.granted) {
             Fluttertoast.showToast(
@@ -314,12 +281,9 @@ class DownloadService {
       if (result.statusCode == 200) {
         var byteDownloaded = result.data;
         if (byteDownloaded != null) {
-          var fileName =
-              title.replaceAll(RegExp(r"[^a-zA-Z0-9]+"), "_") + ".pdf";
-
-          // Ganti direktori penyimpanan sesuai keinginan Anda
+          var fileName = title.replaceAll(RegExp(r"[^a-zA-Z0-9]+"), "_") + ".pdf";
+          var fileDirectory = (await getExternalStorageDirectory())!.path;
           var file = File("/storage/emulated/0/Download/$fileName");
-
           await file.writeAsBytes(byteDownloaded);
 
           if (await file.exists()) {

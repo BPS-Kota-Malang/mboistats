@@ -311,7 +311,7 @@ class DownloadService {
       if (Platform.isAndroid) {
         var status = await Permission.manageExternalStorage.status;
         if (!status.isGranted) {
-          await Permission.manageExternalStorage.request();
+          // await Permission.manageExternalStorage.request();
 
           // Check permission status again after requesting
           status = await Permission.manageExternalStorage.status;

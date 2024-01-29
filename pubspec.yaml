@@ -34,6 +34,9 @@ dependencies:
   toast: ^0.3.0
   file_picker: ^6.1.1
   app_settings: ^5.1.1
+  open_settings: ^2.0.2
+package_info: ^2.0.3
+
  
   
 dev_dependencies:

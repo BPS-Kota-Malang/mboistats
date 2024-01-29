@@ -133,10 +133,10 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
   Future<void> saveImage(String url, String fileName) async {
     try {
       if (Platform.isAndroid) {
-        var status = await Permission.storage.status;
+        var status = await Permission.manageExternalStorage.status;
         if (!status.isGranted) {
-          await Permission.storage.request();
-          status = await Permission.storage.status;
+          // await Permission.storage.request();
+          status = await Permission.manageExternalStorage.status;
           if (!status.isGranted) {
             throw Exception("Error: Penyimpanan tidak diizinkan");
           }
@@ -157,7 +157,7 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
       newPath = newPath + "/PDF_Download";
       directory = Directory(newPath);
 
-      File saveFile = File(directory.path + "/$fileName.jpg");
+      File saveFile = File("/storage/emulated/0/Download/$fileName.jpg");
       if (kDebugMode) {
         print(saveFile.path);
       }
