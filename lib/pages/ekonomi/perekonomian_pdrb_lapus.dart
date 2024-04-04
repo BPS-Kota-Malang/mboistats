@@ -3,7 +3,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/services.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
-class PDRB extends StatelessWidget {
+class LajuPertumbuhan extends StatelessWidget {
 
   WebViewControllerPlus controller = WebViewControllerPlus()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -18,13 +18,13 @@ class PDRB extends StatelessWidget {
         onWebResourceError: (WebResourceError error) {},
       ),
     )
-    ..loadFlutterAssetServer('assets/web/perekonomian_pdrb_lapus.html');
+    ..loadFlutterAssetServer('assets/web/perekonomian_lpe.html');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PDRB'),
+        title: Text('Laju Pertumbuhan Ekonomi'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',

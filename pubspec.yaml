@@ -17,22 +17,23 @@ dependencies:
     sdk: flutter
   carousel_slider: ^4.0.0
   cupertino_icons: ^1.0.2
-  http: ^0.13.3
-  webview_flutter: ^3.0.0
+  http: ^1.2.0
+  webview_flutter: ^4.7.0
+  webview_flutter_plus: ^0.4.4
   url_launcher: ^6.0.13
   path_provider: ^2.0.9
   open_file: ^3.2.1
-  syncfusion_flutter_pdfviewer: ^20.4.54
+  syncfusion_flutter_pdfviewer: ^25.1.37
   flutter_downloader: ^1.6.1
   permission_handler: ^11.0.1
-  dio: ^4.0.0
+  dio: ^5.4.2+1
   package_info: ^2.0.2
   cached_network_image: ^3.0.0
   flutter_file_downloader: ^1.2.0
   connectivity: ^3.0.6
   fluttertoast: ^8.2.4
   toast: ^0.3.0
-  file_picker: ^6.1.1
+  file_picker: ^8.0.0+1
   app_settings: ^5.1.1
   open_settings: ^2.0.2
 package_info: ^2.0.3
@@ -42,7 +43,7 @@ package_info: ^2.0.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.2
   flutter_launcher_icons: "^0.13.1"
 flutter:
   uses-material-design: true
