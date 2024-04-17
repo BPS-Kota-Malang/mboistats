@@ -10,26 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2355516e-4a0a-42b0-908b-cd3ab65d93c8" name="Changes" comment="perubahan data">
-      <change beforePath="$PROJECT_DIR$/.dart_tool/dartpad/web_plugin_registrant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/dartpad/web_plugin_registrant.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/carousel-infografis.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/carousel-infografis.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/carousel-publikasi.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/carousel-publikasi.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/footer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/footer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/datas/pertanian.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/datas/pertanian.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/berita-pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/brs-pages.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/infografis-pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/infografis-pages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/kemiskinan-pages copy.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/publikasi.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/publikasi.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/route-manager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/route-manager.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,7 +112,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712202504036</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="perubahan data">
+      <option name="closed" value="true" />
+      <created>1713346693807</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1713346693807</updated>
+    </task>
+    <task id="LOCAL-00005" summary="perubahan data">
+      <option name="closed" value="true" />
+      <created>1713347987985</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1713347987985</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
