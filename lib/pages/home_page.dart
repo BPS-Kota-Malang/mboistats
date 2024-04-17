@@ -45,14 +45,12 @@ class _HomePageState extends State<HomePage> {
                 child: const Text('Ya'),
               ),
               OutlinedButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Colors.blue),
+              onPressed: () {
+                // Close the entire app when 'Ya' is selected
+                SystemNavigator.pop(); // Use this to exit the app
+              },
+                child: const Text('Tidak'),
                 ),
-                child: const Text('Tidak',
-                  style: TextStyle(color: Colors.blue),
-                ),
-              ),
             ],
           ),
         )) ??
