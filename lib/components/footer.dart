@@ -91,33 +91,3 @@ class _FooterState extends State<Footer> {
   }
   }
 
-  // Widget build(BuildContext context) {
-  //   return BottomNavigationBar(
-  //     currentIndex: _selectedIndex,
-  //     onTap: _onItemTapped,
-  //     items: [
-  //       BottomNavigationBarItem(
-  //         icon: Icon(
-  //           Icons.home,
-  //           color: _selectedIndex == 0 ? Colors.blue : null, // Beranda
-  //         ),
-  //         label: 'Beranda',
-  //       ),
-  //       BottomNavigationBarItem(
-  //         icon: Icon(
-  //           Icons.newspaper_outlined,
-  //           color: _selectedIndex == 1 ? Colors.blue : null, // NEWS
-  //         ),
-  //         label: 'Berita',
-  //       ),
-  //       BottomNavigationBarItem(
-  //         icon: Icon(
-  //           Icons.contacts,
-  //           color: _selectedIndex == 2 ? Colors.blue : null, // Kontak
-  //         ),
-  //         label: 'Kontak',
-  //       ),
-  //     ],
-  //   );
-  // }
-

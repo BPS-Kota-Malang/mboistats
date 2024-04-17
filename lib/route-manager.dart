@@ -1,6 +1,6 @@
 //import 'dart:js';
 import 'package:flutter/material.dart';
-import 'package:mboistat/pages/berita-pages.dart';
+import 'package:mboistat/pages/brs-pages.dart';
 import 'package:mboistat/pages/contact.dart';
 import 'package:mboistat/pages/ekonomi/ekonomi-pages.dart';
 import 'package:mboistat/pages/more-pages.dart';

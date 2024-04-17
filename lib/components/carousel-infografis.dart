@@ -1,12 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_file_downloader/flutter_file_downloader.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
-import 'package:dio/dio.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:saf/saf.dart';
 
 class CarouselInfografis extends StatefulWidget {
   @override
@@ -14,6 +14,7 @@ class CarouselInfografis extends StatefulWidget {
 }
 
 class _CarouselInfografisState extends State<CarouselInfografis> {
+  late Saf saf;
   List<Map<String, dynamic>> dataInfografis = [];
   String imageUrl = '';
 
@@ -26,36 +27,34 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
   Future<void> fetchData() async {
     try {
       final response = await http.get(
-        Uri.parse(
-          'https://webapi.bps.go.id/v1/api/list/domain/3573/model/infographic/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f',
-        ),
+        Uri.parse('https://webapi.bps.go.id/v1/api/list/domain/3573/model/infographic/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f'),
       );
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        final publications =
+        final infographic =
             (data['data'][1] as List).cast<Map<String, dynamic>>();
         setState(() {
-          dataInfografis = publications;
+          dataInfografis = infographic;
         });
       } else {
-        throw Exception('Failed to load data');
+        throw Exception('Gagal mendapatkan data.');
       }
     } catch (error) {
-      print("Error fetching data: $error");
+      print('Gagal fetching data: $error');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return dataInfografis.isEmpty
-        ? Center(
+        ? const Center(
             child: CircularProgressIndicator(),
           )
         : Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(
+              const Padding(
+                padding: EdgeInsets.only(
                   top: 24.0,
                   bottom: 16.0,
                 ),
@@ -78,11 +77,12 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
                   return GestureDetector(
                     onTap: () {
                       setState(() {
-                        imageUrl = item['dl'] ?? '';
-                        openDownloadConfirmation(context, imageUrl, item['title']);
+                        imageUrl = item['img'] ?? '';
                       });
+
+                      openDownloadConfirmation(context, imageUrl, item['title']);
                     },
-                    child: Container(
+                    child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Image.network(
                         item['img'],
@@ -96,26 +96,27 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
           );
   }
 
-  void openDownloadConfirmation(BuildContext context, String imageUrl, String title) async {
+  void openDownloadConfirmation(BuildContext context, String imageUrl, String imageTitle) async {
     try {
       bool confirmDownload = await showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Konfirmasi Unduh"),
-            content: Text("Apakah Anda ingin mengunduh file ini?"),
+            title: const Text("Konfirmasi Unduh"),
+            content: const Text("Apakah Anda ingin mengunduh berkas infografis ini?"),
             actions: [
               TextButton(
-                onPressed: () {
-                  Navigator.pop(context, true);
+                onPressed: () async {
+                  Navigator.pop(context, false);
+                  await downloadAndShowConfirmation(context, imageUrl, imageTitle);
                 },
-                child: Text("Ya"),
+                child: const Text("Ya"),
               ),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context, false);
                 },
-                child: Text("Tidak"),
+                child: const Text("Tidak"),
               ),
             ],
           );
@@ -123,89 +124,102 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
       );
 
       if (confirmDownload == true) {
-        saveImage(imageUrl, title);
+        downloadAndShowConfirmation(context, imageUrl, imageTitle);
       }
     } catch (error) {
       print("Error opening download confirmation: $error");
     }
   }
 
-  Future<void> saveImage(String url, String fileName) async {
-    try {
-      if (Platform.isAndroid) {
-        var status = await Permission.manageExternalStorage.status;
-        if (!status.isGranted) {
-          // await Permission.storage.request();
-          status = await Permission.manageExternalStorage.status;
-          if (!status.isGranted) {
-            throw Exception("Error: Penyimpanan tidak diizinkan");
-          }
-        }
-      }
+  Future<bool> _checkPermission() async {
+    if (Platform.isAndroid || Platform.isIOS) {
+      var permissionStatus = await Permission.storage.status;
 
-      Directory? directory = await getExternalStorageDirectory();
-      String newPath = "";
-      List<String> paths = directory!.path.split("/");
-      for (int x = 1; x < paths.length; x++) {
-        String folder = paths[x];
-        if (folder != "Android") {
-          newPath += "/" + folder;
-        } else {
-          break;
-        }
+      if (permissionStatus.isDenied) {
+        await Permission.storage.request();
+        await saf.getDirectoryPermission(isDynamic: true);
+        return permissionStatus.isGranted;
       }
-      newPath = newPath + "/PDF_Download";
-      directory = Directory(newPath);
+      else {
+        return permissionStatus.isGranted;
+      }
+    }
+    return true;
+  }
 
-      File saveFile = File("/storage/emulated/0/Download/$fileName.jpg");
-      if (kDebugMode) {
-        print(saveFile.path);
-      }
-      if (!await directory.exists()) {
-        await directory.create(recursive: true);
-      }
-      if (await directory.exists()) {
-        await Dio().download(
-          url,
-          saveFile.path,
+  Future<void> downloadAndShowConfirmation(BuildContext context, String pdfUrl, String fileName) async {
+    // Check if the necessary permissions are granted
+    if (await _checkPermission()) {
+      try {
+        Fluttertoast.showToast(
+          msg: "Berkas infografis sedang diunduh.",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.blue,
+          textColor: Colors.white,
+          fontSize: 16.0,
         );
 
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Unduhan Selesai"),
-              content: Text("Berkas infografis disimpan di ${saveFile.path}"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            );
-          },
+        //Download a single file
+        FileDownloader.downloadFile(
+            url: pdfUrl,
+            name: fileName,
+            downloadDestination: DownloadDestinations.publicDownloads,
+            onProgress: (fileName, double progress) {
+
+            },
+            onDownloadCompleted: (String path) {
+              //Renaming File Extension
+              path = path.replaceAll("%20", " ");
+              path = path.replaceAll("%2C", "");
+              String downloadedFileName = path.split('/').last;
+
+              Fluttertoast.showToast(
+                msg: 'Infografis "$downloadedFileName" telah disimpan dalam Folder Download.',
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.blue,
+                textColor: Colors.white,
+                fontSize: 16.0,
+              );
+            },
+            onDownloadError: (String error) {
+              Navigator.pop(context); // Close the download dialog
+              Fluttertoast.showToast(
+                msg: "Gagal mengunduh berkas.",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.blue,
+                textColor: Colors.white,
+                fontSize: 16.0,
+              );
+            });
+      } catch (error) {
+        Navigator.pop(context); // Close the download dialog
+        Fluttertoast.showToast(
+          msg: "Terjadi kesalahan saat mengunduh. $error",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.blue,
+          textColor: Colors.white,
+          fontSize: 16.0,
         );
       }
-    } catch (error) {
-      print("Error during file download: $error");
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("Unduhan Gagal"),
-            content: Text("Gagal Mengunduh File."),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
+    }
+    else {
+      // Display a message indicating that the application is not authorized
+      Fluttertoast.showToast(
+        msg: "Aplikasi belum diizinkan untuk mengakses penyimpanan.",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.blue,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
     }
   }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:dio/dio.dart';
 import 'package:mboistat/theme.dart';
-import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:saf/saf.dart';
 
 class InfografisPages extends StatefulWidget {
   @override
@@ -14,8 +14,8 @@ class InfografisPages extends StatefulWidget {
 }
 
 class _InfografisPagesState extends State<InfografisPages> {
+  late Saf saf;
   List<Map<String, dynamic>> dataInfografis = [];
-  List<String> abstraksiBrs = [];
   String imageUrl = ''; // Variable to store the PDF URL
 
   @override
@@ -25,8 +25,7 @@ class _InfografisPagesState extends State<InfografisPages> {
   }
 
   Future<void> fetchDataInfografis() async {
-    final String apiUrl =
-        "https://webapi.bps.go.id/v1/api/list/domain/3573/model/infographic/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f";
+    const String apiUrl = "https://webapi.bps.go.id/v1/api/list/domain/3573/model/infographic/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f";
 
     final response = await http.get(Uri.parse(apiUrl));
 
@@ -38,30 +37,8 @@ class _InfografisPagesState extends State<InfografisPages> {
         dataInfografis = List<Map<String, dynamic>>.from(infografis);
       });
 
-      for (int i = 0; i < dataInfografis.length; i++) {
-        final brsId = dataInfografis[i]["brs_id"];
-        fetchAbstraksiBrs(brsId);
-      }
     } else {
       throw Exception('Failed to load data');
-    }
-  }
-
-  Future<void> fetchAbstraksiBrs(String brsId) async {
-    final url =
-        "https://webapi.bps.go.id/v1/api/list/domain/3573/model/infographic/lang/ind/domain/3573/key/9db89e91c3c142df678e65a78c4e547f";
-
-    final response = await http.get(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      final parsedResponse = json.decode(response.body);
-      final abstraksi = parsedResponse['data'][2];
-
-      setState(() {
-        abstraksiBrs.add(abstraksi);
-      });
-    } else {
-      throw Exception('Failed to load abstraksi');
     }
   }
 
@@ -72,18 +49,20 @@ class _InfografisPagesState extends State<InfografisPages> {
     return text;
   }
 
-  void openDownloadConfirmation(BuildContext context, String imageUrl, String title) async {
+  void openDownloadConfirmation(BuildContext context, String imageUrl, int index, String imageTitle) async {
     try {
       bool confirmDownload = await showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: Text("Konfirmasi Unduh"),
-            content: Text("Apakah Anda ingin mengunduh file ini?"),
+            content: Text("Apakah Anda ingin mengunduh berkas infografis ini?"),
             actions: [
               TextButton(
-                onPressed: () {
-                  Navigator.pop(context, true);
+                onPressed: () async {
+                  Navigator.pop(context, false);
+                  String imageTitle = dataInfografis[index]["title"];
+                  await downloadAndShowConfirmation(context, imageUrl, imageTitle);
                 },
                 child: Text("Ya"),
               ),
@@ -99,36 +78,85 @@ class _InfografisPagesState extends State<InfografisPages> {
       );
 
       if (confirmDownload == true) {
-        prosesDownload(context, imageUrl, title);
+        downloadAndShowConfirmation(context, imageUrl, imageTitle);
       }
     } catch (error) {}
   }
 
-  Future<void> prosesDownload(BuildContext context, String imageUrl, String title) async {
-    try {
-      // Meminta izin penyimpanan eksternal
-      var status = await Permission.manageExternalStorage.status;
-      if (!status.isGranted) {
-        // await Permission.manageExternalStorage.request();
+  Future<void> downloadAndShowConfirmation(BuildContext context, String pdfUrl, String fileName) async {
+    // Check if the necessary permissions are granted
+    if (await _checkPermission()) {
+      try {
+        Fluttertoast.showToast(
+          msg: "Berkas infografis sedang diunduh.",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.blue,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
 
-        // Cek status izin lagi setelah meminta izin
-        status = await Permission.manageExternalStorage.status;
-        if (!status.isGranted) {
-          _showToast(context, "Error: Penyimpanan tidak diizinkan");
-          return;
-        }
+        //Download a single file
+        FileDownloader.downloadFile(
+            url: pdfUrl,
+            name: fileName,
+            downloadDestination: DownloadDestinations.publicDownloads,
+            onProgress: (fileName, double progress) {
+
+            },
+            onDownloadCompleted: (String path) {
+              //Renaming File Extension
+              path = path.replaceAll("%20", " ");
+              path = path.replaceAll("%2C", "");
+              String downloadedFileName = path.split('/').last;
+
+              Fluttertoast.showToast(
+                msg: 'Infografis "$downloadedFileName" telah disimpan dalam Folder Download.',
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.blue,
+                textColor: Colors.white,
+                fontSize: 16.0,
+              );
+            },
+            onDownloadError: (String error) {
+              Navigator.pop(context); // Close the download dialog
+              Fluttertoast.showToast(
+                msg: "Gagal mengunduh berkas.",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.blue,
+                textColor: Colors.white,
+                fontSize: 16.0,
+              );
+            });
+      } catch (error) {
+        Navigator.pop(context); // Close the download dialog
+        Fluttertoast.showToast(
+          msg: "Terjadi kesalahan saat mengunduh. $error",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.blue,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
       }
-
-      DownloadService downloadService = DownloadService();
-      String filePath = await downloadService.download(imageUrl, title);
-
-      if (filePath.isNotEmpty) {
-        _showDialog(context, "Unduh Selesai", "Berkas infografis '$title' disimpan di $filePath");
-      } else {
-        _showDialog(context, "Unduh Gagal", "Gagal mengunduh file.");
-      }
-    } catch (error) {
-      _showDialog(context, "Error", "Terjadi kesalahan saat mengunduh file: $error");
+    }
+    else {
+      // Display a message indicating that the application is not authorized
+      Fluttertoast.showToast(
+        msg: "Aplikasi belum diizinkan untuk mengakses penyimpanan.",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.blue,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
     }
   }
 
@@ -150,16 +178,14 @@ class _InfografisPagesState extends State<InfografisPages> {
       body: ListView.builder(
         itemCount: dataInfografis.length,
         itemBuilder: (context, index) {
-          final abstract = truncateText(
-              abstraksiBrs.length > index ? abstraksiBrs[index] : '', 150);
 
           return Padding(
             padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
             child: InkWell(
               onTap: () {
-                String imageUrl = dataInfografis[index]["dl"];
+                String imageUrl = dataInfografis[index]["img"];
                 String title = dataInfografis[index]["title"];
-                openDownloadConfirmation(context, imageUrl, title);
+                openDownloadConfirmation(context, imageUrl, index, title);
               },
               child: Container(
                 clipBehavior: Clip.hardEdge,
@@ -210,67 +236,19 @@ class _InfografisPagesState extends State<InfografisPages> {
     );
   }
 
-  void _showDialog(BuildContext context, String title, String content) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(title),
-          content: Text(content),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text("OK"),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  Future<bool> _checkPermission() async {
+    if (Platform.isAndroid || Platform.isIOS) {
+      var permissionStatus = await Permission.storage.status;
 
-  void _showToast(BuildContext context, String message) {
-    Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.red,
-      textColor: Colors.white,
-      fontSize: 16.0,
-    );
-  }
-}
-
-class DownloadService {
-  Future<String> download(String pdfUrl, String title) async {
-    try {
-      var externalDirectory = await getExternalStorageDirectory();
-      if (externalDirectory != null) {
-        var urlImage = pdfUrl;
-        var dio = Dio();
-        var result = await dio.get<List<int>>(urlImage,
-            options: Options(responseType: ResponseType.bytes));
-
-        if (result.statusCode == 200) {
-          var byteDownloaded = result.data;
-          if (byteDownloaded != null) {
-            var fileName = title.replaceAll(RegExp(r"[^\w\s]+"), "") + ".jpg";
-            var file = File("${externalDirectory.path}/Download/$fileName");
-            file.writeAsBytesSync(byteDownloaded);
-            return "${file.path}";
-          } else {
-            return "error file kosong";
-          }
-        } else {
-          return "download error";
-        }
-      } else {
-        return "error";
+      if (permissionStatus.isDenied) {
+        await Permission.storage.request();
+        await saf.getDirectoryPermission(isDynamic: true);
+        return permissionStatus.isGranted;
       }
-    } catch (error) {
-      return "error";
+      else {
+        return permissionStatus.isGranted;
+      }
     }
+    return true;
   }
 }

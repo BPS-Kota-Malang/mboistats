@@ -7,7 +7,7 @@ description: "A new Flutter project."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
-version: 3.0.7+57
+version: 3.0.8+58
 
 environment:
  sdk: '>=2.12.0 <4.0.0'
@@ -15,27 +15,28 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  app_settings: ^5.1.1
+  cached_network_image: ^3.0.0
   carousel_slider: ^4.0.0
+  connectivity: ^3.0.6
   cupertino_icons: ^1.0.2
+  dio: ^5.4.2+1
+  fluttertoast: ^8.2.4
+  flutter_downloader: ^1.6.1
+  file_picker: ^8.0.0+1
+  flutter_file_downloader: ^1.2.1
   http: ^1.2.0
+  open_file: ^3.2.1
+  open_settings: ^2.0.2
+  package_info: ^2.0.2
+  path_provider: ^2.0.11
+  permission_handler: ^10.2.0
+  saf: ^1.0.3+3
+  syncfusion_flutter_pdfviewer: ^25.1.37
+  toast: ^0.3.0
+  url_launcher: ^6.0.13
   webview_flutter: ^4.7.0
   webview_flutter_plus: ^0.4.4
-  url_launcher: ^6.0.13
-  path_provider: ^2.0.9
-  open_file: ^3.2.1
-  syncfusion_flutter_pdfviewer: ^25.1.37
-  flutter_downloader: ^1.6.1
-  permission_handler: ^11.0.1
-  dio: ^5.4.2+1
-  package_info: ^2.0.2
-  cached_network_image: ^3.0.0
-  flutter_file_downloader: ^1.2.0
-  connectivity: ^3.0.6
-  fluttertoast: ^8.2.4
-  toast: ^0.3.0
-  file_picker: ^8.0.0+1
-  app_settings: ^5.1.1
-  open_settings: ^2.0.2
 package_info: ^2.0.3
 
  
