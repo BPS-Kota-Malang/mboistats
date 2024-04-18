@@ -31,10 +31,7 @@ class _HomePageState extends State<HomePage> {
     return (await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text(
-              'Konfirmasi Keluar',
-              style: TextStyle(color: Colors.blue),
-            ),
+            title: const Text('Konfirmasi Keluar', style: TextStyle(color: Colors.blue)),
             content: const Text('Apakah Anda yakin ingin keluar dari aplikasi?'),
             actions: <Widget>[
               OutlinedButton(
