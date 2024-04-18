@@ -89,15 +89,9 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Yuk lebih dekat dengan BPS Kota Malang',
-                      style: bold16.copyWith(color: dark1),
-                    ),
+                    Text('Yuk lebih dekat dengan BPS Kota Malang', style: bold16.copyWith(color: dark1)),
                     const SizedBox(height: 8.0),
-                    Text(
-                      'Mau cari data apa???',
-                      style: regular14.copyWith(color: dark2),
-                    ),
+                    Text('Mau cari data apa???', style: regular14.copyWith(color: dark2)),
                   ],
                 ),
               ),
