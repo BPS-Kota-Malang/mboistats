@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mboistat/datas/more.dart';
 import 'package:mboistat/theme.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class MorePages extends StatelessWidget {
+  const MorePages({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Menu Lainnya'),
+        title: const Text('Menu Lainnya'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -32,10 +34,9 @@ class MorePages extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     if (item.title == 'Galeri InovaZI') {
-                      launch(
-                          'https://sites.google.com/view/bincangdata/halaman-muka');
+                      launchUrlString('https://sites.google.com/view/bincangdata/halaman-muka');
                     } else if (item.title == 'LAPOR') {
-                      launch('https://s.bps.go.id/lapor3573');
+                      launchUrlString('https://s.bps.go.id/lapor3573');
                     }
                   },
                   child: Container(
@@ -48,12 +49,12 @@ class MorePages extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.2),
                           spreadRadius: 2,
                           blurRadius: 4,
-                          offset: Offset(0, 2),
+                          offset: const Offset(0, 2),
                         ),
                       ],
                     ),
                     child: ListTile(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                       leading: Image.asset('assets/icons/${item.icons}'),
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

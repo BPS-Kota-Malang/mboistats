@@ -7,7 +7,7 @@ class TentangPages extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tentang BPS Kota Malang'),
+        title: const Text('Tentang BPS Kota Malang'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -31,7 +31,7 @@ class TentangPages extends StatelessWidget {
                 width: 200, // Lebar container sesuai dengan lebar ikon telepon
                 height:
                     200, // Tinggi container sesuai dengan tinggi ikon telepon
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
                         'assets/icons/office.png'), // Path ikon telepon
@@ -40,13 +40,13 @@ class TentangPages extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
                 height:
                     10), // Tambahkan SizedBox dengan ketinggian yang diinginkan
-            Center(
+            const Center(
               child: Padding(
                 padding:
-                    const EdgeInsets.only(bottom: 16.0), // Jarak di bawah judul
+                    EdgeInsets.only(bottom: 16.0), // Jarak di bawah judul
                 child: Column(),
               ),
             ),
@@ -63,7 +63,7 @@ class TentangPages extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.2),
                           spreadRadius: 2,
                           blurRadius: 4,
-                          offset: Offset(0, 2),
+                          offset: const Offset(0, 2),
                         ),
                       ],
                     ),
@@ -75,7 +75,7 @@ class TentangPages extends StatelessWidget {
                         ),
                       ),
                       subtitle: Container(
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         child: Text(
                           item.description,
                           style: regular14.copyWith(color: dark2),

@@ -11,6 +11,8 @@ import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
 
 class BeritaPages extends StatefulWidget {
+  const BeritaPages({Key? key}) : super(key: key);
+
   @override
   _BeritaPageState createState() => _BeritaPageState();
 }
@@ -46,7 +48,7 @@ class _BeritaPageState extends State<BeritaPages> {
 
   String truncateText(String text, int maxLength) {
     if (text.length > maxLength) {
-      return text.substring(0, maxLength) + '...';
+      return '${text.substring(0, maxLength)}...';
     }
     return text;
   }
@@ -54,7 +56,7 @@ class _BeritaPageState extends State<BeritaPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -94,12 +96,12 @@ class _BeritaPageState extends State<BeritaPages> {
                       color: Colors.grey.withOpacity(0.2),
                       spreadRadius: 2,
                       blurRadius: 4,
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
                 child: ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                   leading: Image.asset(
                     'assets/icons/news.png',
                     width: 40,
@@ -119,7 +121,7 @@ class _BeritaPageState extends State<BeritaPages> {
                             Text(
                               "Size: ${dataBRS[index]["size"]}",
                               style:
-                                  TextStyle(fontSize: 12, color: Colors.grey),
+                                  const TextStyle(fontSize: 12, color: Colors.grey),
                             ),
                           ],
                         ),
@@ -139,7 +141,7 @@ class _BeritaPageState extends State<BeritaPages> {
           );
         },
       ),
-      bottomNavigationBar: Footer(),
+      bottomNavigationBar: const Footer(),
     );
   }
 
@@ -149,21 +151,21 @@ class _BeritaPageState extends State<BeritaPages> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Konfirmasi Unduh"),
-          content: Text("Apakah Anda ingin mengunduh/membuka berkas BRS ini?"),
+          title: const Text("Konfirmasi Unduh"),
+          content: const Text("Apakah Anda ingin mengunduh/membuka berkas BRS ini?"),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
                 openPdfDirectly(context, pdfUrl);
               },
-              child: Text("Buka PDF"),
+              child: const Text("Buka PDF"),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pop(context, false);
               },
-              child: Text("Tidak"),
+              child: const Text("Tidak"),
             ),
             TextButton(
               onPressed: () async {
@@ -172,7 +174,7 @@ class _BeritaPageState extends State<BeritaPages> {
                 String fileName = dataBRS[index]["title"];
                 await downloadAndShowConfirmation(context,pdfUrl, fileName);
               },
-              child: Text("Unduh"),
+              child: const Text("Unduh"),
             ),
           ],
         );
@@ -288,13 +290,13 @@ class _BeritaPageState extends State<BeritaPages> {
 class PDFViewer extends StatelessWidget {
   final String pdfUrl;
 
-  PDFViewer({required this.pdfUrl});
+  const PDFViewer({Key? key, required this.pdfUrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PDF Viewer'),
+        title: const Text('PDF Viewer'),
       ),
       body: SfPdfViewer.network(
         pdfUrl,

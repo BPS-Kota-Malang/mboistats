@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mboistat/components/buttonSection.dart';
-import 'package:mboistat/components/carousel-infografis.dart';
-import 'package:mboistat/components/carousel-publikasi.dart';
+import 'package:mboistat/components/carousel_infografis.dart';
+import 'package:mboistat/components/carousel_publikasi.dart';
 import 'package:mboistat/components/footer.dart';
 import 'package:mboistat/components/menus.dart';
 import 'package:mboistat/theme.dart';

@@ -9,6 +9,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:saf/saf.dart';
 
 class InfografisPages extends StatefulWidget {
+  const InfografisPages({Key? key}) : super(key: key);
+
   @override
   _InfografisPagesState createState() => _InfografisPagesState();
 }
@@ -55,8 +57,8 @@ class _InfografisPagesState extends State<InfografisPages> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Konfirmasi Unduh"),
-            content: Text("Apakah Anda ingin mengunduh berkas infografis ini?"),
+            title: const Text("Konfirmasi Unduh"),
+            content: const Text("Apakah Anda ingin mengunduh berkas infografis ini?"),
             actions: [
               TextButton(
                 onPressed: () async {
@@ -64,13 +66,13 @@ class _InfografisPagesState extends State<InfografisPages> {
                   String imageTitle = dataInfografis[index]["title"];
                   await downloadAndShowConfirmation(context, imageUrl, imageTitle);
                 },
-                child: Text("Ya"),
+                child: const Text("Ya"),
               ),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context, false);
                 },
-                child: Text("Tidak"),
+                child: const Text("Tidak"),
               ),
             ],
           );
@@ -164,7 +166,7 @@ class _InfografisPagesState extends State<InfografisPages> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Infografis'),
+        title: const Text('Infografis'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -197,12 +199,12 @@ class _InfografisPagesState extends State<InfografisPages> {
                       color: Colors.grey.withOpacity(0.2),
                       spreadRadius: 2,
                       blurRadius: 4,
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
                 child: ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                   leading: Image.asset(
                     'assets/icons/infographics.png',
                     width: 40,
