@@ -29,7 +29,7 @@ import 'package:mboistat/pages/kependudukan/kependudukan_sukun.dart';
 import 'package:mboistat/pages/kependudukan/kependudukan_lowokwaru.dart';
 import 'package:mboistat/pages/ekonomi/perekonomian_inflasi_bulanan.dart';
 import 'package:mboistat/pages/ekonomi/perekonomian_inflasi_tahunan.dart';
-import 'package:mboistat/pages/ekonomi/perekonomian_pdrb_lapus.dart';
+import 'package:mboistat/pages/ekonomi/perekonomian_lpe.dart';
 import 'package:mboistat/pages/ekonomi/perekonomian_pdrb.dart';
 import 'package:mboistat/pages/kemiskinan/kemiskinan_garis.dart';
 import 'package:mboistat/pages/kemiskinan/kemiskinan_indeks_kedalaman.dart';
