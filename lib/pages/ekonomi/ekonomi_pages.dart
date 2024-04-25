@@ -3,11 +3,13 @@ import 'package:mboistat/datas/ekonomi.dart';
 import 'package:mboistat/theme.dart';
 
 class EkonomiPages extends StatelessWidget {
+  const EkonomiPages({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Data Perekonomian'),
+        title: const Text('Data Perekonomian'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -46,12 +48,12 @@ class EkonomiPages extends StatelessWidget {
                           spreadRadius: 2, // Seberapa tersebar bayangannya
                           blurRadius: 4, // Seberapa kabur bayangannya
                           offset:
-                              Offset(0, 2), // Perpindahan bayangan dari widget
+                              const Offset(0, 2), // Perpindahan bayangan dari widget
                         ),
                       ],
                     ),
                     child: ListTile(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                       leading: GestureDetector(
                         onTap: () {
                           if (item.route != null) {

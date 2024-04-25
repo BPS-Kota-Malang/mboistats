@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter/services.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 class InflasiBulananPage extends StatelessWidget {
@@ -20,11 +18,13 @@ class InflasiBulananPage extends StatelessWidget {
     )
     ..loadFlutterAssetServer('assets/web/perekonomian_inflasi_bulanan.html');
 
+  InflasiBulananPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inflasi Bulanan'),
+        title: const Text('Inflasi Bulanan'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -39,7 +39,7 @@ class InflasiBulananPage extends StatelessWidget {
         children: [
           // Background Image
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/back_perekonomian.png'),
                 fit: BoxFit.cover,

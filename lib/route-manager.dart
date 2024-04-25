@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:mboistat/pages/brs_pages.dart';
 import 'package:mboistat/pages/contact.dart';
-import 'package:mboistat/pages/ekonomi/ekonomi-pages.dart';
+import 'package:mboistat/pages/ekonomi/ekonomi_pages.dart';
 import 'package:mboistat/pages/more_pages.dart';
 import 'package:mboistat/pages/publikasi.dart';
 import 'package:mboistat/pages/tentang_pages.dart';
@@ -30,7 +30,7 @@ import 'package:mboistat/pages/kependudukan/kependudukan_lowokwaru.dart';
 import 'package:mboistat/pages/ekonomi/perekonomian_inflasi_bulanan.dart';
 import 'package:mboistat/pages/ekonomi/perekonomian_inflasi_tahunan.dart';
 import 'package:mboistat/pages/ekonomi/perekonomian_pdrb_lapus.dart';
-import 'package:mboistat/pages/ekonomi/pdrb-ekonomi.dart';
+import 'package:mboistat/pages/ekonomi/perekonomian_pdrb.dart';
 import 'package:mboistat/pages/kemiskinan/kemiskinan_garis.dart';
 import 'package:mboistat/pages/kemiskinan/kemiskinan_indeks_kedalaman.dart';
 import 'package:mboistat/pages/kemiskinan/kemiskinan_indeks_keparahan.dart';

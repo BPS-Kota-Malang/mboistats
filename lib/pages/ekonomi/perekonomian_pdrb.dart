@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter/services.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 class PDRB extends StatelessWidget {
@@ -20,11 +18,13 @@ class PDRB extends StatelessWidget {
     )
     ..loadFlutterAssetServer('assets/web/perekonomian_pdrb_lapus.html');
 
+  PDRB({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PDRB'),
+        title: const Text('PDRB'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -39,7 +39,7 @@ class PDRB extends StatelessWidget {
         children: [
           // Background Image
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/back_perekonomian.png'),
                 fit: BoxFit.cover,
