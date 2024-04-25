@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:mboistat/components/footer.dart';
 import 'package:mboistat/datas/contact.dart';
 import 'package:mboistat/theme.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class Contact extends StatefulWidget {
   @override
@@ -31,7 +31,7 @@ class _ContactState extends State<Contact> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -62,7 +62,7 @@ class _ContactState extends State<Contact> {
                 child: Container(
                   width: 200, // Lebar container sesuai dengan lebar ikon telepon
                   height: 200, // Tinggi container sesuai dengan tinggi ikon telepon
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('assets/icons/communication.png'), // Path ikon telepon
                       fit: BoxFit.cover, // Sesuaikan dengan tata letak gambar
@@ -70,7 +70,7 @@ class _ContactState extends State<Contact> {
                   ),
                 ),
               ),
-              SizedBox(height: 10), // Tambahkan SizedBox dengan ketinggian yang diinginkan
+              const SizedBox(height: 10), // Tambahkan SizedBox dengan ketinggian yang diinginkan
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 16.0), // Jarak di bawah judul
@@ -90,7 +90,7 @@ class _ContactState extends State<Contact> {
                   ),
                 ),
               ),
-              SizedBox(height: 16), // Tambahkan SizedBox dengan ketinggian yang diinginkan
+              const SizedBox(height: 16), // Tambahkan SizedBox dengan ketinggian yang diinginkan
               ...contact.map((item) => Padding(
                 padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
                 child: InkWell(
@@ -100,40 +100,39 @@ class _ContactState extends State<Contact> {
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
-                          title: Text('Konfirmasi Panggilan',
+                          title: const Text('Konfirmasi Panggilan',
                           style: TextStyle(color: Colors.blue),
                           ),
                           content: Text('Apakah Anda ingin menghubungi ${item.description}?'),
                           actions: <Widget>[
                             OutlinedButton(
-                              onPressed: () => Navigator.of(context).pop(false),
-                              style: OutlinedButton.styleFrom(
-                                side: BorderSide(color: Colors.blue), // Warna border biru
-                              ),
-                              child: Text('Batal',
-                                style: TextStyle(color: Colors.blue), // Warna teks biru
-                              ),
-                            ),
-                            ElevatedButton(
                               onPressed: () {
                                 Navigator.of(context).pop(); // Tutup dialog
-                                launch('tel:${item.description}'); // Meluncurkan panggilan telepon
+                                launchUrlString('tel:${item.description}'); // Meluncurkan panggilan telepon
                               },
-                              child: Text('Hubungi'),
+                              style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.blue)),
+                              child: const Text('Hubungi', style: TextStyle(color: Colors.blue)),
+                            ),
+                            OutlinedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(false);
+                              },
+                              style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.blue)),
+                              child: const Text('Batal', style: TextStyle(color: Colors.blue)),
                             ),
                           ],
                         ),
                       );
                     } else if (item.title == 'Alamat') {
-                      launch('https://www.google.com/maps/place/Jl.+Janti+Barat+No+47,+Sukun');
+                      launchUrlString('https://www.google.com/maps/place/Jl.+Janti+Barat+No+47,+Sukun');
                     } else if (item.title == 'Email') {
-                      launch('mailto:bps3573@bps.go.id');
+                      launchUrlString('mailto:bps3573@bps.go.id');
                     } else if (item.title == 'Instagram') {
-                      launch('https://instagram.com/bpskotamalang');
+                      launchUrlString('https://instagram.com/bpskotamalang');
                     } else if (item.title == 'WhatsApp') {
-                       launch('https://wa.me/+6281250503573');
+                      launchUrlString('https://wa.me/+6281250503573');
                     } else if (item.title == 'Website') {
-                      launch ('https://malangkota.bps.go.id/');
+                      launchUrlString ('https://malangkota.bps.go.id/');
                     }
                   },
                   child: Container(
@@ -146,7 +145,7 @@ class _ContactState extends State<Contact> {
                           color: Colors.grey.withOpacity(0.2),
                           spreadRadius: 2,
                           blurRadius: 4,
-                          offset: Offset(0, 2),
+                          offset: const Offset(0, 2),
                         ),
                       ],
                     ),
@@ -164,7 +163,7 @@ class _ContactState extends State<Contact> {
                             item.description,
                             style: regular14.copyWith(color: dark2),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Align(
                             alignment: Alignment.center,
                             child: Image.asset(
@@ -178,7 +177,7 @@ class _ContactState extends State<Contact> {
                   ),
                 ),
               )),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
             Center(
                   child: Column(
                     children: [
@@ -195,7 +194,7 @@ class _ContactState extends State<Contact> {
           ),
         ),
       ),
-      bottomNavigationBar: Footer(),
+      bottomNavigationBar: const Footer(),
     );
   }
 }

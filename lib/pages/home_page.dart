@@ -26,8 +26,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<bool> _onWillPop(BuildContext context) async {
-    // Memeriksa dan meminta izin WRITE_EXTERNAL_STORAGE atau MANAGE_EXTERNAL_STORAGE
-
     return (await showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -39,15 +37,17 @@ class _HomePageState extends State<HomePage> {
                   // Close the entire app when 'Ya' is selected
                   SystemNavigator.pop(); // Use this to exit the app
                 },
-                child: const Text('Ya'),
+                style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.blue)),
+                child: const Text('Ya',style: TextStyle(color: Colors.blue)),
               ),
               OutlinedButton(
-              onPressed: () {
-                // Close the entire app when 'Ya' is selected
-                SystemNavigator.pop(); // Use this to exit the app
-              },
-                child: const Text('Tidak'),
-                ),
+                onPressed: () {
+                  // Close the entire app when 'Ya' is selected
+                  Navigator.of(context).pop(false); // Use this to close dialog
+                },
+                style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.blue)),
+                child: const Text('Tidak',style: TextStyle(color: Colors.blue)),
+              ),
             ],
           ),
         )) ??
