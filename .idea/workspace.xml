@@ -10,12 +10,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2355516e-4a0a-42b0-908b-cd3ab65d93c8" name="Changes" comment="perubahan data">
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/ekonomi/ekonomi-pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/ekonomi/ekonomi_pages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/ekonomi/pdrb-ekonomi.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/ekonomi/perekonomian_pdrb.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/IPM/ipm-pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/IPM/ipm_pages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/IPM/ipm.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/IPM/ipm.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/IPM/ipm_daya_beli.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/IPM/ipm_daya_beli.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/IPM/ipm_hls.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/IPM/ipm_hls.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/IPM/ipm_rls.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/IPM/ipm_rls.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/IPM/ipm_uhh.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/IPM/ipm_uhh.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/ekonomi/ekonomi_pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/ekonomi/ekonomi_pages.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/ekonomi/perekonomian_inflasi_bulanan.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/ekonomi/perekonomian_inflasi_bulanan.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/ekonomi/perekonomian_inflasi_tahunan.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/ekonomi/perekonomian_inflasi_tahunan.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/ekonomi/perekonomian_pdrb_lapus.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/ekonomi/perekonomian_pdrb_lapus.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/ekonomi/perekonomian_lpe.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/ekonomi/perekonomian_lpe.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/ekonomi/perekonomian_pdrb.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/ekonomi/perekonomian_pdrb.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kemiskinan/kemiskinan.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kemiskinan/kemiskinan.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kemiskinan/kemiskinan_garis.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kemiskinan/kemiskinan_garis.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kemiskinan/kemiskinan_indeks_kedalaman.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kemiskinan/kemiskinan_indeks_kedalaman.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kemiskinan/kemiskinan_indeks_keparahan.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kemiskinan/kemiskinan_indeks_keparahan.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kemiskinan/kemiskinan_tingkat.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kemiskinan/kemiskinan_tingkat.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan-pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan_pages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan_blimbing.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan_blimbing.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan_jenis_kelamin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan_jenis_kelamin.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan_kecamatan.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan_kecamatan.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan_kedungkandang.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan_kedungkandang.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan_klojen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan_klojen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan_lowokwaru.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan_lowokwaru.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan_sukun.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kependudukan/kependudukan_sukun.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kesejahteraan/kesejahteraan-pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kesejahteraan/kesejahteraan_pages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kesejahteraan/kesejahteraan_gini_rasio.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kesejahteraan/kesejahteraan_gini_rasio.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/kesejahteraan/kesejahteraan_pengeluaran_perkapita.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/kesejahteraan/kesejahteraan_pengeluaran_perkapita.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/ketenagakerjaan/ketenagakerjaan-pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/ketenagakerjaan/ketenagakerjaan_pages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/ketenagakerjaan/ketenagakerjaan_ak_pendidikan.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/ketenagakerjaan/ketenagakerjaan_ak_pendidikan.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/ketenagakerjaan/ketenagakerjaan_penganggur_pendidikan.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/ketenagakerjaan/ketenagakerjaan_penganggur_pendidikan.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/ketenagakerjaan/ketenagakerjaan_tpak.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/ketenagakerjaan/ketenagakerjaan_tpak.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/ketenagakerjaan/ketenagakerjaan_tpt.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/ketenagakerjaan/ketenagakerjaan_tpt.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/pertanian/pertanian-pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/pertanian/pertanian_pages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/pertanian/pertanian_luas_panen_padi.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/pertanian/pertanian_luas_panen_padi.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/pertanian/pertanian_produksi_beras.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/pertanian/pertanian_produksi_beras.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/pertanian/pertanian_produksi_padi.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/pertanian/pertanian_produksi_padi.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/pertanian/pertanian_produktivitas_padi.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/pertanian/pertanian_produktivitas_padi.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/route-manager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/route-manager.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -176,7 +209,23 @@
       <option name="project" value="LOCAL" />
       <updated>1714016266568</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="perubahan data">
+      <option name="closed" value="true" />
+      <created>1714016812053</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1714016812053</updated>
+    </task>
+    <task id="LOCAL-00012" summary="perubahan data">
+      <option name="closed" value="true" />
+      <created>1714016914432</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1714016914432</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">

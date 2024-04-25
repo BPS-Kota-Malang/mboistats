@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter/services.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
-class ProduktivitasPadiPage extends StatelessWidget {
+class ProduktivitasPadiPage extends StatefulWidget {
+  const ProduktivitasPadiPage({Key? key}) : super(key: key);
 
+
+  @override
+  State<ProduktivitasPadiPage> createState() => _ProduktivitasPadiPageState();
+}
+
+class _ProduktivitasPadiPageState extends State<ProduktivitasPadiPage> {
   WebViewControllerPlus controller = WebViewControllerPlus()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(const Color(0x00000000))
@@ -24,7 +29,7 @@ class ProduktivitasPadiPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Produktivitas Padi'),
+        title: const Text('Produktivitas Padi'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -39,7 +44,7 @@ class ProduktivitasPadiPage extends StatelessWidget {
         children: [
           // Background Image
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/back_pertanian.png'),
                 fit: BoxFit.cover,

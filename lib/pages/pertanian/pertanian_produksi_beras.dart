@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter/services.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
-class ProduksiBerasPage extends StatelessWidget {
+class ProduksiBerasPage extends StatefulWidget {
+  const ProduksiBerasPage({Key? key}) : super(key: key);
 
+
+  @override
+  State<ProduksiBerasPage> createState() => _ProduksiBerasPageState();
+}
+
+class _ProduksiBerasPageState extends State<ProduksiBerasPage> {
   WebViewControllerPlus controller = WebViewControllerPlus()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(const Color(0x00000000))
@@ -24,7 +29,7 @@ class ProduksiBerasPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Produksi Beras'),
+        title: const Text('Produksi Beras'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -39,7 +44,7 @@ class ProduksiBerasPage extends StatelessWidget {
         children: [
           // Background Image
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/back_pertanian.png'),
                 fit: BoxFit.cover,

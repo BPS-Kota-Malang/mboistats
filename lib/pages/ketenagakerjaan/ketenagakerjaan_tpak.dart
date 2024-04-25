@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter/services.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
-class TingkatPartisipasiAngkatanKerjaPage extends StatelessWidget {
+class TingkatPartisipasiAngkatanKerjaPage extends StatefulWidget {
+  const TingkatPartisipasiAngkatanKerjaPage({Key? key}) : super(key: key);
 
+
+  @override
+  State<TingkatPartisipasiAngkatanKerjaPage> createState() => _TingkatPartisipasiAngkatanKerjaPageState();
+}
+
+class _TingkatPartisipasiAngkatanKerjaPageState extends State<TingkatPartisipasiAngkatanKerjaPage> {
   WebViewControllerPlus controller = WebViewControllerPlus()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(const Color(0x00000000))
@@ -24,7 +29,7 @@ class TingkatPartisipasiAngkatanKerjaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TPAK'),
+        title: const Text('TPAK'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -39,7 +44,7 @@ class TingkatPartisipasiAngkatanKerjaPage extends StatelessWidget {
         children: [
           // Background Image
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/back_ketenagakerjaan.png'),
                 fit: BoxFit.cover,

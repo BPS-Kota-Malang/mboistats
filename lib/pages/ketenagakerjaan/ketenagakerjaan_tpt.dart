@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter/services.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
-class PersentasePengangguranMenurutPendidikanPage extends StatelessWidget {
+class PersentasePengangguranMenurutPendidikanPage extends StatefulWidget {
+  const PersentasePengangguranMenurutPendidikanPage({Key? key}) : super(key: key);
 
+
+  @override
+  State<PersentasePengangguranMenurutPendidikanPage> createState() => _PersentasePengangguranMenurutPendidikanPageState();
+}
+
+class _PersentasePengangguranMenurutPendidikanPageState extends State<PersentasePengangguranMenurutPendidikanPage> {
   WebViewControllerPlus controller = WebViewControllerPlus()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(const Color(0x00000000))
@@ -24,7 +29,7 @@ class PersentasePengangguranMenurutPendidikanPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TPT'),
+        title: const Text('TPT'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -39,7 +44,7 @@ class PersentasePengangguranMenurutPendidikanPage extends StatelessWidget {
         children: [
           // Background Image
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/back_ketenagakerjaan.png'),
                 fit: BoxFit.cover,

@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
-import 'package:flutter/services.dart';
 
-class LuasPanenPadiPage extends StatelessWidget {
+class LuasPanenPadiPage extends StatefulWidget {
+  const LuasPanenPadiPage({Key? key}) : super(key: key);
 
+
+  @override
+  State<LuasPanenPadiPage> createState() => _LuasPanenPadiPageState();
+}
+
+class _LuasPanenPadiPageState extends State<LuasPanenPadiPage> {
   WebViewControllerPlus controller = WebViewControllerPlus()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(const Color(0x00000000))
@@ -24,7 +29,7 @@ class LuasPanenPadiPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Luas Panen Padi'),
+        title: const Text('Luas Panen Padi'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -39,7 +44,7 @@ class LuasPanenPadiPage extends StatelessWidget {
         children: [
           // Background Image
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/back_pertanian.png'),
                 fit: BoxFit.cover,

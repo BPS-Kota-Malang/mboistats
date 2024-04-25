@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mboistat/datas/ekonomi.dart';
 import 'package:mboistat/theme.dart';
 
-class EkonomiPages extends StatelessWidget {
+class EkonomiPages extends StatefulWidget {
   const EkonomiPages({Key? key}) : super(key: key);
 
+  @override
+  State<EkonomiPages> createState() => _EkonomiPagesState();
+}
+
+class _EkonomiPagesState extends State<EkonomiPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

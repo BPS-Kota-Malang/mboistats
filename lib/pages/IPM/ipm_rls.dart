@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter/services.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
-class RataRataLamaSekolahPage extends StatelessWidget {
+class RataRataLamaSekolahPage extends StatefulWidget {
+  const RataRataLamaSekolahPage({Key? key}) : super(key: key);
 
+
+  @override
+  State<RataRataLamaSekolahPage> createState() => _RataRataLamaSekolahPageState();
+}
+
+class _RataRataLamaSekolahPageState extends State<RataRataLamaSekolahPage> {
   WebViewControllerPlus controller = WebViewControllerPlus()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(const Color(0x00000000))
@@ -24,7 +29,7 @@ class RataRataLamaSekolahPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Rata - Rata Lama Sekolah'),
+        title: const Text('Rata - Rata Lama Sekolah'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -39,7 +44,7 @@ class RataRataLamaSekolahPage extends StatelessWidget {
         children: [
           // Background Image
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/back_ipm.png'),
                 fit: BoxFit.cover,

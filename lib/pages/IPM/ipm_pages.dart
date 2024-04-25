@@ -3,11 +3,13 @@ import 'package:mboistat/datas/ipm.dart';
 import 'package:mboistat/theme.dart';
 
 class IPMPages extends StatelessWidget {
+  const IPMPages({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Data IPM'),
+        title: const Text('Data IPM'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -43,12 +45,12 @@ class IPMPages extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.2),
                           spreadRadius: 2,
                           blurRadius: 4,
-                          offset: Offset(0, 2),
+                          offset: const Offset(0, 2),
                         ),
                       ],
                     ),
                     child: ListTile(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                       leading: GestureDetector(
                         onTap: () {
                           if (item.route != null) {

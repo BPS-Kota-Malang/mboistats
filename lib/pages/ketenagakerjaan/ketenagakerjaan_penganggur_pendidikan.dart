@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter/services.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
-class PengangguranMenurutPendidikan extends StatelessWidget {
+class PengangguranMenurutPendidikan extends StatefulWidget {
+  const PengangguranMenurutPendidikan({Key? key}) : super(key: key);
 
+
+  @override
+  State<PengangguranMenurutPendidikan> createState() => _PengangguranMenurutPendidikanState();
+}
+
+class _PengangguranMenurutPendidikanState extends State<PengangguranMenurutPendidikan> {
   WebViewControllerPlus controller = WebViewControllerPlus()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(const Color(0x00000000))
@@ -24,7 +29,7 @@ class PengangguranMenurutPendidikan extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pengangguran'),
+        title: const Text('Pengangguran'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -39,7 +44,7 @@ class PengangguranMenurutPendidikan extends StatelessWidget {
         children: [
           // Background Image
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/back_ketenagakerjaan.png'),
                 fit: BoxFit.cover,

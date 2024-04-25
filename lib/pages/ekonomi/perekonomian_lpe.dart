@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
-class LajuPertumbuhan extends StatelessWidget {
+class LajuPertumbuhan extends StatefulWidget {
 
+
+  const LajuPertumbuhan({Key? key}) : super(key: key);
+
+  @override
+  State<LajuPertumbuhan> createState() => _LajuPertumbuhanState();
+}
+
+class _LajuPertumbuhanState extends State<LajuPertumbuhan> {
   WebViewControllerPlus controller = WebViewControllerPlus()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(const Color(0x00000000))
@@ -17,8 +25,6 @@ class LajuPertumbuhan extends StatelessWidget {
       ),
     )
     ..loadFlutterAssetServer('assets/web/perekonomian_lpe.html');
-
-  LajuPertumbuhan({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

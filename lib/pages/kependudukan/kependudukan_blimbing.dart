@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter/services.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
-class PendudukBlimbingPage extends StatelessWidget {
+class PendudukBlimbingPage extends StatefulWidget {
+  const PendudukBlimbingPage({Key? key}) : super(key: key);
 
+
+  @override
+  State<PendudukBlimbingPage> createState() => _PendudukBlimbingPageState();
+}
+
+class _PendudukBlimbingPageState extends State<PendudukBlimbingPage> {
   WebViewControllerPlus controller = WebViewControllerPlus()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(const Color(0x00000000))
@@ -24,7 +29,7 @@ class PendudukBlimbingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kependudukan'),
+        title: const Text('Kependudukan'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -39,7 +44,7 @@ class PendudukBlimbingPage extends StatelessWidget {
         children: [
           // Background Image
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/back_kependudukan.png'),
                 fit: BoxFit.cover,

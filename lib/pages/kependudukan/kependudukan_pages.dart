@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/datas/pertanian.dart';
+import 'package:mboistat/datas/kependudukan.dart';
 import 'package:mboistat/theme.dart';
 
-class PertanianPages extends StatelessWidget {
+class KependudukanPages extends StatelessWidget {
+  const KependudukanPages({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Data Pertanian'),
+        title: const Text('Data Kependudukan'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -19,39 +21,41 @@ class PertanianPages extends StatelessWidget {
           },
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 24,
-          ),
-          //News
-          ...pertanian.map((item) => Padding(
-                padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 24,
+            ),
+            //News
+            ...kependudukan.map((item) => Padding(
+                  padding:
+                  const EdgeInsets.only(bottom: 24, left: 16, right: 16),
                   child: InkWell(
-                  onTap: () {
-                    if (item.route != null) {
-                      Navigator.of(context).pushNamed(item.route!);
-                    }
-                  },
-                child: Container(
-                  clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: dark4),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey
-                            .withOpacity(0.2), // Warna abu-abu transparan
-                        spreadRadius: 2, // Seberapa tersebar bayangannya
-                        blurRadius: 4, // Seberapa kabur bayangannya
-                        offset:
-                            Offset(0, 2), // Perpindahan bayangan dari widget
+                    onTap: () {
+                      if (item.route != null) {
+                        Navigator.of(context).pushNamed(item.route!);
+                      }
+                    },
+                    child: Container(
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: dark4),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey
+                                .withOpacity(0.2), // Warna abu-abu transparan
+                            spreadRadius: 2, // Seberapa tersebar bayangannya
+                            blurRadius: 4, // Seberapa kabur bayangannya
+                            offset: const Offset(
+                                0, 2), // Perpindahan bayangan dari widget
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: ListTile(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                       leading: GestureDetector(
                         onTap: () {
                           if (item.route != null) {
@@ -80,10 +84,11 @@ class PertanianPages extends StatelessWidget {
                         ],
                       ),
                     ),
-                ),
+                    ),
                   ),
-              )),
-        ],
+                )),
+          ],
+        ),
       ),
     );
   }

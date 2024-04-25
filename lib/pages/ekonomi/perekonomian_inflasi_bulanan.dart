@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
-class InflasiBulananPage extends StatelessWidget {
+class InflasiBulananPage extends StatefulWidget {
 
+
+  const InflasiBulananPage({Key? key}) : super(key: key);
+
+  @override
+  State<InflasiBulananPage> createState() => _InflasiBulananPageState();
+}
+
+class _InflasiBulananPageState extends State<InflasiBulananPage> {
   WebViewControllerPlus controller = WebViewControllerPlus()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(const Color(0x00000000))
@@ -17,8 +25,6 @@ class InflasiBulananPage extends StatelessWidget {
       ),
     )
     ..loadFlutterAssetServer('assets/web/perekonomian_inflasi_bulanan.html');
-
-  InflasiBulananPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

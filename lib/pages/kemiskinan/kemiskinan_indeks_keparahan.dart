@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter/services.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
-class IndeksKeparahanKemiskinan extends StatelessWidget {
+class IndeksKeparahanKemiskinan extends StatefulWidget {
+  const IndeksKeparahanKemiskinan({Key? key}) : super(key: key);
 
+
+  @override
+  State<IndeksKeparahanKemiskinan> createState() => _IndeksKeparahanKemiskinanState();
+}
+
+class _IndeksKeparahanKemiskinanState extends State<IndeksKeparahanKemiskinan> {
   WebViewControllerPlus controller = WebViewControllerPlus()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(const Color(0x00000000))
@@ -24,7 +29,7 @@ class IndeksKeparahanKemiskinan extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Indeks Keparahan Kemiskinan'),
+        title: const Text('Indeks Keparahan Kemiskinan'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -39,7 +44,7 @@ class IndeksKeparahanKemiskinan extends StatelessWidget {
         children: [
           // Background Image
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/back_kemiskinan.png'),
                 fit: BoxFit.cover,

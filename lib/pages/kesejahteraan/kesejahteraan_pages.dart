@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/datas/ketenagakerjaan.dart';
+import 'package:mboistat/datas/kesejahteraan.dart';
 import 'package:mboistat/theme.dart';
 
-class KetenagakerjaanPages extends StatelessWidget {
+class KesejahteraanPages extends StatelessWidget {
+  const KesejahteraanPages({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Data Ketenagakerjaan'),
+        title: const Text('Data Kesejahteraan'),
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/left-arrow.png',
@@ -26,32 +28,32 @@ class KetenagakerjaanPages extends StatelessWidget {
             height: 24,
           ),
           //News
-          ...ketenagakerjaan.map((item) => Padding(
+          ...kesejahteraan.map((item) => Padding(
                 padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
-                child: InkWell(
+                 child: InkWell(
                   onTap: () {
                     if (item.route != null) {
                       Navigator.of(context).pushNamed(item.route!);
                     }
                   },
-                  child: Container(
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: dark4),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey
-                              .withOpacity(0.2), // Warna abu-abu transparan
-                          spreadRadius: 2, // Seberapa tersebar bayangannya
-                          blurRadius: 4, // Seberapa kabur bayangannya
-                          offset:
-                              Offset(0, 2), // Perpindahan bayangan dari widget
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                child: Container(
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: dark4),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey
+                            .withOpacity(0.2), // Warna abu-abu transparan
+                        spreadRadius: 2, // Seberapa tersebar bayangannya
+                        blurRadius: 4, // Seberapa kabur bayangannya
+                        offset:
+                            const Offset(0, 2), // Perpindahan bayangan dari widget
+                      ),
+                    ],
+                  ),
+                  child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                       leading: GestureDetector(
                         onTap: () {
                           if (item.route != null) {
@@ -80,8 +82,8 @@ class KetenagakerjaanPages extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ),
                 ),
+                 ),
               )),
         ],
       ),
