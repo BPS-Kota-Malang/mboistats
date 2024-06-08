@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/mboisat.iml" filepath="$PROJECT_DIR$/mboisat.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/mboisat_android.iml" filepath="$PROJECT_DIR$/android/mboisat_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mboistats.iml" filepath="$PROJECT_DIR$/mboistats.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/mboistats_android.iml" filepath="$PROJECT_DIR$/android/mboistats_android.iml" />
     </modules>
   </component>
 </project>

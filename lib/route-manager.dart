@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mboistat/pages/brs_pages.dart';
 import 'package:mboistat/pages/contact.dart';
 import 'package:mboistat/pages/ekonomi/ekonomi_pages.dart';
+import 'package:mboistat/pages/ekonomi/perekonomian_deteksi_dini_inflasi.dart';
 import 'package:mboistat/pages/more_pages.dart';
 import 'package:mboistat/pages/publikasi.dart';
 import 'package:mboistat/pages/tentang_pages.dart';
@@ -86,6 +87,7 @@ class RouteManager {
     '/PDRB': (context) => PDRB(),
     '/InflasiTahunKalender': (context) => InflasiTahunanPage(),
     '/InflasiBulanan': (context) => InflasiBulananPage(),
+    '/DeteksiDiniInflasi': (context) => DeteksiDiniInflasiPage(),
 
     //Kemiskinan
     '/kemiskinan': (context) => KemiskinanPages(),

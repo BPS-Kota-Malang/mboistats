@@ -9,4 +9,6 @@ List<Ekonomi> ekonomi = [
       route: '/InflasiTahunKalender'),
   Ekonomi('inflasi_bulanan.png', 'Inflasi Bulanan',
       route: '/InflasiBulanan'),
+  Ekonomi('perekonomian_deteksi_inflasi.png', 'Deteksi Dini Inflasi',
+      route: '/DeteksiDiniInflasi'),
 ];

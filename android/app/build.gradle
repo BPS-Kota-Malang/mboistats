@@ -31,7 +31,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("X:\\AndroidProject\\keystore\\mboistats_keystore.jks")
+            storeFile file("C:\\Users\\BPS KOTA MALANG 5\\Documents\\Android Project\\keystore\\mboistats_keystore.jks")
             storePassword "@BPSKotaMalang3573"
             keyAlias "scaitz"
             keyPassword "@BPSKotaMalang3573"
