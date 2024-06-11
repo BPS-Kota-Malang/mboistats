@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MboistatButton {
+class MboistatsButton {
   final String button;
   final String title;
   final Color? color;
   final String route;
 
-  MboistatButton({
+  MboistatsButton({
     required this.button,
     required this.title,
     this.color,

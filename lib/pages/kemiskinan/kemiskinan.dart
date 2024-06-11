@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/datas/kemiskinan.dart';
-import 'package:mboistat/theme.dart';
+import 'package:mboistats/datas/kemiskinan.dart';
+import 'package:mboistats/theme.dart';
 
 class KemiskinanPages extends StatelessWidget {
   const KemiskinanPages({Key? key}) : super(key: key);

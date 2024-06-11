@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/datas/pertanian.dart';
-import 'package:mboistat/theme.dart';
+import 'package:mboistats/datas/pertanian.dart';
+import 'package:mboistats/theme.dart';
 
 class PertanianPages extends StatelessWidget {
   const PertanianPages({Key? key}) : super(key: key);

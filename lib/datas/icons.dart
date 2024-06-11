@@ -1,20 +1,20 @@
-import 'package:mboistat/models/mboistat_icon.dart';
+import 'package:mboistats/models/mboistats_icon.dart';
 
 //ini dibangun menggunakan contruktor
-List<MboistatIcon> mboistatMenuIcon = [
-  MboistatIcon(
+List<mboistatsIcon> mboistatsMenuIcon = [
+  mboistatsIcon(
       icon: 'ketenagakerjaan',
       title: 'Tenaga Kerja',
       route: '/ketenagakerjaan'),
-  MboistatIcon(icon: 'ekonomi', title: 'Perekonomian', route: '/ekonomi'),
-  MboistatIcon(icon: 'ipm', title: 'IPM', route: '/ipm'),
-  MboistatIcon(icon: 'kemiskinan', title: 'Kemiskinan', route: '/kemiskinan'),
-  MboistatIcon(
+  mboistatsIcon(icon: 'ekonomi', title: 'Perekonomian', route: '/ekonomi'),
+  mboistatsIcon(icon: 'ipm', title: 'IPM', route: '/ipm'),
+  mboistatsIcon(icon: 'kemiskinan', title: 'Kemiskinan', route: '/kemiskinan'),
+  mboistatsIcon(
       icon: 'kependudukan', title: 'Kependudukan', route: '/kependudukan'),
-  MboistatIcon(
+  mboistatsIcon(
       icon: 'kesejahteraan', title: 'Kesejahteraan', route: '/kesejahteraan'),
 
-  MboistatIcon(icon: 'pertanian', title: 'Pertanian', route: '/pertanian'),
-  MboistatIcon(icon: 'more', title: 'Lainnya', route: '/more'),
-  //  MboistatIcon(icon : 'MboistatLogo', title: 'mboistat', color: red),
+  mboistatsIcon(icon: 'pertanian', title: 'Pertanian', route: '/pertanian'),
+  mboistatsIcon(icon: 'more', title: 'Lainnya', route: '/more'),
+  //  mboistatsIcon(icon : 'mboistatsLogo', title: 'mboistats', color: red),
 ];

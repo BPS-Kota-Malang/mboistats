@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:mboistat/components/footer.dart';
-import 'package:mboistat/theme.dart';
+import 'package:mboistats/components/footer.dart';
+import 'package:mboistats/theme.dart';
 import 'package:saf/saf.dart';
 import 'dart:convert';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
@@ -62,7 +62,7 @@ class _BeritaPageState extends State<BeritaPages> {
         elevation: 0,
         toolbarHeight: 50,
         title: const Text(
-          'MBOIStatS+',
+          'mboistatsS+',
           style: TextStyle(color: Colors.black),
         ),
         leading: Row(

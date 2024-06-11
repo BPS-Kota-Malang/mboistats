@@ -1,4 +1,4 @@
-import 'package:mboistat/models/publikasi.dart';
+import 'package:mboistats/models/publikasi.dart';
 
 List<ImageData> images = [
   ImageData(imagePath: 'assets/images/pic4.jpg'),

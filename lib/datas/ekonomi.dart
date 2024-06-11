@@ -1,4 +1,4 @@
-import 'package:mboistat/models/ekonomi.dart';
+import 'package:mboistats/models/ekonomi.dart';
 
 List<Ekonomi> ekonomi = [
   Ekonomi('laju_pertumbuhan.png', 'Laju Pertumbuhan Ekonomi',

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/datas/ekonomi.dart';
-import 'package:mboistat/theme.dart';
+import 'package:mboistats/datas/ekonomi.dart';
+import 'package:mboistats/theme.dart';
 
 class EkonomiPages extends StatefulWidget {
   const EkonomiPages({Key? key}) : super(key: key);

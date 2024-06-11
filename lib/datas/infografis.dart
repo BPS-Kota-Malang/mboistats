@@ -1,4 +1,4 @@
-import 'package:mboistat/models/infografis.dart';
+import 'package:mboistats/models/infografis.dart';
 
 List<ImageData> images = [
   ImageData(imagePath: 'assets/images/pic4.jpg'),

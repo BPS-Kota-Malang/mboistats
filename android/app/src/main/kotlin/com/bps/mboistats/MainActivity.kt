@@ -1,4 +1,4 @@
-package com.bps.mboistats
+package com.bps.mboistatss
 import io.flutter.embedding.android.FlutterActivity
 
 class MainActivity: FlutterActivity()

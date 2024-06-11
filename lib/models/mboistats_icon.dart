@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MboistatIcon {
+class mboistatsIcon {
   final String icon;
   final String title;
   final Color? color;
   final String route;
 
-  MboistatIcon({
+  mboistatsIcon({
     required this.icon,
     required this.title,
     this.color,

@@ -1,4 +1,4 @@
-import 'package:mboistat/models/kependudukan.dart';
+import 'package:mboistats/models/kependudukan.dart';
 
 List<Kependudukan> kependudukan = [
   Kependudukan('kependudukan_1.png', 'Penduduk Menurut Jenis Kelamin',

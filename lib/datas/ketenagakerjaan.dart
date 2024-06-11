@@ -1,4 +1,4 @@
-import 'package:mboistat/models/ketenagakerjaan.dart';
+import 'package:mboistats/models/ketenagakerjaan.dart';
 
 List<Ketenagakerjaan> ketenagakerjaan = [
   Ketenagakerjaan('angkatan_kerja.png', 'Angkatan Kerja Menurut Pendidikan',

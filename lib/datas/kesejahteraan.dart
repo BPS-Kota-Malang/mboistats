@@ -1,4 +1,4 @@
-import 'package:mboistat/models/kesejahteraan.dart';
+import 'package:mboistats/models/kesejahteraan.dart';
 
 List<Kesejahteraan> kesejahteraan = [
   Kesejahteraan(

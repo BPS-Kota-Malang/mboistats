@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/datas/button.dart';
+import 'package:mboistats/datas/button.dart';
 
 class ButtonSection extends StatelessWidget {
   @override
@@ -10,7 +10,7 @@ class ButtonSection extends StatelessWidget {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          children: mboistatButton.map((icon) {
+          children: mboistatsButton.map((icon) {
             return Row(
               children: [
                 GestureDetector(

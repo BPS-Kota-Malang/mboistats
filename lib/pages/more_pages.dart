@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/datas/more.dart';
-import 'package:mboistat/theme.dart';
+import 'package:mboistats/datas/more.dart';
+import 'package:mboistats/theme.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class MorePages extends StatelessWidget {

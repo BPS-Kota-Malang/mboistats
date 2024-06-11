@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
-import 'package:mboistat/components/footer.dart';
-import 'package:mboistat/datas/contact.dart';
-import 'package:mboistat/theme.dart';
+import 'package:mboistats/components/footer.dart';
+import 'package:mboistats/datas/contact.dart';
+import 'package:mboistats/theme.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class Contact extends StatefulWidget {
@@ -37,7 +37,7 @@ class _ContactState extends State<Contact> {
         elevation: 0,
         toolbarHeight: 50,
         title: const Text(
-          'MBOIStatS+',
+          'mboistatsS+',
           style: TextStyle(color: Colors.black),
         ),
         leading: Row(

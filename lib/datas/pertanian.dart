@@ -1,4 +1,4 @@
-import 'package:mboistat/models/pertanian.dart';
+import 'package:mboistats/models/pertanian.dart';
 
 List<Pertanian> pertanian = [
   Pertanian('pertanian_1.png', 'Produksi Padi', route:'/ProduksiPadi'),

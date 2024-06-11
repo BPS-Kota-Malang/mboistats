@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/datas/ipm.dart';
-import 'package:mboistat/theme.dart';
+import 'package:mboistats/datas/ipm.dart';
+import 'package:mboistats/theme.dart';
 
 class IPMPages extends StatelessWidget {
   const IPMPages({Key? key}) : super(key: key);

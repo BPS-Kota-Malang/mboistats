@@ -1,4 +1,4 @@
-import 'package:mboistat/models/tentang.dart';
+import 'package:mboistats/models/tentang.dart';
 
 List<Tentang> tentang= [
   Tentang('Tentang BPS Kota Malang',

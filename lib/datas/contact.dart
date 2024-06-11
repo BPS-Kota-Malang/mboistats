@@ -1,4 +1,4 @@
-import 'package:mboistat/models/contact.dart';
+import 'package:mboistats/models/contact.dart';
 
 List<Contact> contact = [
   Contact('alamat.png', 'Alamat', 'Jl. Janti Barat No 47, Sukun'),

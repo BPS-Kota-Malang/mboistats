@@ -1,4 +1,4 @@
-import 'package:mboistat/models/berita.dart';
+import 'package:mboistats/models/berita.dart';
 
 List<Berita> berita = [
   Berita('berita.png', 'Perkembangan Pariwisata Kota Malang',

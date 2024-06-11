@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/datas/tentang.dart';
-import 'package:mboistat/theme.dart';
+import 'package:mboistats/datas/tentang.dart';
+import 'package:mboistats/theme.dart';
 
 class TentangPages extends StatelessWidget {
   @override

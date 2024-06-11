@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mboistat/components/buttonSection.dart';
-import 'package:mboistat/components/carousel_infografis.dart';
-import 'package:mboistat/components/carousel_publikasi.dart';
-import 'package:mboistat/components/footer.dart';
-import 'package:mboistat/components/menus.dart';
-import 'package:mboistat/theme.dart';
+import 'package:mboistats/components/buttonSection.dart';
+import 'package:mboistats/components/carousel_infografis.dart';
+import 'package:mboistats/components/carousel_publikasi.dart';
+import 'package:mboistats/components/footer.dart';
+import 'package:mboistats/components/menus.dart';
+import 'package:mboistats/theme.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           toolbarHeight: 50,
           title: const Text(
-            'MBOIStatS+',
+            'mboistatsS+',
             style: TextStyle(color: Colors.black),
           ),
           leading: Row(

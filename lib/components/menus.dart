@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/datas/icons.dart';
-import 'package:mboistat/theme.dart';
+import 'package:mboistats/datas/icons.dart';
+import 'package:mboistats/theme.dart';
 
 class Menus extends StatelessWidget {
   const Menus({Key? key});
@@ -15,7 +15,7 @@ class Menus extends StatelessWidget {
           crossAxisCount: 4,
           mainAxisSpacing: 8,
           children: [
-            ...mboistatMenuIcon.map((icon) {
+            ...mboistatsMenuIcon.map((icon) {
               return GestureDetector(
                 onTap: () {
                   Navigator.pushNamed(context, icon.route);

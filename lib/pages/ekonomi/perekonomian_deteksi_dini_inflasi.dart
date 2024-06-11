@@ -13,7 +13,7 @@ class DeteksiDiniInflasiPage extends StatefulWidget {
 class _DeteksiDiniInflasiPageState extends State<DeteksiDiniInflasiPage> {
   WebViewControllerPlus controller = WebViewControllerPlus()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
-    ..setBackgroundColor(const Color(0x00000000))
+    ..setBackgroundColor(Colors.transparent)
     ..setNavigationDelegate(
       NavigationDelegate(
         onProgress: (int progress) {
@@ -43,15 +43,7 @@ class _DeteksiDiniInflasiPageState extends State<DeteksiDiniInflasiPage> {
       ),
       body: Stack(
         children: [
-          // Background Image
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/back_perekonomian.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+
           // WebView
           WebViewWidget(controller: controller),
         ],

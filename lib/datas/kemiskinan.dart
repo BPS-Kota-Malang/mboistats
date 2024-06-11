@@ -1,4 +1,4 @@
-import 'package:mboistat/models/kemiskinan.dart';
+import 'package:mboistats/models/kemiskinan.dart';
 
 List<Kemiskinan> kemiskinan = [
   Kemiskinan(

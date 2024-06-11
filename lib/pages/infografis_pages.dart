@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:mboistat/theme.dart';
+import 'package:mboistats/theme.dart';
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:fluttertoast/fluttertoast.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/datas/kesejahteraan.dart';
-import 'package:mboistat/theme.dart';
+import 'package:mboistats/datas/kesejahteraan.dart';
+import 'package:mboistats/theme.dart';
 
 class KesejahteraanPages extends StatelessWidget {
   const KesejahteraanPages({Key? key}) : super(key: key);

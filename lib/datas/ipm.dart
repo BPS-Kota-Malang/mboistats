@@ -1,4 +1,4 @@
-import 'package:mboistat/models/ipm.dart';
+import 'package:mboistats/models/ipm.dart';
 
 List<IPM> ipm = [
   IPM('ipm_1.png', 'Indeks Pembangunan Manusia',  route: '/PendudukBekerja'),

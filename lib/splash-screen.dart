@@ -64,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen>
                 opacity: opacity,
                 duration: Duration(seconds: 1),
                 // child: const Text(
-                //   "MBOIStats+",
+                //   "mboistatss+",
                 //   style: TextStyle(
                 //     fontSize: 32,
                 //     fontWeight: FontWeight.bold,

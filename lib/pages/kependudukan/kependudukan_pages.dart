@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mboistat/datas/kependudukan.dart';
-import 'package:mboistat/theme.dart';
+import 'package:mboistats/datas/kependudukan.dart';
+import 'package:mboistats/theme.dart';
 
 class KependudukanPages extends StatelessWidget {
   const KependudukanPages({Key? key}) : super(key: key);

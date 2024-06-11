@@ -1,5 +1,5 @@
 
-name: mboistat
+name: mboistats
 description: "A new Flutter project."
 
 # The following line prevents the package from being accidentally published to
@@ -7,7 +7,7 @@ description: "A new Flutter project."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
-version: 3.2.0+60
+version: 3.2.1+61
 
 environment:
  sdk: '>=2.12.0 <4.0.0'
@@ -52,7 +52,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/web/
-    # - assets/icons/MboistatLogo.png
+    # - assets/icons/mboistatsLogo.png
     # - assets/icons/ekonomi.png
     # - assets/icons/ipm.png
     # - assets/icons/kemiskinan.png
