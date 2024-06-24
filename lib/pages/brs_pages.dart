@@ -62,7 +62,7 @@ class _BeritaPageState extends State<BeritaPages> {
         elevation: 0,
         toolbarHeight: 50,
         title: const Text(
-          'mboistatsS+',
+          'MBOIStatS+',
           style: TextStyle(color: Colors.black),
         ),
         leading: Row(
@@ -152,15 +152,8 @@ class _BeritaPageState extends State<BeritaPages> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text("Konfirmasi Unduh"),
-          content: const Text("Apakah Anda ingin mengunduh/membuka berkas BRS ini?"),
+          content: const Text("Apakah Anda ingin membuka/mengunduh berkas BRS ini?"),
           actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                openPdfDirectly(context, pdfUrl);
-              },
-              child: const Text("Buka PDF"),
-            ),
             TextButton(
               onPressed: () {
                 Navigator.pop(context, false);
@@ -175,6 +168,13 @@ class _BeritaPageState extends State<BeritaPages> {
                 await downloadAndShowConfirmation(context,pdfUrl, fileName);
               },
               child: const Text("Unduh"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                openPdfDirectly(context, pdfUrl);
+              },
+              child: const Text("Buka PDF"),
             ),
           ],
         );
@@ -205,15 +205,14 @@ class _BeritaPageState extends State<BeritaPages> {
 
             },
             onDownloadCompleted: (String path) {
+
               //Renaming File Extension
-              path = path.replaceAll("%20", " ");
-              File downloadedFile = File(path);
-              String downloadedFileName = downloadedFile.path.split('/').last;
-              downloadedFile.rename(path.replaceAll(".html", ".pdf"));
-              downloadedFileName = downloadedFileName.replaceAll(".html", ".pdf");
+              String fileExt = path.substring(path.lastIndexOf('.'),path.length);
+              File downloadedFile = File('/storage/emulated/0/Download/$fileName$fileExt');
+              downloadedFile.rename(downloadedFile.path.replaceAll(".html", ".pdf"));
 
               Fluttertoast.showToast(
-                msg: 'Berita Resmi Statistik (BRS) "$downloadedFileName" telah disimpan dalam Folder Download.',
+                msg: 'Berita Resmi Statistik (BRS) "$fileName.pdf" telah disimpan dalam Folder Download.',
                 toastLength: Toast.LENGTH_LONG,
                 gravity: ToastGravity.CENTER,
                 timeInSecForIosWeb: 1,

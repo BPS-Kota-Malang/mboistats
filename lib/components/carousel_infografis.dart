@@ -108,17 +108,17 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
             content: const Text("Apakah Anda ingin mengunduh berkas infografis ini?"),
             actions: [
               TextButton(
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+                child: const Text("Tidak"),
+              ),
+              TextButton(
                 onPressed: () async {
                   Navigator.pop(context, false);
                   await downloadAndShowConfirmation(context, imageUrl, imageTitle);
                 },
                 child: const Text("Ya"),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context, false);
-                },
-                child: const Text("Tidak"),
               ),
             ],
           );
@@ -172,13 +172,11 @@ class _CarouselInfografisState extends State<CarouselInfografis> {
 
             },
             onDownloadCompleted: (String path) {
-              //Renaming File Extension
-              path = path.replaceAll("%20", " ");
-              path = path.replaceAll("%2C", "");
-              String downloadedFileName = path.split('/').last;
+              //Get Extension File
+              String fileExt = path.substring(path.lastIndexOf('.'),path.length);
 
               Fluttertoast.showToast(
-                msg: 'Infografis "$downloadedFileName" telah disimpan dalam Folder Download.',
+                msg: 'Infografis "$fileName$fileExt" telah disimpan dalam Folder Download.',
                 toastLength: Toast.LENGTH_LONG,
                 gravity: ToastGravity.CENTER,
                 timeInSecForIosWeb: 1,

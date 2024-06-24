@@ -37,7 +37,7 @@ class _ContactState extends State<Contact> {
         elevation: 0,
         toolbarHeight: 50,
         title: const Text(
-          'mboistatsS+',
+          'MBOIStatS+',
           style: TextStyle(color: Colors.black),
         ),
         leading: Row(
@@ -107,18 +107,18 @@ class _ContactState extends State<Contact> {
                           actions: <Widget>[
                             OutlinedButton(
                               onPressed: () {
+                                Navigator.of(context).pop(false);
+                              },
+                              style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.blue)),
+                              child: const Text('Batal', style: TextStyle(color: Colors.blue)),
+                            ),
+                            OutlinedButton(
+                              onPressed: () {
                                 Navigator.of(context).pop(); // Tutup dialog
                                 launchUrlString('tel:${item.description}'); // Meluncurkan panggilan telepon
                               },
                               style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.blue)),
                               child: const Text('Hubungi', style: TextStyle(color: Colors.blue)),
-                            ),
-                            OutlinedButton(
-                              onPressed: () {
-                                Navigator.of(context).pop(false);
-                              },
-                              style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.blue)),
-                              child: const Text('Batal', style: TextStyle(color: Colors.blue)),
                             ),
                           ],
                         ),

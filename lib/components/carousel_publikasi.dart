@@ -119,15 +119,8 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text("Konfirmasi Unduh"),
-          content: const Text("Apakah Anda ingin mengunduh/membuka berkas publikasi ini?"),
+          content: const Text("Apakah Anda ingin membuka/mengunduh berkas publikasi ini?"),
           actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                openPdfDirectly(context, pdfUrl);
-              },
-              child: const Text("Buka PDF"),
-            ),
             TextButton(
               onPressed: () {
                 Navigator.pop(context, false);
@@ -140,6 +133,13 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
                 await downloadAndShowConfirmation(context, pdfUrl, pdfTitle);
               },
               child: const Text("Unduh"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                openPdfDirectly(context, pdfUrl);
+              },
+              child: const Text("Buka PDF"),
             ),
           ],
         );
@@ -171,14 +171,12 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
             },
             onDownloadCompleted: (String path) {
               //Renaming File Extension
-              path = path.replaceAll("%20", " ");
-              File downloadedFile = File(path);
-              String downloadedFileName = downloadedFile.path.split('/').last;
-              downloadedFile.rename(path.replaceAll(".html", ".pdf"));
-              downloadedFileName = downloadedFileName.replaceAll(".html", ".pdf");
+              String fileExt = path.substring(path.lastIndexOf('.'),path.length);
+              File downloadedFile = File('/storage/emulated/0/Download/$fileName$fileExt');
+              downloadedFile.rename(downloadedFile.path.replaceAll(".html", ".pdf"));
 
               Fluttertoast.showToast(
-                msg: 'Publikasi "$downloadedFileName" telah disimpan dalam Folder Download.',
+                msg: 'Publikasi "$fileName.pdf" telah disimpan dalam Folder Download.',
                 toastLength: Toast.LENGTH_LONG,
                 gravity: ToastGravity.CENTER,
                 timeInSecForIosWeb: 1,

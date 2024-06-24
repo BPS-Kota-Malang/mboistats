@@ -171,7 +171,7 @@
     },
     {
       "name": "file_picker",
-      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/file_picker-8.0.4",
+      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/file_picker-8.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -201,7 +201,7 @@
     },
     {
       "name": "flutter_file_downloader",
-      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_file_downloader-1.2.1",
+      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_file_downloader-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
@@ -213,7 +213,7 @@
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-3.0.2",
+      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-4.0.0",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
@@ -297,9 +297,9 @@
     },
     {
       "name": "lints",
-      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/lints-3.0.0",
+      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/lints-4.0.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.1"
     },
     {
       "name": "matcher",
@@ -363,7 +363,7 @@
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_android-2.2.5",
+      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_android-2.2.6",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
@@ -501,49 +501,49 @@
     },
     {
       "name": "syncfusion_flutter_core",
-      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_core-25.2.7",
+      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_core-26.1.38",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "syncfusion_flutter_pdf",
-      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_pdf-25.2.7",
+      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_pdf-26.1.38",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "syncfusion_flutter_pdfviewer",
-      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_pdfviewer-25.2.7",
+      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_pdfviewer-26.1.38",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "syncfusion_flutter_signaturepad",
-      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_signaturepad-25.2.7",
+      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_signaturepad-26.1.38",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "syncfusion_pdfviewer_macos",
-      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_pdfviewer_macos-25.2.7",
+      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_pdfviewer_macos-26.1.38",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "syncfusion_pdfviewer_platform_interface",
-      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_pdfviewer_platform_interface-25.2.7",
+      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_pdfviewer_platform_interface-26.1.38",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "syncfusion_pdfviewer_web",
-      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_pdfviewer_web-25.2.7",
+      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_pdfviewer_web-26.1.38",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "syncfusion_pdfviewer_windows",
-      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_pdfviewer_windows-25.2.7",
+      "rootUri": "file:///C:/Users/Satria%20C.%20Wibawa/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_pdfviewer_windows-26.1.38",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -716,7 +716,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2024-06-11T10:02:13.486601Z",
+  "generated": "2024-06-21T08:12:14.960355Z",
   "generator": "pub",
   "generatorVersion": "3.4.3",
   "flutterRoot": "file:///X:/AndroidProject/flutter_sdk",

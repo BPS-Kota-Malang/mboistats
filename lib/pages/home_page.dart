@@ -35,18 +35,18 @@ class _HomePageState extends State<HomePage> {
               OutlinedButton(
                 onPressed: () {
                   // Close the entire app when 'Ya' is selected
-                  SystemNavigator.pop(); // Use this to exit the app
-                },
-                style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.blue)),
-                child: const Text('Ya',style: TextStyle(color: Colors.blue)),
-              ),
-              OutlinedButton(
-                onPressed: () {
-                  // Close the entire app when 'Ya' is selected
                   Navigator.of(context).pop(false); // Use this to close dialog
                 },
                 style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.blue)),
                 child: const Text('Tidak',style: TextStyle(color: Colors.blue)),
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  // Close the entire app when 'Ya' is selected
+                  SystemNavigator.pop(); // Use this to exit the app
+                },
+                style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.blue)),
+                child: const Text('Ya',style: TextStyle(color: Colors.blue)),
               ),
             ],
           ),
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           toolbarHeight: 50,
           title: const Text(
-            'mboistatsS+',
+            'MBOIStatS+',
             style: TextStyle(color: Colors.black),
           ),
           leading: Row(
