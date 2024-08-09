@@ -92,13 +92,13 @@
 					<tr id="chart" align ="center" style="width:50%; text-align:center; height:15px;" >
 						 <script>
 							var data1=[], data2=[], data3=[],dataCategories=[]; 
-							for(var i=maxData; i > 1; i--){
-								if(i == 5  || i == 9) continue;
-								
-								data1.push(dataAll[dataAll.length*(1/3)-i][1]);
-								data2.push(dataAll[dataAll.length*(2/3)-i][1]);
-								data3.push(dataAll[dataAll.length*(3/3)-i][1]);
-								dataCategories.push(dataAll[dataAll.length*(1/3)-i][2] + ' ' + dataAll[dataAll.length*(1/3)-i][3]);
+							for(var i=maxData; i > 0; i--){
+								if(i%4 != 0){
+									data1.push(dataAll[dataAll.length*(1/3)-i][1]);
+									data2.push(dataAll[dataAll.length*(2/3)-i][1]);
+									data3.push(dataAll[dataAll.length*(3/3)-i][1]);
+									dataCategories.push(dataAll[dataAll.length*(1/3)-i][2] + ' ' + dataAll[dataAll.length*(1/3)-i][3]);
+								}
 							}
 							
 							 var options = {
@@ -253,7 +253,7 @@
 				<script>
 					if(maxData > 0){
 					//Looping Baris
-						for (var i = maxData; i > 0; i--) {
+						for (var i = 1; i <= maxData; i++) {
 							if(i % 2 ==0) document.write('<tr align ="center" style="background-color:#B7DFC3; font-weight:bold; ">');
 							else document.write('<tr align ="center" style="background-color:#50D078; font-weight:bold;">');
 								
