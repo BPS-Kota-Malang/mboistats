@@ -173,7 +173,7 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
               //Renaming File Extension
               String fileExt = path.substring(path.lastIndexOf('.'),path.length);
               File downloadedFile = File('/storage/emulated/0/Download/$fileName$fileExt');
-              downloadedFile.rename(downloadedFile.path.replaceAll(".html", ".pdf"));
+              downloadedFile.rename(downloadedFile.path.replaceAll(".php", ".pdf"));
 
               Fluttertoast.showToast(
                 msg: 'Publikasi "$fileName.pdf" telah disimpan dalam Folder Download.',
