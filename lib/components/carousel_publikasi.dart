@@ -30,7 +30,7 @@ class _CarouselPublikasiState extends State<CarouselPublikasi> {
 
   Future<void> fetchData() async {
     try {
-      final response = await http.get(Uri.parse('http://webapi.bps.go.id/v1/api/list/domain/3573/model/publication/lang/ind/id/1/key/9db89e91c3c142df678e65a78c4e547f'));
+      final response = await http.get(Uri.parse('http://webapi.bps.go.id/v1/api/list/domain/3573/model/publication/lang/ind/page/1/key/9db89e91c3c142df678e65a78c4e547f'));
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
