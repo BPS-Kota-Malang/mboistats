@@ -108,11 +108,13 @@ class _InfografisPagesState extends State<InfografisPages> {
 
             },
             onDownloadCompleted: (String path) {
-              //Get Extension File
+              //Renaming File Extension
               String fileExt = path.substring(path.lastIndexOf('.'),path.length);
+              File downloadedFile = File('/storage/emulated/0/Download/$fileName$fileExt');
+              downloadedFile.rename(downloadedFile.path.replaceAll('.php', '.jpg'));
 
               Fluttertoast.showToast(
-                msg: 'Infografis "$fileName$fileExt" telah disimpan dalam Folder Download.',
+                msg: 'Infografis $fileName.jpg telah disimpan dalam Folder Download.',
                 toastLength: Toast.LENGTH_LONG,
                 gravity: ToastGravity.CENTER,
                 timeInSecForIosWeb: 1,
