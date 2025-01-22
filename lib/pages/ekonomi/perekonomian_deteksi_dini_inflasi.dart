@@ -24,7 +24,7 @@ class _DeteksiDiniInflasiPageState extends State<DeteksiDiniInflasiPage> {
         onWebResourceError: (WebResourceError error) {},
       ),
     )
-    ..loadRequest(Uri.parse('https://inflasi.bpskotamalang.id'));
+    ..loadRequest(Uri.parse('https://s.bps.go.id/deteksi_dini_inflasi'));
 
   @override
   Widget build(BuildContext context) {
